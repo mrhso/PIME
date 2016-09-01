@@ -36,18 +36,19 @@ SetCompressorDictSize 16 ; larger dictionary size for better compression ratio
 AllowSkipFiles off ; cannot skip a file
 
 ; icons of the generated installer and uninstaller
-!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
+!define MUI_ICON "..\python\input_methods\rime\icon.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\orange-uninstall.ico"
 
 !define /file PRODUCT_VERSION "..\version.txt"
 
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\PIME"
-!define HOMEPAGE_URL "https://github.com/EasyIME/"
+!define HOMEPAGE_URL "https://github.com/osfans/PIME/releases"
 
 Name "$(PRODUCT_NAME)"
 BrandingText "$(PRODUCT_NAME)"
 
-OutFile "PIME-${PRODUCT_VERSION}-setup.exe" ; The generated installer file name
+!define /date NOW "%Y%m%d"
+OutFile "PRIME-${PRODUCT_VERSION}-setup-${NOW}.exe" ; The generated installer file name
 
 ; We install everything to C:\Program Files (x86)
 InstallDir "$PROGRAMFILES32\PIME"
@@ -77,7 +78,7 @@ Page custom setIEProtectedPage leaveIEProtectedPage
 
 ; finish page
 !define MUI_FINISHPAGE_LINK_LOCATION "${HOMEPAGE_URL}"
-!define MUI_FINISHPAGE_LINK "$(PRODUCT_PAGE) ${MUI_FINISHPAGE_LINK_LOCATION}"
+!define MUI_FINISHPAGE_LINK "${MUI_FINISHPAGE_LINK_LOCATION}"
 !insertmacro MUI_PAGE_FINISH
 
 ; uninstallation pages
@@ -282,6 +283,7 @@ Function .onInit
 	; check if old version is installed and uninstall it first
 	Call uninstallOldVersion
 	Call hideCheEngSection
+
 FunctionEnd
 
 ; called to show an error message when errors happen
@@ -392,7 +394,7 @@ SectionEnd
 
 SectionGroup /e $(SECTION_GROUP)
 	Section $(CHEWING) chewing
-		SectionIn 1 2
+		SectionIn 2
 		SetOutPath "$INSTDIR\python\input_methods"
 		File /r "..\python\input_methods\chewing"
 	SectionEnd
@@ -446,7 +448,7 @@ SectionGroup /e $(SECTION_GROUP)
 	SectionEnd
 
 	Section $(RIME) rime
-		SectionIn 2
+		SectionIn 1 2
 		SetOutPath "$INSTDIR\python\input_methods"
 		File /r /x "brise" "..\python\input_methods\rime"
 		SetOutPath "$INSTDIR\python\input_methods\rime\data"
