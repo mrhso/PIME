@@ -346,8 +346,8 @@ class RimeStyle:
         if rime.config_get_int(config, b'style/font_point', value):
             self.font_point = value.value
         if rime.config_get_bool(config, b'style/horizontal', value):
-            self.candidate_per_row = 10 if bool(value) else 1
-        if rime.config_get_int(config, b'style/candidate_per_row', value):
+            self.candidate_per_row = 20 if bool(value) else 1
+        elif rime.config_get_int(config, b'style/candidate_per_row', value):
             self.candidate_per_row = value.value
         if rime.config_get_bool(config, b'style/display_tray_icon', value):
             self.display_tray_icon = bool(value)
