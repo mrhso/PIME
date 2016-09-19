@@ -103,6 +103,51 @@ void Client::updateUI(const Json::Value& data) {
 		else if (value.isBool() && strcmp(name, "candUseCursor") == 0) {
 			textService_->setCandUseCursor(value.asBool());
 		}
+		else if (value.isInt() && strcmp(name, "candWinPos") == 0) {
+			textService_->setCandWinPos(value.asInt());
+		}
+		else if (value.isBool() && strcmp(name, "selKeyUseCursor") == 0) {
+			textService_->setSelKeyUseCursor(value.asBool());
+		}
+		else if (value.isBool() && strcmp(name, "desktopUse3DBorder") == 0) {
+			textService_->setDesktopUse3DBorder(value.asBool());
+		}
+		else if (value.isInt() && strcmp(name, "textColor") == 0) {
+			textService_->setTextcolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "candidateTextColor") == 0) {
+			textService_->setCandidatetextcolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "labelTextColor") == 0) {
+			textService_->setLabeltextcolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "commentTextColor") == 0) {
+			textService_->setCommenttextcolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "backColor") == 0) {
+			textService_->setBackcolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "borderColor") == 0) {
+			textService_->setBordercolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "hilitedTextColor") == 0) {
+			textService_->setHilitedtextcolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "hilitedBackColor") == 0) {
+			textService_->setHilitedbackcolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "hilitedCandidateTextColor") == 0) {
+			textService_->setHilitedcandidatetextcolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "hilitedCandidateBackColor") == 0) {
+			textService_->setHilitedcandidatebackcolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "hilitedLabelTextColor") == 0) {
+			textService_->setHilitedlabeltextcolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "hilitedCommentTextColor") == 0) {
+			textService_->setHilitedcommenttextcolor(value.asInt());
+		}
 	}
 }
 

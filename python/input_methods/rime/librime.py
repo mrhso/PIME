@@ -314,6 +314,7 @@ commands = {
     "get_log_dir": ID_LOG_DIR,
 }
 
+CAND_WIN_POSITIONS = ["left", "right", "fixed"]
 class RimeStyle:
     font_face = "MingLiu"
     candidate_format = "{0} {1}"
@@ -324,6 +325,9 @@ class RimeStyle:
     inline_code = False
     display_tray_icon = False
     candidate_use_cursor = False
+    sel_key_use_cursor = False
+    desktop_use_3d_border = False
+    candidate_window_position = 0
     soft_cursor = False
     menu = []
     options = []
@@ -331,8 +335,11 @@ class RimeStyle:
     schemas = []
     uris = []
     session_id = None
+    color_scheme = ""
+    colors = {}
 
     def __init__(self, appname, session_id):
+        global CAND_WIN_POSITIONS
         self.session_id = session_id
         config = RimeConfig()
         if not rime.config_open(appname.encode("UTF-8"), config):
@@ -340,6 +347,8 @@ class RimeStyle:
         self.font_face = rimeGetString(config, 'style/font_face')
         self.candidate_format = rimeGetString(config, 'style/candidate_format')
         self.inline_preedit = rimeGetString(config, 'style/inline_preedit')
+        s = rimeGetString(config, 'style/candidate_window_position')
+        self.candidate_window_position = CAND_WIN_POSITIONS.index(s) if s in CAND_WIN_POSITIONS else 0
         menu_opencc_config = rimeGetString(config, 'style/menu_opencc')
         self.menu_opencc = OpenCC(menu_opencc_config) if menu_opencc_config else None
         value = c_int()
@@ -355,11 +364,17 @@ class RimeStyle:
             self.candidate_use_cursor = bool(value)
         if rime.config_get_bool(config, b'style/soft_cursor', value):
             self.soft_cursor = bool(value)
+        if rime.config_get_bool(config, b'style/sel_key_use_cursor', value):
+            self.sel_key_use_cursor = bool(value)
+        if rime.config_get_bool(config, b'style/desktop_use_3d_border', value):
+            self.desktop_use_3d_border = bool(value)
         self.options.clear()
         self.options_states.clear()
         self.uris.clear()
         self.menu = self.config_get_menu(config, b'menu')
         #print("menu", self.menu)
+        self.color_scheme = rimeGetString(config, 'style/color_scheme')
+        self.colors = self.config_get_colors(config)
         rime.config_close(config)
 
     def get_schema(self, commandId):
@@ -395,6 +410,40 @@ class RimeStyle:
                 submenu.append(d)
         rime.free_schema_list(schema_list)
         return submenu          
+
+    def config_get_colors(self, config):
+        colors = {}
+        scheme = rime.config_get_cstring(config, b'style/color_scheme')
+        iterator = RimeConfigIterator()
+        if not scheme or not rime.config_begin_map(iterator, config, b'preset_color_schemes/' + scheme):
+            return colors
+        value = c_int()
+        while rime.config_next(iterator):
+            if iterator.key.endswith(b'_color') and rime.config_get_int(config, iterator.path, value):
+                key = iterator.key.decode("UTF-8")
+                key = (key[0]+key.title()[1:]).replace("_","")
+                colors[key] = value.value
+        rime.config_end(iterator)
+        if "candidateTextColor" not in colors:
+            colors["candidateTextColor"]=colors["textColor"]
+        if "borderColor" not in colors:
+            colors["borderColor"]=colors["textColor"]
+        if "hilitedTextColor" not in colors:
+            colors["hilitedTextColor"]=colors["textColor"]
+        if "hilitedBackColor" not in colors:
+            colors["hilitedBackColor"]=colors["backColor"]
+        if "hilitedCandidateTextColor" not in colors:
+            colors["hilitedCandidateTextColor"]=colors["hilitedTextColor"]
+        if "hilitedCandidateBackColor" not in colors:
+            colors["hilitedCandidateBackColor"]=colors["hilitedBackColor"]
+        colors["labelTextColor"] = colors.get("labelColor", colors["candidateTextColor"])
+        if "hilitedLabelTextColor" not in colors:
+            colors["hilitedLabelTextColor"]=colors["hilitedCandidateTextColor"]
+        if "commentTextColor" not in colors:
+            colors["commentTextColor"]=colors["labelTextColor"]
+        if "hilitedCommentTextColor" not in colors:
+            colors["hilitedCommentTextColor"]=colors["hilitedLabelTextColor"]
+        return colors
 
     def config_get_menu(self, config, path):
         menu = []

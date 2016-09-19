@@ -100,6 +100,14 @@ public:
 		candUseCursor_ = candUseCursor;
 	}
 
+	int candWinPos() const {
+		return candWinPos_;
+	}
+
+	void setCandWinPos(int candWinPos) {
+		candWinPos_ = candWinPos;
+	}
+
 	std::wstring candFontName() const {
 		return candFontName_;
 	}
@@ -116,6 +124,49 @@ public:
 	void setCandFontSize(int candFontSize) {
 		candFontSize_ = candFontSize;
 		updateFont_ = true;
+	}
+
+	void setSelKeyUseCursor(bool use) {
+		selKeyUseCursor_ = use;
+	}
+	void setDesktopUse3DBorder(bool use) {
+		desktopUse3DBorder_ = use;
+	}
+	void setTextcolor(int textColor) {
+		textColor_ = textColor;
+	}
+	void setCandidatetextcolor(int candidateTextColor) {
+		candidateTextColor_ = candidateTextColor;
+	}
+	void setLabeltextcolor(int labelTextColor) {
+		labelTextColor_ = labelTextColor;
+	}
+	void setCommenttextcolor(int commentTextColor) {
+		commentTextColor_ = commentTextColor;
+	}
+	void setBackcolor(int backColor) {
+		backColor_ = backColor;
+	}
+	void setBordercolor(int borderColor) {
+		borderColor_ = borderColor;
+	}
+	void setHilitedtextcolor(int hilitedTextColor) {
+		hilitedTextColor_ = hilitedTextColor;
+	}
+	void setHilitedbackcolor(int hilitedBackColor) {
+		hilitedBackColor_ = hilitedBackColor;
+	}
+	void setHilitedcandidatetextcolor(int hilitedCandidateTextColor) {
+		hilitedCandidateTextColor_ = hilitedCandidateTextColor;
+	}
+	void setHilitedcandidatebackcolor(int hilitedCandidateBackColor) {
+		hilitedCandidateBackColor_ = hilitedCandidateBackColor;
+	}
+	void setHilitedlabeltextcolor(int hilitedLabelTextColor) {
+		hilitedLabelTextColor_ = hilitedLabelTextColor;
+	}
+	void setHilitedcommenttextcolor(int hilitedCommentTextColor) {
+		hilitedCommentTextColor_ = hilitedCommentTextColor;
 	}
 
 	bool showingCandidates() {
@@ -171,6 +222,23 @@ private:
 	bool candUseCursor_;
 	std::wstring candFontName_;
 	int candFontSize_;
+
+	int candWinPos_;
+	bool selKeyUseCursor_;
+	bool desktopUse3DBorder_;
+	// color scheme
+	int textColor_;
+	int candidateTextColor_;
+	int labelTextColor_;
+	int commentTextColor_;
+	int backColor_;
+	int borderColor_;
+	int hilitedTextColor_;
+	int hilitedBackColor_;
+	int hilitedCandidateTextColor_;
+	int hilitedCandidateBackColor_;
+	int hilitedLabelTextColor_;
+	int hilitedCommentTextColor_;
 
 	HMENU popupMenu_;
 
