@@ -102,10 +102,9 @@ class RimeTextService(TextService):
                 candFontName = self.style.font_face,
                 candPerRow = self.style.candidate_per_row,
                 candUseCursor = self.style.candidate_use_cursor,
-                candWinPos = self.style.candidate_window_position,
                 selKeyUseCursor = self.style.sel_key_use_cursor,
                 desktopUse3DBorder = self.style.desktop_use_3d_border,
-                **self.style.colors)
+                **self.style.colors, **self.style.layout)
             rime.set_option(self.session_id, b'soft_cursor', self.style.soft_cursor)
             rime.set_option(self.session_id, b'_horizontal', self.style.candidate_per_row > 1)
 

@@ -108,6 +108,9 @@ public:
 		candWinPos_ = candWinPos;
 	}
 
+	void setLayoutSpacing(int value) {
+		layoutSpacing_ = value;
+	}
 	std::wstring candFontName() const {
 		return candFontName_;
 	}
@@ -223,7 +226,6 @@ private:
 	std::wstring candFontName_;
 	int candFontSize_;
 
-	int candWinPos_;
 	bool selKeyUseCursor_;
 	bool desktopUse3DBorder_;
 	// color scheme
@@ -239,6 +241,9 @@ private:
 	int hilitedCandidateBackColor_;
 	int hilitedLabelTextColor_;
 	int hilitedCommentTextColor_;
+	// layout
+	int candWinPos_;
+	int layoutSpacing_;
 
 	HMENU popupMenu_;
 

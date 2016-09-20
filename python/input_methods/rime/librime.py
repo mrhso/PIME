@@ -314,7 +314,7 @@ commands = {
     "get_log_dir": ID_LOG_DIR,
 }
 
-CAND_WIN_POSITIONS = ["left", "right", "fixed"]
+LAYOUT_POSITIONS = ["left", "right", "fixed", "bottom_left", "bottom_right", "top_left", "top_right"]
 class RimeStyle:
     font_face = "MingLiu"
     candidate_format = "{0} {1}"
@@ -327,7 +327,7 @@ class RimeStyle:
     candidate_use_cursor = False
     sel_key_use_cursor = False
     desktop_use_3d_border = False
-    candidate_window_position = 0
+    layout = {}
     soft_cursor = False
     menu = []
     options = []
@@ -347,8 +347,6 @@ class RimeStyle:
         self.font_face = rimeGetString(config, 'style/font_face')
         self.candidate_format = rimeGetString(config, 'style/candidate_format')
         self.inline_preedit = rimeGetString(config, 'style/inline_preedit')
-        s = rimeGetString(config, 'style/candidate_window_position')
-        self.candidate_window_position = CAND_WIN_POSITIONS.index(s) if s in CAND_WIN_POSITIONS else 0
         menu_opencc_config = rimeGetString(config, 'style/menu_opencc')
         self.menu_opencc = OpenCC(menu_opencc_config) if menu_opencc_config else None
         value = c_int()
@@ -375,6 +373,7 @@ class RimeStyle:
         #print("menu", self.menu)
         self.color_scheme = rimeGetString(config, 'style/color_scheme')
         self.colors = self.config_get_colors(config)
+        self.layout = self.config_get_layout(config)
         rime.config_close(config)
 
     def get_schema(self, commandId):
@@ -444,6 +443,20 @@ class RimeStyle:
         if "hilitedCommentTextColor" not in colors:
             colors["hilitedCommentTextColor"]=colors["hilitedLabelTextColor"]
         return colors
+
+    def config_get_layout(self, config):
+        layout = {}
+        s = rimeGetString(config, 'style/layout/position')
+        layout["layout_position"] = LAYOUT_POSITIONS.index(s) if s in LAYOUT_POSITIONS else 0
+        iterator = RimeConfigIterator()
+        if not rime.config_begin_map(iterator, config, b'style/layout'):
+            return layout
+        value = c_int()
+        while rime.config_next(iterator):
+            if rime.config_get_int(config, iterator.path, value):
+                key = iterator.key.decode("UTF-8")
+                layout["layout_" + key] = value.value
+        return layout
 
     def config_get_menu(self, config, path):
         menu = []

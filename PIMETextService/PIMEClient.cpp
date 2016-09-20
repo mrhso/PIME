@@ -103,9 +103,6 @@ void Client::updateUI(const Json::Value& data) {
 		else if (value.isBool() && strcmp(name, "candUseCursor") == 0) {
 			textService_->setCandUseCursor(value.asBool());
 		}
-		else if (value.isInt() && strcmp(name, "candWinPos") == 0) {
-			textService_->setCandWinPos(value.asInt());
-		}
 		else if (value.isBool() && strcmp(name, "selKeyUseCursor") == 0) {
 			textService_->setSelKeyUseCursor(value.asBool());
 		}
@@ -147,6 +144,12 @@ void Client::updateUI(const Json::Value& data) {
 		}
 		else if (value.isInt() && strcmp(name, "hilitedCommentTextColor") == 0) {
 			textService_->setHilitedcommenttextcolor(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "layout_position") == 0) {
+			textService_->setCandWinPos(value.asInt());
+		}
+		else if (value.isInt() && strcmp(name, "layout_spacing") == 0) {
+			textService_->setLayoutSpacing(value.asInt());
 		}
 	}
 }

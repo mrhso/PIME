@@ -296,9 +296,9 @@ void TextService::updateCandidates(Ime::EditSession* session) {
 	RECT textRect;
 	// get the position of composition area from TSF
 	if (candWinPos_ == 0 && compositionRect(session, &textRect)) {
-		candidateWindow_->moveWindow(textRect);
+		candidateWindow_->moveWindow(textRect, layoutSpacing_);
 	} else if (candWinPos_ == 1 && selectionRect(session, &textRect)) {
-		candidateWindow_->moveWindow(textRect);
+		candidateWindow_->moveWindow(textRect, layoutSpacing_);
 	}
 	else {
 	}
