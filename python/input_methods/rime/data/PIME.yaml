@@ -1,7 +1,7 @@
 # PIME settings
 # encoding: utf-8
 
-config_version: "0.08"
+config_version: "0.10"
 
 #app_options:
 #  cmd.exe:

@@ -94,19 +94,22 @@ class RimeTextService(TextService):
         )
         self.updateLangStatus()
 
+    def updateUI(self):
+        self.style = RimeStyle(APP, self.session_id)
+        self.customizeUI(candFontSize = self.style.font_point,
+            candFontName = self.style.font_face,
+            candPerRow = self.style.candidate_per_row,
+            candUseCursor = self.style.candidate_use_cursor,
+            selKeyUseCursor = self.style.sel_key_use_cursor,
+            desktopUse3DBorder = self.style.desktop_use_3d_border,
+            **self.style.colors, **self.style.layout)
+        rime.set_option(self.session_id, b'soft_cursor', self.style.soft_cursor)
+        rime.set_option(self.session_id, b'_horizontal', self.style.candidate_per_row > 1)
+
     def createSession(self):
         if not (self.session_id and rime.find_session(self.session_id)):
             self.session_id = rime.create_session()
-            self.style = RimeStyle(APP, self.session_id)
-            self.customizeUI(candFontSize = self.style.font_point,
-                candFontName = self.style.font_face,
-                candPerRow = self.style.candidate_per_row,
-                candUseCursor = self.style.candidate_use_cursor,
-                selKeyUseCursor = self.style.sel_key_use_cursor,
-                desktopUse3DBorder = self.style.desktop_use_3d_border,
-                **self.style.colors, **self.style.layout)
-            rime.set_option(self.session_id, b'soft_cursor', self.style.soft_cursor)
-            rime.set_option(self.session_id, b'_horizontal', self.style.candidate_per_row > 1)
+            self.updateUI()
 
     def onDeactivate(self):
         TextService.onDeactivate(self)
@@ -274,6 +277,7 @@ class RimeTextService(TextService):
         elif commandId >= ID_SCHEMA:
             schema_id = self.style.get_schema(commandId)
             rimeSelectSchema(self.session_id, schema_id)
+            self.updateUI()
         elif commandId >= ID_OPTION:
             self.toggleOption(self.style.get_option(commandId))
         elif commandId in (ID_ASCII_MODE, ID_MODE_ICON) and commandType == COMMAND_LEFT_CLICK:  # 切換中英文模式
