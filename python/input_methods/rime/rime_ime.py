@@ -37,10 +37,29 @@ shared_dir = os.path.join(curdir, "data")
 rimeInit(datadir=shared_dir, userdir=user_dir, appname=APP, appver=APP_VERSION, fullcheck=first_run)
 rime.deploy_config_file(CONFIG_FILE.encode("UTF-8"), b'config_version')
 
+OPTION_NAMES = [ "中文", "西文", "半角", "全角", "漢字", "汉字", "通用", "增廣", "。，", "．，" ]
 def rimeCallback(context_object, session_id, message_type, message_value):
-    pass
+    print(context_object, session_id.contents if session_id else 0, message_type, message_value)
+    if session_id:
+        if message_type == b'schema':
+            memset(context_object, 1, 1)
+        elif message_type == b'option':
+            value_type = 0
+            if message_value.endswith(b'ascii_mode'):
+                value_type = 2
+            elif message_value.endswith(b'full_shape'):
+                value_type = 3
+            elif message_value.endswith(b'simplification'):
+                value_type = 4
+            elif message_value.endswith(b'extended_charset'):
+                value_type = 5
+            elif message_value.endswith(b'ascii_punct'):
+                value_type = 6
+            if value_type > 0:
+                value = 0 if message_value.startswith(b'!') else 1
+                memset(context_object, (value_type - 2) * 2 + value + 2, 1)
 rime_callback = RimeNotificationHandler(rimeCallback)
-rime.set_notification_handler(rime_callback, None)
+#rime.set_notification_handler(rime_callback, None)
 
 class RimeTextService(TextService):   
     session_id = None
@@ -52,12 +71,15 @@ class RimeTextService(TextService):
     lastKeyUpCode = None
     lastKeyUpRet = True
     keyComposing = False
+    message_type = c_int(0)
+    ignore_message = False
 
     def __init__(self, client):
         TextService.__init__(self, client)
 
     def onActivate(self):
         TextService.onActivate(self)
+        rime.set_notification_handler(rime_callback, byref(self.message_type))
         self.createSession()
 
         if not self.style.display_tray_icon: return
@@ -199,6 +221,22 @@ class RimeTextService(TextService):
         icon_path = os.path.join(self.icon_dir, icon_name)
         self.changeButton("switch-shape", icon=icon_path)
 
+        if self.ignore_message:
+            self.ignore_message = False
+            memset(byref(self.message_type), 0, 1)
+            return
+
+        if self.message_type.value == 1:
+            status = RimeStatus()
+            if rime.get_status(self.session_id, status):
+                self.showMessage(status.schema_name.decode("UTF-8"), 1)
+                rime.free_status(status)
+            self.updateUI()            
+            memset(byref(self.message_type), 0, 1)
+        elif self.message_type.value > 1:
+            self.showMessage(OPTION_NAMES[self.message_type.value - 2], 1)
+            memset(byref(self.message_type), 0, 1)
+
     def onKey(self):
         self.updateLangStatus()
 
@@ -271,13 +309,13 @@ class RimeTextService(TextService):
         
     def onCommand(self, commandId, commandType):
         print("onCommand", commandId, commandType)
+        self.ignore_message = True
         global user_dir, shared_dir
         if commandId >= ID_URI:
             os.startfile(self.style.get_uri(commandId))
         elif commandId >= ID_SCHEMA:
             schema_id = self.style.get_schema(commandId)
             rimeSelectSchema(self.session_id, schema_id)
-            self.updateUI()
         elif commandId >= ID_OPTION:
             self.toggleOption(self.style.get_option(commandId))
         elif commandId in (ID_ASCII_MODE, ID_MODE_ICON) and commandType == COMMAND_LEFT_CLICK:  # 切換中英文模式
