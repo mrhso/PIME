@@ -21,6 +21,7 @@ from keycodes import *
 VoidSymbol = 0xFFFFFF
 space = 0x020
 grave = 0x060
+XK_3270_PrintScreen = 0xFD1D
 BackSpace = 0xFF08
 Tab = 0xFF09
 Linefeed = 0xFF0A
@@ -219,12 +220,12 @@ RELEASE_MASK = 1 << 30
 MODIFIER_MASK = 0x5f001fff
 
 VKMaps = {
+    VK_CANCEL: Break,
     VK_BACK: BackSpace,
     VK_TAB: Tab,
     VK_CLEAR: Clear,
     VK_RETURN: Return,
 
-    VK_MENU: Alt_L,
     VK_PAUSE: Pause,
     VK_CAPITAL: Caps_Lock,
 
@@ -241,25 +242,25 @@ VKMaps = {
     # VK_MODECHANGE: 0,
 
     VK_SPACE: space,
-    VK_PRIOR: Prior,
-    VK_NEXT: Next,
-    VK_END: End,
-    VK_HOME: Home,
-    VK_LEFT: Left,
-    VK_UP: Up,
-    VK_RIGHT: Right,
-    VK_DOWN: Down,
+    VK_PRIOR: KP_Prior,
+    VK_NEXT: KP_Next,
+    VK_END: KP_End,
+    VK_HOME: KP_Home,
+    VK_LEFT: KP_Left,
+    VK_UP: KP_Up,
+    VK_RIGHT: KP_Right,
+    VK_DOWN: KP_Down,
     VK_SELECT: Select,
     VK_PRINT: Print,
     VK_EXECUTE: Execute,
-    # VK_SNAPSHOT: 0,
-    VK_INSERT: Insert,
-    VK_DELETE: Delete,
+    VK_SNAPSHOT: XK_3270_PrintScreen,
+    VK_INSERT: KP_Insert,
+    VK_DELETE: KP_Delete,
     VK_HELP: Help,
 
     VK_LWIN: Meta_L,
     VK_RWIN: Meta_R,
-    # VK_APPS: 0,
+    VK_APPS: Menu,
     # VK_SLEEP: 0,
     VK_NUMPAD0: KP_0,
     VK_NUMPAD1: KP_1,
@@ -310,19 +311,49 @@ VKMaps = {
     VK_LCONTROL: Control_L,
     VK_RCONTROL: Control_R,
     VK_LMENU: Alt_L,
-    VK_RMENU: Alt_R
+    VK_RMENU: Alt_R,
+    VK_SHIFT: Shift_L,
+    VK_CONTROL: Control_L,
+    VK_MENU: Alt_L
+}
+
+
+EMaps = {
+    VK_CANCEL: Break,
+    VK_RETURN: KP_Enter,
+    VK_PRIOR: Prior,
+    VK_NEXT: Next,
+    VK_END: End,
+    VK_HOME: Home,
+    VK_LEFT: Left,
+    VK_UP: Up,
+    VK_RIGHT: Right,
+    VK_DOWN: Down,
+    VK_PRINT: Print,
+    VK_INSERT: Insert,
+    VK_DELETE: Delete,
+    VK_RWIN: Meta_R,
+    VK_DIVIDE: KP_Divide,
+    VK_NUMLOCK: Num_Lock,
+    VK_RSHIFT: Shift_R,
+    VK_RCONTROL: Control_R,
+    VK_RMENU: Alt_R,
+    VK_SHIFT: Shift_R,
+    VK_CONTROL: Control_R,
+    VK_MENU: Alt_R
 }
 
 def translateKeyCode(keyEvent):
     keyCode = keyEvent.keyCode
     if keyCode == VK_SHIFT:
         keyCode = VK_RSHIFT if keyEvent.isKeyToggled(VK_RSHIFT) else VK_LSHIFT
-    elif keyCode == VK_CONTROL:
-        keyCode = VK_RCONTROL if keyEvent.isKeyToggled(VK_RCONTROL) else VK_LCONTROL
 
     result = VoidSymbol
     if keyCode in VKMaps:
-        result = VKMaps[keyCode]
+        if keyEvent.isExtended and keyCode in EMaps:
+            result = EMaps[keyCode]
+        else:
+            result = VKMaps[keyCode]
     elif keyEvent.isPrintableChar():
         result = keyEvent.charCode
     return result

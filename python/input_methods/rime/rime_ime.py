@@ -145,10 +145,10 @@ class RimeTextService(TextService):
 
     def processKey(self, keyEvent, isUp = False):
         self.createSession()
-        print("session", self.session_id.contents if self.session_id else None, rime)
+        #print("session", self.session_id.contents if self.session_id else None, rime)
         if not isUp: self.keyComposing = self.isComposing()
         ret = rime.process_key(self.session_id, translateKeyCode(keyEvent), translateModifiers(keyEvent, isUp))
-        print("Up" if isUp else "Down", keyEvent.keyCode,keyEvent.repeatCount,keyEvent.scanCode,translateKeyCode(keyEvent), translateModifiers(keyEvent, isUp), "ret", ret)
+        print("Up" if isUp else "Down", keyEvent.keyCode,keyEvent.isExtended,keyEvent.repeatCount,hex(translateKeyCode(keyEvent)), hex(translateModifiers(keyEvent, isUp)), "ret", ret)
         if ret:
             return True
         if self.keyComposing and keyEvent.keyCode == VK_RETURN:
@@ -158,7 +158,7 @@ class RimeTextService(TextService):
         return ret
 
     def filterKeyDown(self, keyEvent):
-        #print("keyDown", keyEvent.keyCode,keyEvent.repeatCount)
+        #print("filterKeyDown", keyEvent.keyCode,keyEvent.isExtended,keyEvent.repeatCount)
         if self.lastKeyDownCode == keyEvent.keyCode:
             self.lastKeySkip += 1
             if self.lastKeySkip >= 2:
