@@ -48,7 +48,7 @@ Name "$(PRODUCT_NAME)"
 BrandingText "$(PRODUCT_NAME)"
 
 !define /date NOW "%Y%m%d"
-OutFile "PRIME-${PRODUCT_VERSION}-setup-${NOW}.exe" ; The generated installer file name
+OutFile "PIME-${PRODUCT_VERSION}-setup.exe" ; The generated installer file name
 
 ; We install everything to C:\Program Files (x86)
 InstallDir "$PROGRAMFILES32\PIME"
