@@ -26,104 +26,90 @@
 #include <Lmcons.h> // for UNLEN
 #include <Winnt.h> // for security attributes constants
 #include <aclapi.h> // for ACL
+#include <rpc.h> // for UuidCreate
 #include <cstring>
 #include <string>
 #include <vector>
 #include <unordered_map>
 #include <queue>
+#include <deque>
 #include <memory>
 #include "BackendServer.h"
+
+#include <uv.h>
 
 
 namespace PIME {
 
+class PipeServer;
+class BackendServer;
+
 struct ClientInfo {
-	HANDLE pipe_;
 	BackendServer* backend_;
 	std::string textServiceGuid_;
 	std::string clientId_;
-
-	std::string readBuf_;
-
-	ClientInfo(HANDLE pipe) :
-		pipe_(pipe),
-		backend_(nullptr) {
-	}
-};
-
-
-class PipeServer;
-
-struct AsyncRequest {
-	enum Type {
-		ASYNC_READ,
-		ASYNC_WRITE
-	};
-
-	OVERLAPPED overlapped_;
+	uv_pipe_t pipe_;
 	PipeServer* server_;
-	std::weak_ptr<ClientInfo>  client_;
-	Type type_;
-	std::unique_ptr<char[]> buf_;
-	int bufSize_;
-	DWORD errCode_;
-	DWORD numBytes_;
-	bool success_;
 
-	AsyncRequest(PipeServer* server, const std::shared_ptr<ClientInfo>& client, Type type, int bufSize, const char* bufContent = nullptr) :
-		server_(server),
-		client_(client),
-		type_(type),
-		buf_(new char[bufSize]),
-		bufSize_(bufSize),
-		errCode_(0),
-		numBytes_(0),
-		success_(false) {
-		memset(&overlapped_, 0, sizeof(OVERLAPPED));
-		if (bufContent != nullptr) {
-			memcpy(buf_.get(), bufContent, bufSize);
-		}
+	ClientInfo(PipeServer* server);
+
+	uv_stream_t* stream() {
+		return reinterpret_cast<uv_stream_t*>(&pipe_);
 	}
 
-	~AsyncRequest() {
-	}
+	bool isInitialized() const;
+
+	bool init(const Json::Value& params);
 };
 
 
 class PipeServer {
 public:
-
 	PipeServer();
+
 	~PipeServer();
 
 	int exec(LPSTR cmd);
+
 	static PipeServer* get() { // get the singleton object
 		return singleton_;
 	}
 
 	void quit();
 
-	void readClient(const std::shared_ptr<ClientInfo>& client);
-	void writeClient(const std::shared_ptr<ClientInfo>& client, const char* data, int len);
-	void closeClient(const std::shared_ptr<ClientInfo>& client);
+	void handleBackendReply(const char* readBuf, size_t len);
+
+	void outputDebugMessage(const char* msg, size_t len);
+
+	BackendServer* backendFromLangProfileGuid(const char* guid);
+
+	BackendServer* backendFromName(const char* name);
+
+	void onBackendClosed(BackendServer* backend);
 
 private:
+	// backend server
+	void initBackendServers(const std::wstring& topDirPath);
+	void finalizeBackendServers();
+	void initInputMethods(const std::wstring& topDirPath);
+
 	static std::string getPipeName(const char* base_name);
 	void initSecurityAttributes();
-	HANDLE acceptClientPipe();
-	HANDLE createPipe(const wchar_t * app_name);
-	void closePipe(HANDLE pipe);
+	void initPipe(uv_pipe_t* pipe, const char * app_name, SECURITY_ATTRIBUTES* sa = nullptr);
 	void terminateExistingLauncher();
 	void parseCommandLine(LPSTR cmd);
 	// bool launchBackendByName(const char* name);
 
-	static void CALLBACK _onFinishedCallback(DWORD err, DWORD numBytes, OVERLAPPED* overlapped);
+	void onNewClientConnected(uv_stream_t* server, int status);
+	void onClientDataReceived(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
+	void handleClientMessage(ClientInfo* client, const char* readBuf, size_t len);
+	void closeClient(ClientInfo* client);
 
-	void onReadFinished(AsyncRequest* req);
+	void onNewDebugClientConnected(uv_stream_t* server, int status);
+	void onDebugClientDataReceived(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
+	void closeDebugClient();
 
-	void onWriteFinished(AsyncRequest* req);
-
-	void handleClientMessage(const std::shared_ptr<ClientInfo>& client);
+	void sendReplyToClient(const std::string clientId, const char* msg, size_t len);
 
 private:
 	// security attribute stuff for creating the server pipe
@@ -133,15 +119,18 @@ private:
 	EXPLICIT_ACCESS explicitAccesses_[2];
 	PSID everyoneSID_;
 	PSID allAppsSID_;
-
-	OVERLAPPED connectPipeOverlapped_;
-	bool pendingPipeConnection_;
-
+	
 	std::wstring topDirPath_;
 	bool quitExistingLauncher_;
 	static PipeServer* singleton_;
-	std::unordered_map<HANDLE, std::shared_ptr<ClientInfo>> clients_;
-	std::queue<AsyncRequest*> finishedRequests_;
+	std::vector<ClientInfo*> clients_;
+	uv_pipe_t serverPipe_; // main server pipe accepting connections from the clients
+	uv_pipe_t debugServerPipe_; // pipe used for communicate with the debug console
+	uv_pipe_t* debugClientPipe_; // connected client pipe of the debug console
+	std::deque<std::string> recentDebugMessages_; // buffer storing recent debug messages
+
+	std::vector<BackendServer*> backends_;
+	std::unordered_map<std::string, BackendServer*> backendMap_;
 };
 
 } // namespace PIME

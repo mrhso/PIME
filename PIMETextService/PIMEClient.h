@@ -75,9 +75,8 @@ public:
 	void onCompositionTerminated(bool forced);
 
 private:
-	HANDLE connectPipe(const wchar_t* pipeName);
+	static HANDLE connectPipe(const wchar_t* pipeName);
 	bool connectServerPipe();
-	bool launchServer();
 	bool sendRequestText(HANDLE pipe, const char* data, int len, std::string& reply);
 	bool sendRequest(Json::Value& req, Json::Value& result);
 	void closePipe();
@@ -94,10 +93,13 @@ private:
 	TextService* textService_;
 	std::string guid_;
 	HANDLE pipe_;
-	std::unordered_map<std::string, PIME::LangBarButton*> buttons_; // map buttons to string IDs
+	std::unordered_map<std::string, Ime::ComPtr<PIME::LangBarButton>> buttons_; // map buttons to string IDs
 	unsigned int newSeqNum_;
 	bool isActivated_;
 	bool connectingServerPipe_;
+	UINT connectServerTimerId_;
+
+	static std::unordered_map<UINT_PTR, Client*> timerIdToClients_;
 };
 
 }

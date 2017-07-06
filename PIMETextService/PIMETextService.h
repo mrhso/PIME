@@ -179,12 +179,14 @@ public:
 	// candidate window
 	void showCandidates(Ime::EditSession* session);
 	void updateCandidates(Ime::EditSession* session);
+    void updateCandidatesWindow(Ime::EditSession* session);
 	void hideCandidates();
 
 	void refreshCandidates();
 
 	// message window
 	void showMessage(Ime::EditSession* session, std::wstring message, int duration = 3);
+    void updateMessageWindow(Ime::EditSession* session);
 	void hideMessage();
 
 private:
@@ -194,16 +196,6 @@ private:
 	static void CALLBACK onMessageTimeout(HWND hwnd, UINT msg, UINT_PTR id, DWORD time);
 
 	void updateLangButtons(); // update status of language bar buttons
-
-	// reload configurations if changes are detected
-	void reloadConfigIfNeeded();
-
-	// apply current configurations to chewing context
-	void applyConfig();
-
-	void toggleLanguageMode(); // toggle between English and Chinese
-	void toggleShapeMode(); // toggle between full shape and half shape
-	void toggleSimplifiedChinese(); // toggle output traditional or simplified Chinese
 
 	void createCandidateWindow(Ime::EditSession* session);
 	int candFontHeight();

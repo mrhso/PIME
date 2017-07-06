@@ -54,6 +54,9 @@ class KeyEvent:
     def isPrintableChar(self):
         return self.charCode > 0x1f and self.charCode != 0x7f
 
+    def isSymbols(self):
+        return self.charCode in [0x3d, 0x5b, 0x5c, 0x5d, 0x27]
+
 
 class TextService:
     def __init__(self, client):
@@ -120,6 +123,7 @@ class TextService:
             self.onCompositionTerminated(forced)
         elif method == "onActivate":
             self.isActivated = True
+            self.keyboardOpen = msg["isKeyboardOpen"]
             self.onActivate()
         elif method == "onDeactivate":
             self.onDeactivate()
@@ -248,6 +252,9 @@ class TextService:
     def setSelKeys(self, keys):
         self.currentReply["setSelKeys"] = keys
 
+    def setKeyboardOpen(self, opened):
+        self.currentReply["openKeyboard"] = opened
+
     '''
     Valid arguments:
     candFontName, cadFontSize, candPerRow, candUseCursor
@@ -270,3 +277,6 @@ class TextService:
             "message": message,
             "duration": duration
         }
+
+    def hideMessage(self):
+        self.currentReply["hideMessage"] = True

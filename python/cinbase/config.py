@@ -28,54 +28,58 @@ selKeys=(
 )
 
 class CinBaseConfig:
-    
+
     def __init__(self):
-        self.imeDirName = ""
         self.candPerRow = 3
         self.defaultEnglish = False
         self.defaultFullSpace = False
+        self.disableOnStartup = False
         self.switchLangWithShift = True
         self.outputSmallLetterWithShift = False
         self.switchPageWithSpace = False
         self.outputSimpChinese = False
+        self.messageDurationTime = 3
         self.hidePromptMessages = True
         self.autoClearCompositionChar = False
         self.playSoundWhenNonCand = False
         self.directShowCand = False
-        self.directCommitString = False
         self.directCommitSymbol = False
-        self.colorCandWnd = True
-        self.advanceAfterSelection = True
         self.fontSize = DEF_FONT_SIZE
         self.selCinType = 0
-        self.selCinFile = ""
-        self.cinFileList = []
-        self.cindir = ""
+        self.ignorePrivateUseArea = True
         self.selKeyType = 0
         self.candPerPage = 9
         self.cursorCandList = True
-        self.enableCapsLock = True
         self.fullShapeSymbols = False
         self.directOutFSymbols = False
         self.directOutMSymbols = True
-        # self.phraseMark = True
-        self.escCleanAllBuf = True
         self.easySymbolsWithShift = False
-        # self.easySymbolsWithCtrl = False
-        self.upperCaseWithShift = True
         self.showPhrase = False
         self.sortByPhrase = True
         self.supportWildcard = True
         self.compositionBufferMode = False
         self.autoMoveCursorInBrackets = False
         self.selWildcardType = 0
+        self.imeReverseLookup = False
+        self.homophoneQuery = False
+        self.selHCinType = 0
+        self.userExtendTable = False
+        self.reLoadTable = False
+        self.priorityExtendTable = False
+        self.selRCinType = 0
         self.candMaxItems = 100
+        self.messageDurationTime = 3
         self.keyboardType = 0
         self.selDayiSymbolCharType = 0
+
+        self.ignoreSaveList = ["ignoreSaveList", "curdir", "cinFileList", "selCinFile", "imeDirName", "_version", "_lastUpdateTime"]
         self.curdir = os.path.abspath(os.path.dirname(__file__))
-        
-        # version: last modified time of (config.json, symbols.dat, swkb.dat)
-        self._version = (0.0, 0.0, 0.0)
+        self.cinFileList = []
+        self.selCinFile = ""
+        self.imeDirName = ""
+
+        # version: last modified time of (config.json, symbols.dat, swkb.dat, fsymbols.dat, flangs.dat, userphrase.dat)
+        self._version = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
         self._lastUpdateTime = 0.0
 
     def getConfigDir(self):
@@ -112,19 +116,28 @@ class CinBaseConfig:
             self.save()
         self.update()
 
+    def toJson(self):
+        return {key: value for key, value in self.__dict__.items() if not key.startswith("_") and not key in self.ignoreSaveList}
+
     def save(self):
         filename = self.getConfigFile()
         try:
             with open(filename, "w") as f:
-                json = {key: value for key, value in self.__dict__.items() if not key.startswith("_")}
-                js = json.dump(json, f, indent=4)
+                jsondata = {key: value for key, value in self.__dict__.items() if not key in self.ignoreSaveList}
+                js = json.dump(jsondata, f, sort_keys=True, indent=4)
             self.update()
         except Exception:
             pass # FIXME: handle I/O errors?
 
     def getDataDir(self):
         return os.path.join(os.path.dirname(__file__), "data")
-        
+
+    def getCinDir(self):
+        return os.path.join(os.path.dirname(__file__), "cin")
+
+    def getJsonDir(self):
+        return os.path.join(os.path.dirname(__file__), "json")
+
     def getDefaultConfigDir(self):
         return os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, "input_methods", self.imeDirName, "config"))
 
@@ -193,6 +206,14 @@ class CinBaseConfig:
         if userphraseFile:
             try:
                 userphraseTime = os.path.getmtime(userphraseFile)
+            except Exception:
+                pass
+
+        extendtableTime = 0.0
+        extendtableFile = self.findFile(datadirs, "extendtable.dat")
+        if extendtableFile:
+            try:
+                extendtableTime = os.path.getmtime(extendtableFile)
             except Exception:
                 pass
 

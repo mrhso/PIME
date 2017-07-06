@@ -42,7 +42,7 @@ AllowSkipFiles off ; cannot skip a file
 !define /file PRODUCT_VERSION "..\version.txt"
 
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\PIME"
-!define HOMEPAGE_URL "https://github.com/osfans/PIME/releases"
+!define HOMEPAGE_URL "https://github.com/osfans/PRIME/releases"
 
 Name "$(PRODUCT_NAME)"
 BrandingText "$(PRODUCT_NAME)"
@@ -63,6 +63,7 @@ RequestExecutionLevel admin
 !insertmacro MUI_PAGE_LICENSE "..\PSF.txt" ; for python
 
 ; !insertmacro MUI_PAGE_COMPONENTS
+!define MUI_COMPONENTSPAGE_SMALLDESC
 !insertmacro MUI_PAGE_COMPONENTS
 
 ; Custom IE Protected Mode
@@ -106,6 +107,13 @@ Page custom setIEProtectedPage leaveIEProtectedPage
 
 var UPDATEX86DLL
 var UPDATEX64DLL
+
+var INST_PYTHON
+var INST_CINBASE
+var INST_NODE
+
+; The table file of Liu input method
+var LIU_UNI_TAB_FILE
 
 ; Uninstall old versions
 Function uninstallOldVersion
@@ -161,6 +169,8 @@ Function uninstallOldVersion
 
 			Delete /REBOOTOK "$INSTDIR\PIMELauncher.exe"
 
+            Delete /REBOOTOK "$INSTDIR\PIMEDebugConsole.exe"
+
             Delete "$INSTDIR\backends.json"
 			RMDir /REBOOTOK /r "$INSTDIR\python"
 			RMDir /REBOOTOK /r "$INSTDIR\node"
@@ -179,6 +189,7 @@ Function uninstallOldVersion
 			Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHESIMPLEX).lnk"
 			Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEPHONETIC).lnk"
 			Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEEZ).lnk"
+            ; Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_BRAILLE_CHEWING).lnk"
 			Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(UNINSTALL_PIME).lnk"
 			RMDir "$SMPROGRAMS\$(PRODUCT_NAME)"
 
@@ -280,10 +291,13 @@ Function .onInit
 	StrCpy $UPDATEX86DLL "True"
 	StrCpy $UPDATEX64DLL "True"
 
+	StrCpy $INST_PYTHON "False"
+	StrCpy $INST_CINBASE "False"
+	StrCpy $INST_NODE "False"
+
 	; check if old version is installed and uninstall it first
 	Call uninstallOldVersion
-	Call hideCheEngSection
-
+	Call hideSection
 FunctionEnd
 
 ; called to show an error message when errors happen
@@ -304,6 +318,7 @@ Function ensureVCRedist
     ; Reference: https://blogs.msdn.microsoft.com/vcblog/2015/03/03/introducing-the-universal-crt/
     ;            https://docs.python.org/3/using/windows.html#embedded-distribution
     ${IfNot} ${FileExists} "$SYSDIR\ucrtbase.dll"
+	${OrIfNot} ${FileExists} "$SYSDIR\msvcp140.dll"
         MessageBox MB_YESNO|MB_ICONQUESTION $(DOWNLOAD_VC2015_QUESTION) IDYES +2
             Abort ; this is skipped if the user select Yes
         ; Download VC++ 2015 redistibutable (x86 version)
@@ -317,8 +332,9 @@ Function ensureVCRedist
         ; Run vcredist installer
         ExecWait "$TEMP\vc2015_redist.x86.exe" $0
 
-        ; check again is ucrtbase.dll is available
+        ; check again if ucrtbase.dll or msvcp140.dll is available
         ${IfNot} ${FileExists} "$SYSDIR\ucrtbase.dll"
+		${OrIfNot} ${FileExists} "$SYSDIR\msvcp140.dll"
             MessageBox MB_ICONSTOP|MB_OK $(INST_VC2015_FAILED_MESSAGE)
             ExecShell "open" "https://support.microsoft.com/en-us/kb/2999226"
             Abort
@@ -379,104 +395,144 @@ Section $(SECTION_MAIN) SecMain
     ; Install backend informations
     File "..\backends.json"
 
-	; Install the python backend and input method modules along with an embedable version of python 3.
-	File /r /x "__pycache__" /x "input_methods" /x ".git" /x ".idea" "..\python"
-	SetOutPath "$INSTDIR\python\input_methods"
-	File "..\python\input_methods\__init__.py"
-
-	SetOutPath "$INSTDIR"
-	; Install the node.js backend and input method modules along with an embedable version of node v6.
-	File /r /x "input_methods" "..\node"
-
 	; Install the launcher responsible to launch the backends
 	File "..\build\PIMELauncher\Release\PIMELauncher.exe"
+    
+    ; Install developer tool used to inspect debug messages
+    File "..\build\PIMELauncher\Release\PIMEDebugConsole.exe"
 SectionEnd
 
-SectionGroup /e $(SECTION_GROUP)
-	Section $(CHEWING) chewing
-		SectionIn 2
-		SetOutPath "$INSTDIR\python\input_methods"
-		File /r "..\python\input_methods\chewing"
-	SectionEnd
-
-	Section $(CHECJ) checj
-		SectionIn 2
-		SetOutPath "$INSTDIR\python\input_methods"
-		File /r "..\python\input_methods\checj"
-	SectionEnd
-/*
-	Section $(CHELIU) cheliu
-		SectionIn 2
-		SetOutPath "$INSTDIR\python\input_methods"
-		File /r "..\python\input_methods\cheliu"
-	SectionEnd
-*/
-	Section $(CHEARRAY) chearray
-		SectionIn 2
-		SetOutPath "$INSTDIR\python\input_methods"
-		File /r "..\python\input_methods\chearray"
-	SectionEnd
-
-	Section $(CHEDAYI) chedayi
-		SectionIn 2
-		SetOutPath "$INSTDIR\python\input_methods"
-		File /r "..\python\input_methods\chedayi"
-	SectionEnd
-
-	Section $(CHEPINYIN) chepinyin
-		SectionIn 2
-		SetOutPath "$INSTDIR\python\input_methods"
-		File /r "..\python\input_methods\chepinyin"
-	SectionEnd
-
-	Section $(CHESIMPLEX) chesimplex
-		SectionIn 2
-		SetOutPath "$INSTDIR\python\input_methods"
-		File /r "..\python\input_methods\chesimplex"
-	SectionEnd
-
-	Section $(CHEPHONETIC) chephonetic
-		SectionIn 2
-		SetOutPath "$INSTDIR\python\input_methods"
-		File /r "..\python\input_methods\chephonetic"
-	SectionEnd
-
-	Section $(CHEEZ) cheez
-		SectionIn 2
-		SetOutPath "$INSTDIR\python\input_methods"
-		File /r "..\python\input_methods\cheez"
-	SectionEnd
-
-	Section $(RIME) rime
-		SectionIn 1 2
-		SetOutPath "$INSTDIR\python\input_methods"
-		File /r /x "brise" "..\python\input_methods\rime"
-		SetOutPath "$INSTDIR\python\input_methods\rime\data"
-		File "..\python\input_methods\rime\brise\*.txt"
-		File "..\python\input_methods\rime\brise\*.yaml"
-		File "..\python\input_methods\rime\brise\preset\*.yaml"
-		File "..\python\input_methods\rime\brise\supplement\*.yaml"
-		File "..\python\input_methods\rime\brise\extra\*.yaml"
-		SetOutPath "$INSTDIR\python\input_methods\rime\data\opencc"
-		File "..\python\opencc\*.json" "..\python\opencc\*.ocd"
-	SectionEnd
-
-	Section $(EMOJIME) emojime
-			SectionIn 2
-			SetOutPath "$INSTDIR\node\input_methods"
-			File /r "..\node\input_methods\emojime"
-	SectionEnd
-
-	Section $(CHEENG) cheeng
-		${If} ${AtLeastWin8}
+SectionGroup /e $(PYTHON_SECTION_GROUP) python_section_group
+	SectionGroup /e $(PYTHON_CHT_SECTION_GROUP) python_cht_section_group
+		Section $(CHEWING) chewing
 			SectionIn 2
 			SetOutPath "$INSTDIR\python\input_methods"
-			File /r "..\python\input_methods\cheeng"
-		${EndIf}
-	SectionEnd
+			File /r "..\python\input_methods\chewing"
+			StrCpy $INST_PYTHON "True"
+		SectionEnd
+
+		Section $(CHECJ) checj
+			SectionIn 2
+			SetOutPath "$INSTDIR\python\input_methods"
+			File /r "..\python\input_methods\checj"
+			StrCpy $INST_PYTHON "True"
+			StrCpy $INST_CINBASE "True"
+		SectionEnd
+
+		Section $(CHELIU) cheliu
+            SectionIn 2
+            ; Ask the user to provide "liu-uni.tab" file
+            MessageBox MB_OK|MB_ICONQUESTION "$(SELECT_LIU_FILE)"
+            nsDialogs::SelectFileDialog open "" "liu-uni.tab file|liu-uni.tab"
+            Pop $LIU_UNI_TAB_FILE
+			${If} ${FileExists} "$LIU_UNI_TAB_FILE"
+				SetOutPath "$INSTDIR\python\input_methods"
+				File /r "..\python\input_methods\cheliu"
+				SetOutPath "$INSTDIR\python\cinbase\cin"
+				StrCpy $INST_PYTHON "True"
+				StrCpy $INST_CINBASE "True"
+            ${Else}
+                MessageBox MB_OK|MB_ICONSTOP "$(CANNOT_INSTALL_LIU)"
+                StrCpy $LIU_UNI_TAB_FILE ""
+			${EndIf}
+		SectionEnd
+
+		Section $(CHEARRAY) chearray
+			SectionIn 2
+			SetOutPath "$INSTDIR\python\input_methods"
+			File /r "..\python\input_methods\chearray"
+			StrCpy $INST_PYTHON "True"
+			StrCpy $INST_CINBASE "True"
+		SectionEnd
+
+		Section $(CHEDAYI) chedayi
+			SectionIn 2
+			SetOutPath "$INSTDIR\python\input_methods"
+			File /r "..\python\input_methods\chedayi"
+			StrCpy $INST_PYTHON "True"
+			StrCpy $INST_CINBASE "True"
+		SectionEnd
+
+		Section $(CHEPINYIN) chepinyin
+			SectionIn 2
+			SetOutPath "$INSTDIR\python\input_methods"
+			File /r "..\python\input_methods\chepinyin"
+			StrCpy $INST_PYTHON "True"
+			StrCpy $INST_CINBASE "True"
+		SectionEnd
+
+		Section $(CHESIMPLEX) chesimplex
+			SectionIn 2
+			SetOutPath "$INSTDIR\python\input_methods"
+			File /r "..\python\input_methods\chesimplex"
+			StrCpy $INST_PYTHON "True"
+			StrCpy $INST_CINBASE "True"
+		SectionEnd
+
+		Section $(CHEPHONETIC) chephonetic
+			SectionIn 2
+			SetOutPath "$INSTDIR\python\input_methods"
+			File /r "..\python\input_methods\chephonetic"
+			StrCpy $INST_PYTHON "True"
+			StrCpy $INST_CINBASE "True"
+		SectionEnd
+
+		Section $(CHEEZ) cheez
+			SectionIn 2
+			SetOutPath "$INSTDIR\python\input_methods"
+			File /r "..\python\input_methods\cheez"
+			StrCpy $INST_PYTHON "True"
+			StrCpy $INST_CINBASE "True"
+		SectionEnd
+
+		Section $(CHEENG) cheeng
+			${If} ${AtLeastWin8}
+				SectionIn 2
+				SetOutPath "$INSTDIR\python\input_methods"
+				File /r "..\python\input_methods\cheeng"
+				StrCpy $INST_PYTHON "True"
+			${EndIf}
+		SectionEnd
+
+		Section $(BRAILLE_CHEWING) braille_chewing
+            SectionIn 2
+            SetOutPath "$INSTDIR\python\input_methods"
+            File /r "..\python\input_methods\braille_chewing"
+            StrCpy $INST_PYTHON "True"
+		SectionEnd
+
+    SectionGroupEnd
+
+	SectionGroup /e $(PYTHON_CHS_SECTION_GROUP) python_chs_section_group
+		Section $(RIME) rime
+			SectionIn 1 2
+			SetOutPath "$INSTDIR\python\input_methods"
+			File /r /x "brise" "..\python\input_methods\rime"
+			SetOutPath "$INSTDIR\python\input_methods\rime\data"
+			File "..\python\input_methods\rime\brise\*.txt"
+			File "..\python\input_methods\rime\brise\*.yaml"
+			File "..\python\input_methods\rime\brise\preset\*.yaml"
+			File "..\python\input_methods\rime\brise\supplement\*.yaml"
+			File "..\python\input_methods\rime\brise\extra\*.yaml"
+			SetOutPath "$INSTDIR\python\input_methods\rime\data\opencc"
+			File "..\python\opencc\*.json" "..\python\opencc\*.ocd"
+			StrCpy $INST_PYTHON "True"
+		SectionEnd
+	SectionGroupEnd
 SectionGroupEnd
 
-Function hideCheEngSection
+SectionGroup /e $(NODE_SECTION_GROUP) node_section_group
+	SectionGroup /e $(NODE_CHT_SECTION_GROUP) node_cht_section_group
+		Section $(EMOJIME) emojime
+				SectionIn 2
+				SetOutPath "$INSTDIR\node\input_methods"
+				File /r "..\node\input_methods\emojime"
+				StrCpy $INST_NODE "True"
+		SectionEnd
+	SectionGroupEnd
+SectionGroupEnd
+
+Function hideSection
 	${IfNot} ${AtLeastWin8}
 		SectionSetText ${cheeng} ""
 	${EndIf}
@@ -484,6 +540,32 @@ FunctionEnd
 
 Section "" Register
 	SectionIn 1 2
+	; Install the python backend and input method modules along with an embedable version of python 3.
+	${If} $INST_PYTHON == "True"
+		SetOutPath "$INSTDIR"
+		File /r /x "__pycache__" /x "input_methods" /x "cinbase" /x ".git" /x ".idea" "..\python"
+		SetOutPath "$INSTDIR\python\input_methods"
+		File "..\python\input_methods\__init__.py"
+	${EndIf}
+
+	; Install the CinBase Class for all cin-based input method modules.
+	${If} $INST_CINBASE == "True"
+		SetOutPath "$INSTDIR\python"
+		File /r /x "__pycache__" /x "cin" "..\python\cinbase"
+        ${If} ${SectionIsSelected} ${cheliu}
+            ; Convert the tab file to *.cin format first.
+            nsExec::ExecToLog '"$INSTDIR\python\python3\python.exe" "$INSTDIR\python\cinbase\tools\liu_unitab2cin.py" "$LIU_UNI_TAB_FILE" "$INSTDIR\python\cinbase\cin\liu.cin"'
+            ; Convert the liu.cin file to json format used by cinbase.
+            nsExec::ExecToLog '"$INSTDIR\python\python3\python.exe" "$INSTDIR\python\cinbase\tools\cintojson.py" "liu.cin"'
+        ${EndIf}
+	${EndIf}
+
+	; Install the node.js backend and input method modules along with an embedable version of node v6.
+	${If} $INST_NODE == "True"
+		SetOutPath "$INSTDIR"
+		File /r /x "input_methods" "..\node"
+	${EndIf}
+
 	; Install the text service dlls
 	${If} ${RunningX64} ; This is a 64-bit Windows system
 		SetOutPath "$INSTDIR\x64"
@@ -515,7 +597,9 @@ Section "" Register
 	WriteUninstaller "$INSTDIR\Uninstall.exe" ;Create uninstaller
 
 	; Compile all installed python modules to *.pyc files
-	nsExec::ExecToLog  '"$INSTDIR\python\python3\python.exe" -m compileall "$INSTDIR\python"'
+	${If} $INST_PYTHON == "True"
+		nsExec::ExecToLog  '"$INSTDIR\python\python3\python.exe" -m compileall "$INSTDIR\python"'
+	${EndIf}
 
 	; Launch the python server as current user (non-elevated process)
 	${StdUtils.ExecShellAsUser} $0 "$INSTDIR\PIMELauncher.exe" "open" ""
@@ -536,46 +620,52 @@ Section "" Register
 	${EndIf}
 
 	${If} ${SectionIsSelected} ${checj}
-		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHECJ).lnk" "$INSTDIR\python\input_methods\checj\config\config.hta" "" "$INSTDIR\python\input_methods\checj\icon.ico" 0
+		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHECJ).lnk" "$INSTDIR\python\python3\pythonw.exe" '"$INSTDIR\python\cinbase\configtool.py" config checj' "$INSTDIR\python\input_methods\checj\icon.ico" 0
 	${EndIf}
-/*
+
 	${If} ${SectionIsSelected} ${cheliu}
-		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHELIU).lnk" "$INSTDIR\python\input_methods\cheliu\config\config.hta" "" "$INSTDIR\python\input_methods\cheliu\icon.ico" 0
+		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHELIU).lnk" "$INSTDIR\python\python3\pythonw.exe" '"$INSTDIR\python\cinbase\configtool.py" config cheliu' "$INSTDIR\python\input_methods\cheliu\icon.ico" 0
 	${EndIf}
-*/
+
 	${If} ${SectionIsSelected} ${chearray}
-		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEARRAY).lnk" "$INSTDIR\python\input_methods\chearray\config\config.hta" "" "$INSTDIR\python\input_methods\chearray\icon.ico" 0
+		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEARRAY).lnk" "$INSTDIR\python\python3\pythonw.exe" '"$INSTDIR\python\cinbase\configtool.py" config chearray' "$INSTDIR\python\input_methods\chearray\icon.ico" 0
 	${EndIf}
 
 	${If} ${SectionIsSelected} ${chedayi}
-		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEDAYI).lnk" "$INSTDIR\python\input_methods\chedayi\config\config.hta" "" "$INSTDIR\python\input_methods\chedayi\icon.ico" 0
+		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEDAYI).lnk" "$INSTDIR\python\python3\pythonw.exe" '"$INSTDIR\python\cinbase\configtool.py" config chedayi' "$INSTDIR\python\input_methods\chedayi\icon.ico" 0
 	${EndIf}
 
 	${If} ${SectionIsSelected} ${chepinyin}
-		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEPINYIN).lnk" "$INSTDIR\python\input_methods\chepinyin\config\config.hta" "" "$INSTDIR\python\input_methods\chepinyin\icon.ico" 0
+		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEPINYIN).lnk" "$INSTDIR\python\python3\pythonw.exe" '"$INSTDIR\python\cinbase\configtool.py" config chepinyin' "$INSTDIR\python\input_methods\chepinyin\icon.ico" 0
 	${EndIf}
 
 	${If} ${SectionIsSelected} ${chesimplex}
-		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHESIMPLEX).lnk" "$INSTDIR\python\input_methods\chesimplex\config\config.hta" "" "$INSTDIR\python\input_methods\chesimplex\icon.ico" 0
+		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHESIMPLEX).lnk" "$INSTDIR\python\python3\pythonw.exe" '"$INSTDIR\python\cinbase\configtool.py" config chesimplex' "$INSTDIR\python\input_methods\chesimplex\icon.ico" 0
 	${EndIf}
 
 	${If} ${SectionIsSelected} ${chephonetic}
-		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEPHONETIC).lnk" "$INSTDIR\python\input_methods\chephonetic\config\config.hta" "" "$INSTDIR\python\input_methods\chephonetic\icon.ico" 0
+		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEPHONETIC).lnk" "$INSTDIR\python\python3\pythonw.exe" '"$INSTDIR\python\cinbase\configtool.py" config chephonetic' "$INSTDIR\python\input_methods\chephonetic\icon.ico" 0
 	${EndIf}
 
 	${If} ${SectionIsSelected} ${cheez}
-		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEEZ).lnk" "$INSTDIR\python\input_methods\cheez\config\config.hta" "" "$INSTDIR\python\input_methods\cheez\icon.ico" 0
+		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEEZ).lnk" "$INSTDIR\python\python3\pythonw.exe" '"$INSTDIR\python\cinbase\configtool.py" config cheez' "$INSTDIR\python\input_methods\cheez\icon.ico" 0
 	${EndIf}
 
-	CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)$(UNINSTALL_PIME)\.lnk" "$INSTDIR\Uninstall.exe"
+	CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(UNINSTALL_PIME).lnk" "$INSTDIR\Uninstall.exe"
 SectionEnd
 
 ;Assign language strings to sections
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
 	!insertmacro MUI_DESCRIPTION_TEXT ${SecMain} $(SecMain_DESC)
+	!insertmacro MUI_DESCRIPTION_TEXT ${python_section_group} $(PYTHON_SECTION_GROUP_DESC)
+	!insertmacro MUI_DESCRIPTION_TEXT ${python_cht_section_group} $(PYTHON_CHT_SECTION_GROUP_DESC)
+	!insertmacro MUI_DESCRIPTION_TEXT ${python_chs_section_group} $(PYTHON_CHS_SECTION_GROUP_DESC)
+	!insertmacro MUI_DESCRIPTION_TEXT ${node_section_group} $(NODE_SECTION_GROUP_DESC)
+	!insertmacro MUI_DESCRIPTION_TEXT ${node_cht_section_group} $(NODE_CHT_SECTION_GROUP_DESC)
+	;!insertmacro MUI_DESCRIPTION_TEXT ${node_chs_section_group} $(NODE_CHS_SECTION_GROUP_DESC)
 	!insertmacro MUI_DESCRIPTION_TEXT ${chewing} $(chewing_DESC)
 	!insertmacro MUI_DESCRIPTION_TEXT ${checj} $(checj_DESC)
-	; !insertmacro MUI_DESCRIPTION_TEXT ${cheliu} $(cheliu_DESC)
+	!insertmacro MUI_DESCRIPTION_TEXT ${cheliu} $(cheliu_DESC)
 	!insertmacro MUI_DESCRIPTION_TEXT ${chearray} $(chearray_DESC)
 	!insertmacro MUI_DESCRIPTION_TEXT ${chedayi} $(chedayi_DESC)
 	!insertmacro MUI_DESCRIPTION_TEXT ${chepinyin} $(chepinyin_DESC)
@@ -585,6 +675,7 @@ SectionEnd
     !insertmacro MUI_DESCRIPTION_TEXT ${rime} $(rime_DESC)
 	!insertmacro MUI_DESCRIPTION_TEXT ${emojime} $(emojime_DESC)
 	!insertmacro MUI_DESCRIPTION_TEXT ${cheeng} $(cheeng_DESC)
+	!insertmacro MUI_DESCRIPTION_TEXT ${braille_chewing} $(braille_chewing_DESC)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ;Uninstaller Section
@@ -607,6 +698,8 @@ Section "Uninstall"
 	ExecWait '"$INSTDIR\PIMELauncher.exe" /quit'
 	Delete /REBOOTOK "$INSTDIR\PIMELauncher.exe"
 
+    Delete /REBOOTOK "$INSTDIR\PIMEDebugConsole.exe"
+
 	RMDir /REBOOTOK /r "$INSTDIR\x86"
 	RMDir /REBOOTOK /r "$INSTDIR\python"
 	RMDir /REBOOTOK /r "$INSTDIR\node"
@@ -625,6 +718,7 @@ Section "Uninstall"
 	Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHESIMPLEX).lnk"
 	Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEPHONETIC).lnk"
     Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEEZ).lnk"
+	; Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_BRAILLE_CHEWING).lnk"
 	Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(UNINSTALL_PIME).lnk"
 	RMDir "$SMPROGRAMS\$(PRODUCT_NAME)"
 

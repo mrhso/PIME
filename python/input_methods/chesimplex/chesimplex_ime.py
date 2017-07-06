@@ -20,8 +20,10 @@ import os.path
 import copy
 
 from cinbase import CinBase
+from cinbase import LoadCinTable
+from cinbase import LoadRCinTable
+from cinbase import LoadHCinTable
 from cinbase.config import CinBaseConfig
-from .cin import Cin
 
 
 class CheSimplexTextService(TextService):
@@ -34,13 +36,10 @@ class CheSimplexTextService(TextService):
         # 輸入法模組自訂區域
         self.imeDirName = "chesimplex"
         self.maxCharLength = 2 # 輸入法最大編碼字元數量
-        self.cinFileList = ["simplecj.cin", "simplex.cin", "simplex5.cin"]
+        self.cinFileList = ["simplecj.json", "simplex.json", "simplex5.json"]
 
         self.cinbase = CinBase
         self.curdir = os.path.abspath(os.path.dirname(__file__))
-        self.datadir = os.path.join(self.curdir, "data")
-        self.cindir = os.path.join(self.curdir, "cin")
-        self.icon_dir = self.curdir
 
         # 初始化輸入行為設定
         self.cinbase.initTextService(self, TextService)
@@ -51,26 +50,30 @@ class CheSimplexTextService(TextService):
         self.cfg = copy.deepcopy(CinBaseConfig)
         self.cfg.imeDirName = self.imeDirName
         self.cfg.cinFileList = self.cinFileList
-        self.cfg.cindir = self.cindir
         self.cfg.load()
+        self.jsondir = self.cfg.getJsonDir()
+        self.cindir = self.cfg.getCinDir()
+        self.ignorePrivateUseArea = self.cfg.ignorePrivateUseArea
+        self.cinbase.initCinBaseContext(self)
 
         # 載入輸入法碼表
-        if not CinTable.cin:
-            CinTable.loadCinFile(self)
-            self.cin = CinTable.cin
+        if not CinTable.curCinType == self.cfg.selCinType and not CinTable.loading:
+            loadCinFile = LoadCinTable(self, CinTable)
+            loadCinFile.start()
         else:
+            while CinTable.loading:
+                continue
             self.cin = CinTable.cin
 
 
     # 檢查設定檔是否有被更改，是否需要套用新設定
     def checkConfigChange(self):
-        self.cinbase.checkConfigChange(self, CinTable)
+        self.cinbase.checkConfigChange(self, CinTable, RCinTable, HCinTable)
 
 
     # 輸入法被使用者啟用
     def onActivate(self):
         TextService.onActivate(self)
-        self.cinbase.initCinBaseContext(self)
         self.cinbase.onActivate(self)
 
 
@@ -84,12 +87,12 @@ class CheSimplexTextService(TextService):
     # return True，系統會呼叫 onKeyDown() 進一步處理這個按鍵
     # return False，表示我們不需要這個鍵，系統會原封不動把按鍵傳給應用程式
     def filterKeyDown(self, keyEvent):
-        KeyState = self.cinbase.filterKeyDown(self, keyEvent)
+        KeyState = self.cinbase.filterKeyDown(self, keyEvent, CinTable, RCinTable, HCinTable)
         return KeyState
 
 
     def onKeyDown(self, keyEvent):
-        KeyState = self.cinbase.onKeyDown(self, keyEvent)
+        KeyState = self.cinbase.onKeyDown(self, keyEvent, CinTable, RCinTable, HCinTable)
         return KeyState
 
 
@@ -140,14 +143,27 @@ class CheSimplexTextService(TextService):
 
 
 class CinTable:
+    loading = False
     def __init__(self):
         self.cin = None
-        
-    def loadCinFile(self, ImeTextService):
-        selCinFile = ImeTextService.cinFileList[ImeTextService.cfg.selCinType]
-        CinPath = os.path.join(ImeTextService.cindir, selCinFile)
-        
-        self.cin = None
-        with io.open(CinPath, encoding='utf-8') as fs:
-            self.cin = Cin(fs)
+        self.curCinType = None
+        self.userExtendTable = None
+        self.priorityExtendTable = None
+        self.ignorePrivateUseArea = None
 CinTable = CinTable()
+
+
+class RCinTable:
+    loading = False
+    def __init__(self):
+        self.cin = None
+        self.curCinType = None
+RCinTable = RCinTable()
+
+
+class HCinTable:
+    loading = False
+    def __init__(self):
+        self.cin = None
+        self.curCinType = None
+HCinTable = HCinTable()

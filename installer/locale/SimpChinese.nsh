@@ -23,11 +23,16 @@
 !insertmacro LANG_STRING IEProtectedPage_MESSAGE "PIME 输入法须要变更 IE 设置，才能在 IE 里使用。"
 
 !insertmacro LANG_STRING SECTION_MAIN "PIME 输入法平台"
-!insertmacro LANG_STRING SECTION_GROUP "输入法模块"
+!insertmacro LANG_STRING PYTHON_SECTION_GROUP "Python 输入法模组"
+!insertmacro LANG_STRING PYTHON_CHT_SECTION_GROUP "中文繁体"
+!insertmacro LANG_STRING PYTHON_CHS_SECTION_GROUP "中文简体"
+!insertmacro LANG_STRING NODE_SECTION_GROUP "Node 输入法模组"
+!insertmacro LANG_STRING NODE_CHT_SECTION_GROUP "中文繁体"
+!insertmacro LANG_STRING NODE_CHS_SECTION_GROUP "中文简体"
 
 !insertmacro LANG_STRING CHEWING 新酷音
 !insertmacro LANG_STRING CHECJ 酷仓
-!insertmacro LANG_STRING CHELIU 虾米
+!insertmacro LANG_STRING CHELIU "虾米 (須自備正版表格檔)"
 !insertmacro LANG_STRING CHEARRAY 行列
 !insertmacro LANG_STRING CHEDAYI 大易
 !insertmacro LANG_STRING CHEPINYIN 拼音
@@ -37,8 +42,18 @@
 !insertmacro LANG_STRING RIME 中州韵
 !insertmacro LANG_STRING EMOJIME emojime
 !insertmacro LANG_STRING CHEENG 英数
+!insertmacro LANG_STRING BRAILLE_CHEWING "點字酷音"
+
+!insertmacro LANG_STRING SELECT_LIU_FILE "蝦米模块需要「正版」嘸蝦米輸入法的表格檔 (liu-uni.tab) 才能安裝。$\r$\n請選取 liu-uni.tab 檔案所在位置。"
+!insertmacro LANG_STRING CANNOT_INSTALL_LIU "缺少 liu-uni.tab 表格檔，無法安裝蝦米輸入法。"
 
 !insertmacro LANG_STRING SecMain_DESC "安装 $(PRODUCT_NAME) 主程序到你的电脑里。"
+!insertmacro LANG_STRING PYTHON_SECTION_GROUP_DESC "Python 输入法模组"
+!insertmacro LANG_STRING PYTHON_CHT_SECTION_GROUP_DESC "中文繁体"
+!insertmacro LANG_STRING PYTHON_CHS_SECTION_GROUP_DESC "中文简体"
+!insertmacro LANG_STRING NODE_SECTION_GROUP_DESC "NODE 输入法模组"
+!insertmacro LANG_STRING NODE_CHT_SECTION_GROUP_DESC "中文繁体"
+!insertmacro LANG_STRING NODE_CHS_SECTION_GROUP_DESC "中文简体"
 !insertmacro LANG_STRING chewing_DESC "安装新酷音输入法模块。"
 !insertmacro LANG_STRING checj_DESC "安装酷仓输入法模块。"
 !insertmacro LANG_STRING cheliu_DESC "安装虾米输入法模块。"
@@ -51,6 +66,7 @@
 !insertmacro LANG_STRING rime_DESC "安装中州韵输入法引擎，内含拼音、注音、仓颉、五笔、粤拼、吴语等数种输入方案。"
 !insertmacro LANG_STRING emojime_DESC "安装 emojime 输入法模块。"
 !insertmacro LANG_STRING cheeng_DESC "安装英数输入法模块。"
+!insertmacro LANG_STRING braille_chewing_DESC "安装點字酷音输入法模块。"
 
 !insertmacro LANG_STRING SET_CHEWING "设置新酷音输入法"
 !insertmacro LANG_STRING SET_CHEWING_PHRASES "编辑新酷音使用者辞库"
@@ -62,5 +78,6 @@
 !insertmacro LANG_STRING SET_CHESIMPLEX "设置速成输入法"
 !insertmacro LANG_STRING SET_CHEPHONETIC "设置注音输入法"
 !insertmacro LANG_STRING SET_CHEEZ "设置轻松输入法"
+!insertmacro LANG_STRING SET_BRAILLE_CHEWING "設定點字酷音輸入法"
 
 !insertmacro LANG_STRING UNINSTALL_PIME "卸载 PIME"

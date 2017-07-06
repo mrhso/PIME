@@ -1,20 +1,52 @@
-body {
-    line-height: 150%;
+a[target="_blank"]::after {
+    font-family: "FontAwesome";
+    content: "\f08e";
+    margin: 0 3px 0 1px;
 }
 
-#symbols, #ez_symbols, #ui_page {
-    width: 100%;
-    min-height: 320px;
+kbd {
+    display: inline-block;
+    margin: 0 0.1em;
+    padding: 0.1em 0.6em;
+    line-height: 1.3;
+    color: #242729;
+    background-color: #e1e3e5;
+    border: 1px solid #adb3b9;
+    border-radius: 3px;
+    white-space: nowrap;
 }
 
-#buttons {
-    position: relative;
-    float: right;
-    margin: 4px;
+textarea {
+    min-height: 400px;
 }
 
-#ui_page {
-    height: auto !important;
+#top_box {
+    margin-left: 17em;
+}
+
+.tab-content {
+    margin-top: 1em;
+    min-height: 400px;
+}
+
+.nav {
+    margin-top: 2em;
+}
+
+#ok {
+    margin-top: 1em;
+}
+
+.config_section {
+    padding-left: 2em;
+}
+
+.config_section h1 {
+    font-size: 120%;
+    font-weight: bold;
+    padding: 0 0 0.3em 0;
+    border-bottom: 1px solid #aaaaaa;
+    margin-left: -1em;
 }
 
 #selExample {
@@ -22,8 +54,8 @@ body {
     line-height: 110%;
     display: inline-block;
     min-width: 2.3em;
-    margin-top: 5px;
     padding: 4px;
+    margin-top: 0.5em;
     border-top: 1px solid grey;
     border-right: 2px solid black;
     border-bottom: 1px solid black;
@@ -33,11 +65,25 @@ body {
 
 #selExample span {
     color: blue;
+    font-family: monospace;
 }
 
-#top_box {
-    width: 60%;
-    margin: auto;
+#ui_tab .btn {
+    text-transform: none;
+}
+
+#user_phrase_buttons {
+    position: fixed;
+    margin: 4px;
+    padding: 1em 1em 0 0;
+    border-right: 2px solid grey;
+    height: 95%;
+    width: 15em;
+}
+
+#user_phrase_buttons #phrase_count {
+    padding: 1em;
+    position: absolute;
 }
 
 #phrase_table {
@@ -50,14 +96,27 @@ body {
     border-bottom: 1px solid #dddddd;
 }
 
+#phrase_table #phrase, #phrase_table #delete_phrase {
+    width: 12em;
+}
+
+#phrase_table #bopomofo {
+    width: 25em;
+}
+
 #table_content tr:hover, .phrase_selected {
-    background-color: #dce0e8;
+    background-color: #eab342;
 }
 
 #table_content .phrase_selected {
     font-weight: bold;
 }
 
-#table_content small {
-    color: red;
+.fixed_dialog {
+    position: fixed;
+}
+
+.bopomofo_display {
+    /* for bopomofo display*/
+    font-family: sans-serif !important;
 }

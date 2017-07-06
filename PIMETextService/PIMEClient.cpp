@@ -35,6 +35,8 @@ using namespace std;
 
 namespace PIME {
 
+unordered_map<UINT_PTR, Client*> Client::timerIdToClients_;
+
 Client::Client(TextService* service, REFIID langProfileGuid):
 	textService_(service),
 	pipe_(INVALID_HANDLE_VALUE),
@@ -55,8 +57,8 @@ Client::~Client(void) {
 
 	// some language bar buttons are not unregistered properly
 	if (!buttons_.empty()) {
-		for (auto it = buttons_.begin(); it != buttons_.end(); ++it) {
-			textService_->removeButton(it->second);
+		for (auto& item: buttons_) {
+			textService_->removeButton(item.second);
 		}
 	}
 	LangBarButton::clearIconCache();
@@ -157,6 +159,30 @@ void Client::updateUI(const Json::Value& data) {
 void Client::updateStatus(Json::Value& msg, Ime::EditSession* session) {
 	// We need to handle ordering of some types of the requests.
 	// For example, setCompositionCursor() should happen after setCompositionCursor().
+
+	// set sel keys before update candidates
+	const auto& setSelKeysVal = msg["setSelKeys"];
+	if (setSelKeysVal.isString()) {
+		// keys used to select candidates
+		std::wstring selKeys = utf8ToUtf16(setSelKeysVal.asCString());
+		textService_->setSelKeys(selKeys);
+	}
+
+	// show message
+    bool endComposition = false;
+	const auto& showMessageVal = msg["showMessage"];
+	if (showMessageVal.isObject()) {
+		const Json::Value& message = showMessageVal["message"];
+		const Json::Value& duration = showMessageVal["duration"];
+		if (message.isString() && duration.isInt()) {
+			if (!textService_->isComposing()) {
+				textService_->startComposition(session->context());
+                endComposition = true;
+			}
+			textService_->showMessage(session, utf8ToUtf16(message.asCString()), duration.asInt());
+		}
+	}
+
 	if (session != nullptr) { // if an edit session is available
 		// handle candidate list
 		const auto& showCandidatesVal = msg["showCandidates"];
@@ -199,7 +225,6 @@ void Client::updateStatus(Json::Value& msg, Ime::EditSession* session) {
 		}
 
 		// handle comosition and commit strings
-		bool endComposition = false;
 		const auto& commitStringVal = msg["commitString"];
 		if (commitStringVal.isString()) {
 			std::wstring commitString = utf8ToUtf16(commitStringVal.asCString());
@@ -208,6 +233,13 @@ void Client::updateStatus(Json::Value& msg, Ime::EditSession* session) {
 					textService_->startComposition(session->context());
 				}
 				textService_->setCompositionString(session, commitString.c_str(), commitString.length());
+                // FIXME: update the position of candidate and message window when the composition string is changed.
+                if (textService_->candidateWindow_ != nullptr) {
+                    textService_->updateCandidatesWindow(session);
+                }
+                if (textService_->messageWindow_ != nullptr) {
+                    textService_->updateMessageWindow(session);
+                }
 				textService_->endComposition(session->context());
 			}
 		}
@@ -234,6 +266,13 @@ void Client::updateStatus(Json::Value& msg, Ime::EditSession* session) {
 				}
 				textService_->setCompositionString(session, compositionString.c_str(), compositionString.length());
 			}
+            // FIXME: update the position of candidate and message window when the composition string is changed.
+            if (textService_->candidateWindow_ != nullptr) {
+                textService_->updateCandidatesWindow(session);
+            }
+            if (textService_->messageWindow_ != nullptr) {
+                textService_->updateMessageWindow(session);
+            }
 		}
 
 		const auto& compositionCursorVal = msg["compositionCursor"];
@@ -273,15 +312,14 @@ void Client::updateStatus(Json::Value& msg, Ime::EditSession* session) {
 		for (auto btn_it = addButtonVal.begin(); btn_it != addButtonVal.end(); ++btn_it) {
 			const Json::Value& btn = *btn_it;
 			// FIXME: when to clear the id <=> button map??
-			PIME::LangBarButton* langBtn = PIME::LangBarButton::fromJson(textService_, btn);
+			Ime::ComPtr<PIME::LangBarButton> langBtn{ PIME::LangBarButton::fromJson(textService_, btn), false };
 			if (langBtn != nullptr) {
-				buttons_[langBtn->id()] = langBtn; // insert into the map
+				buttons_.emplace(langBtn->id(), langBtn); // insert into the map
 				textService_->addButton(langBtn);
-				langBtn->Release();
 			}
 		}
 	}
-	
+
 	const auto& removeButtonVal = msg["removeButton"];
 	if (removeButtonVal.isArray()) {
 		// FIXME: handle windows-mode-icon
@@ -296,7 +334,6 @@ void Client::updateStatus(Json::Value& msg, Ime::EditSession* session) {
 			}
 		}
 	}
-
 	const auto& changeButtonVal = msg["changeButton"];
 	if (changeButtonVal.isArray()) {
 		// FIXME: handle windows-mode-icon
@@ -306,7 +343,7 @@ void Client::updateStatus(Json::Value& msg, Ime::EditSession* session) {
 				string id = btn["id"].asString();
 				auto map_it = buttons_.find(id);
 				if (map_it != buttons_.end()) {
-					map_it->second->update(btn);
+					map_it->second->updateFromJson(btn);
 				}
 			}
 		}
@@ -348,35 +385,16 @@ void Client::updateStatus(Json::Value& msg, Ime::EditSession* session) {
 	}
 
 	// other configurations
-	const auto& setSelKeysVal = msg["setSelKeys"];
-	if (setSelKeysVal.isString()) {
-		// keys used to select candidates
-		std::wstring selKeys = utf8ToUtf16(setSelKeysVal.asCString());
-		textService_->setSelKeys(selKeys);
-	}
-	
 	const auto& customizeUIVal = msg["customizeUI"];
 	if (customizeUIVal.isObject()) {
 		// customize the UI
 		updateUI(customizeUIVal);
 	}
 
-	// show message
-	const auto& showMessageVal = msg["showMessage"];
-	bool endComposition = false;
-	if (showMessageVal.isObject()) {
-		const Json::Value& message = showMessageVal["message"];
-		const Json::Value& duration = showMessageVal["duration"];
-		if (message.isString() && duration.isInt()) {
-			if (!textService_->isComposing()) {
-				textService_->startComposition(session->context());
-				endComposition = true;
-			}
-			textService_->showMessage(session, utf8ToUtf16(message.asCString()), duration.asInt());
-			if (endComposition) {
-				textService_->endComposition(session->context());
-			}
-		}
+	// hide message
+    const auto& hideMessageVal = msg["hideMessage"];
+	if (hideMessageVal.isBool()) {
+        textService_->hideMessage();
 	}
 }
 
@@ -681,38 +699,47 @@ bool Client::sendRequest(Json::Value& req, Json::Value & result) {
 	Json::FastWriter writer;
 	std::string reqStr = writer.write(req); // convert the json object to string
 
-	for (int retry_connect = 1; retry_connect >= 0; --retry_connect) {
-		if (!connectingServerPipe_) {  // if we're not in the middle of initializing the pipe connection
-			if (!connectServerPipe()) {  // ensure that we're connected
-				continue;
+	if (!connectingServerPipe_) {  // if we're not in the middle of initializing the pipe connection
+		// ensure that we're connected
+		if (!connectServerPipe()) {
+			// connection failed, schedule a timer to try again every 0.5 seconds
+			if (connectServerTimerId_ != 0) { // do not create a new timer if there is an existing one.
+				connectServerTimerId_ = SetTimer(NULL, 0, 500, [](HWND hwnd, UINT msg, UINT_PTR timerId, DWORD time) {
+					auto client = timerIdToClients_[timerId];
+					if (client->connectServerPipe()) {
+						// successfully connected, cancel the timer
+						KillTimer(NULL, timerId);
+						timerIdToClients_.erase(timerId);
+						client->connectServerTimerId_ = 0;
+					}
+				});
+				timerIdToClients_[connectServerTimerId_] = this;
 			}
+			return false;
 		}
-		// now we should be connected. if not, it's an error.
-		if (pipe_ == INVALID_HANDLE_VALUE)
-			break;
+	}
 
-		if (sendRequestText(pipe_, reqStr.c_str(), reqStr.length(), ret)) {
-			Json::Reader reader;
-			success = reader.parse(ret, result);
-			if (success) {
-				if (result["seqNum"].asUInt() != seqNum) // sequence number mismatch
-					success = false;
-			}
-			break; // send request succeeded, no more retries
+	if (sendRequestText(pipe_, reqStr.c_str(), reqStr.length(), ret)) {
+		Json::Reader reader;
+		success = reader.parse(ret, result);
+		if (success) {
+			if (result["seqNum"].asUInt() != seqNum) // sequence number mismatch
+				success = false;
 		}
-		else { // fail to send the request to the server
-			if (connectingServerPipe_) { // we're in the middle of initializing the pipe connection
-				break; // fail directly
-			}
-			else {
-				closePipe(); // close the pipe connection and try again
-			}
+	}
+	else { // fail to send the request to the server
+		if (connectingServerPipe_) { // we're in the middle of initializing the pipe connection
+			return false;
 		}
-	};
+		else {
+			closePipe(); // close the pipe connection since it's broken
+		}
+	}
 	return success;
 }
 
 // establish a connection to the specified pipe and returns its handle
+// static
 HANDLE Client::connectPipe(const wchar_t* pipeName) {
 	bool hasErrors = false;
 	HANDLE pipe = INVALID_HANDLE_VALUE;
@@ -777,8 +804,8 @@ bool Client::connectServerPipe() {
 
 				// cleanup for the previous instance.
 				// remove all buttons
-				for (auto it = buttons_.begin(); it != buttons_.end(); ++it) {
-					textService_->removeButton(it->second);
+				for (auto& item: buttons_) {
+					textService_->removeButton(item.second);
 				}
 				buttons_.clear();
 
@@ -795,6 +822,12 @@ bool Client::connectServerPipe() {
 }
 
 void Client::closePipe() {
+	if (connectServerTimerId_) {
+		KillTimer(NULL, connectServerTimerId_);
+		timerIdToClients_.erase(connectServerTimerId_);
+		connectServerTimerId_ = 0;
+	}
+
 	if (pipe_ != INVALID_HANDLE_VALUE) {
 		DisconnectNamedPipe(pipe_);
 		CloseHandle(pipe_);

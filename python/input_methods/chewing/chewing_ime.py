@@ -19,18 +19,15 @@ from keycodes import * # for VK_XXX constants
 from textService import *
 import os.path
 import time
-from .libchewing import ChewingContext
-from .chewing_config import chewingConfig
+from libchewing import ChewingContext, CHEWING_DATA_DIR, CHINESE_MODE, \
+    ENGLISH_MODE, FULLSHAPE_MODE, HALFSHAPE_MODE
+
 import opencc  # OpenCC 繁體簡體中文轉換
 import sys
 from ctypes import windll  # for ShellExecuteW()
 
+from .chewing_config import chewingConfig
 
-# from libchewing/include/global.h
-CHINESE_MODE = 1
-ENGLISH_MODE = 0
-FULLSHAPE_MODE = 1
-HALFSHAPE_MODE = 0
 
 # 按鍵內碼和名稱的對應
 keyNames = {
@@ -77,8 +74,6 @@ class ChewingTextService(TextService):
     def __init__(self, client):
         TextService.__init__(self, client)
         self.curdir = os.path.abspath(os.path.dirname(__file__))
-        self.datadir = os.path.join(self.curdir, "data")
-        # print(self.datadir)
         self.icon_dir = self.curdir
         self.chewingContext = None # libchewing context
 
@@ -97,6 +92,9 @@ class ChewingTextService(TextService):
 
         # 使用 OpenCC 繁體中文轉簡體
         self.opencc = None
+
+        # has language buttons
+        self.hasLangButtons = False
 
     # 檢查設定檔是否有被更改，是否需要套用新設定
     def checkConfigChange(self):
@@ -147,6 +145,7 @@ class ChewingTextService(TextService):
         # 轉換輸出成簡體中文?
         self.setOutputSimplifiedChinese(cfg.outputSimpChinese)
 
+
     # 初始化新酷音輸入法引擎
     def initChewingContext(self):
         # load libchewing context
@@ -155,7 +154,7 @@ class ChewingTextService(TextService):
             # syspath 參數可包含多個路徑，用 ; 分隔
             # 此處把 user 設定檔目錄插入到 system-wide 資料檔路徑前
             # 如此使用者變更設定後，可以比系統預設值有優先權
-            search_paths = ";".join((cfg.getConfigDir(), self.datadir)).encode("UTF-8")
+            search_paths = ";".join((cfg.getConfigDir(), CHEWING_DATA_DIR)).encode("UTF-8")
             user_phrase = cfg.getUserPhrase().encode("UTF-8")
 
             # 建立 ChewingContext，此處路徑需要 UTF-8 編碼
@@ -193,8 +192,26 @@ class ChewingTextService(TextService):
         # 當 Shift + Space 被按下的時候，onPreservedKey() 會被呼叫
         self.addPreservedKey(VK_SPACE, TF_MOD_SHIFT, SHIFT_SPACE_GUID); # shift + space
 
-        # 新增語言列按鈕 (Windows 8 之後已取消語言列)
+        # 啟動時預設停用中文輸入 (限 Windows 8 以上適用)
+        if self.client.isWindows8Above:
+            self.setKeyboardOpen(not cfg.disableOnStartup)
 
+        # 新增語言列按鈕 (Windows 8 之後 default 已取消語言列)
+        if self.keyboardOpen:
+            self.addLangButtons()
+
+        # Windows 8 以上已取消語言列功能，改用 systray IME mode icon
+        if self.client.isWindows8Above:
+            icon_name = "chi.ico" if self.langMode == CHINESE_MODE else "eng.ico"  # 切換中英文
+            self.addButton("windows-mode-icon",
+                icon = os.path.join(self.icon_dir, icon_name),
+                tooltip = "中英文切換",
+                commandId = ID_MODE_ICON
+            )
+
+    def addLangButtons(self):
+        if self.hasLangButtons:
+            return
         # 切換中英文
         icon_name = "chi.ico" if self.langMode == CHINESE_MODE else "eng.ico"
         self.addButton("switch-lang",
@@ -202,14 +219,6 @@ class ChewingTextService(TextService):
             tooltip = "中英文切換",
             commandId = ID_SWITCH_LANG
         )
-
-        # Windows 8 以上已取消語言列功能，改用 systray IME mode icon
-        if self.client.isWindows8Above:
-            self.addButton("windows-mode-icon",
-                icon = os.path.join(self.icon_dir, icon_name),
-                tooltip = "中英文切換",
-                commandId = ID_MODE_ICON
-            )
 
         # 切換全半形
         icon_name = "full.ico" if self.shapeMode == FULLSHAPE_MODE else "half.ico"
@@ -225,6 +234,14 @@ class ChewingTextService(TextService):
             tooltip = "設定",
             type = "menu"
         )
+        self.hasLangButtons = True
+
+    def removeLangButtons(self):
+        if self.hasLangButtons:
+            self.removeButton("switch-lang")
+            self.removeButton("switch-shape")
+            self.removeButton("settings")
+        self.hasLangButtons = False
 
     # 使用者離開輸入法
     def onDeactivate(self):
@@ -239,9 +256,8 @@ class ChewingTextService(TextService):
         self.lastOutputSimpChinese = None
 
         # 移除語言列按鈕
-        self.removeButton("switch-lang")
-        self.removeButton("switch-shape")
-        self.removeButton("settings")
+        self.removeLangButtons()
+
         if self.client.isWindows8Above:
             self.removeButton("windows-mode-icon")
 
@@ -275,7 +291,7 @@ class ChewingTextService(TextService):
         # 使用者開始輸入，還沒送出前的編輯區內容稱 composition string
         # isComposing() 是 False，表示目前沒有正在編輯中文
         # 另外，若使用 "`" key 輸入特殊符號，可能會有編輯區是空的，但選字清單開啟，輸入法需要處理的情況
-		# 此時 isComposing() 也會是 True
+        # 此時 isComposing() 也會是 True
         if self.isComposing():
             return True
         # --------------   以下都是「沒有」正在輸入中文的狀況   --------------
@@ -368,6 +384,10 @@ class ChewingTextService(TextService):
                     temporaryEnglishMode = True
                     invertCase = True  # 大寫字母轉成小寫
 
+                # 如果啟動半形符號模式，且輸入符號，則暫時切換為英文模式
+                if not cfg.fullShapeSymbols and keyEvent.isSymbols():
+                    temporaryEnglishMode = True
+
                 # 若按下 Shift 鍵
                 if keyEvent.isKeyDown(VK_SHIFT):
                     if charStr.isalpha():  # 如果是英文字母
@@ -378,7 +398,7 @@ class ChewingTextService(TextService):
                                 invertCase = True # 大寫字母轉成小寫
                     else: # 如果不是英文字母
                         # 如果不使用 Shift 輸入全形標點，則暫時切成英文模式
-                        if not cfg.fullShapeSymbols:
+                        if not cfg.fullShapeSymbolsWithShift:
                             temporaryEnglishMode = True
 
             if self.langMode == ENGLISH_MODE: # 英文模式
@@ -417,6 +437,13 @@ class ChewingTextService(TextService):
             if self.showCandidates:
                 candCursor = self.candidateCursor  # 目前的游標位置
                 candCount = len(self.candidateList)  # 目前選字清單項目數
+                if keyCode == VK_HOME:  # 處理Home、End鍵，移到選字視窗的第一和最後一個字
+                    candCursor = 0
+                    ignoreKey = keyHandled = True
+                elif keyCode == VK_END:
+                    candCursor = candCount - 1
+                    ignoreKey = keyHandled = True
+
                 if cfg.leftRightAction == 0:    # 使用左右鍵游標選字
                     if keyCode == VK_LEFT:  # 游標左移
                         if candCursor > 0:
@@ -651,7 +678,8 @@ class ChewingTextService(TextService):
             self.langMode = langMode
             icon_name = "chi.ico" if langMode == CHINESE_MODE else "eng.ico"
             icon_path = os.path.join(self.icon_dir, icon_name)
-            self.changeButton("switch-lang", icon=icon_path)
+            if self.hasLangButtons:
+                self.changeButton("switch-lang", icon=icon_path)
 
             if self.client.isWindows8Above: # windows 8 mode icon
                 # FIXME: we need a better set of icons to meet the
@@ -661,9 +689,10 @@ class ChewingTextService(TextService):
         shapeMode = chewingContext.get_ShapeMode()
         if shapeMode != self.shapeMode:  # 如果全形半形模式改變
             self.shapeMode = shapeMode
-            icon_name = "full.ico" if shapeMode == FULLSHAPE_MODE else "half.ico"
-            icon_path = os.path.join(self.icon_dir, icon_name)
-            self.changeButton("switch-shape", icon=icon_path)
+            if self.hasLangButtons:
+                icon_name = "full.ico" if shapeMode == FULLSHAPE_MODE else "half.ico"
+                icon_path = os.path.join(self.icon_dir, icon_name)
+                self.changeButton("switch-shape", icon=icon_path)
 
     # 切換中英文模式
     def toggleLanguageMode(self):
@@ -692,6 +721,7 @@ class ChewingTextService(TextService):
         TextService.onKeyboardStatusChanged(self, opened)
         if opened: # 鍵盤開啟
             self.initChewingContext() # 確保新酷音引擎啟動
+            self.addLangButtons()
         else: # 鍵盤關閉，輸入法停用
             # 若選字中，隱藏選字視窗
             if self.showCandidates:
@@ -704,12 +734,13 @@ class ChewingTextService(TextService):
 
             # self.hideMessage() # hide message window, if there's any
             self.chewingContext = None  # 釋放新酷音引擎資源
+            # disable 其他語言列按鈕
+            self.removeLangButtons()
 
         # Windows 8 systray IME mode icon
         if self.client.isWindows8Above:
             # 若鍵盤關閉，我們需要把 widnows 8 mode icon 設定為 disabled
             self.changeButton("windows-mode-icon", enable=opened)
-        # FIXME: 是否需要同時 disable 其他語言列按鈕？
         self.updateLangButtons()
 
     # 當中文編輯結束時會被呼叫。若中文編輯不是正常結束，而是因為使用者

@@ -15,13 +15,17 @@ class swkb(object):
             line = line.strip()
 
             key, root = safeSplit(line)
-            key = key.strip()
+            key = key.upper().strip()
             root = root.strip()
 
             try:
                 self.chardefs[key].append(root)
             except KeyError:
                 self.chardefs[key] = [root]
+
+    def __del__(self):
+        del self.chardefs
+        self.chardefs = {}
 
     def isInCharDef(self, key):
         return key in self.chardefs

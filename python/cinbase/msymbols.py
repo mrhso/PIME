@@ -1,5 +1,8 @@
 from __future__ import print_function
 from __future__ import unicode_literals
+import os
+import re
+import json
 
 class msymbols(object):
 
@@ -7,35 +10,21 @@ class msymbols(object):
     encoding = 'utf-8'
 
     def __init__(self, fs):
+        self.keynames = []
+        self.chardefs = {}
+        self.__dict__.update(json.load(fs))
 
+
+    def __del__(self):
+        del self.keynames
+        del self.chardefs
         self.keynames = []
         self.chardefs = {}
 
-        for line in fs:
-
-            line = line.strip()
-
-            key, root = safeSplit(line)
-            key = key.strip()
-            root = root.strip()
-            
-            if len(key) <= 1:
-                for rootstr in root:
-                    try:
-                        self.chardefs[key].append(rootstr)
-                    except KeyError:
-                        self.chardefs[key] = [rootstr]
-            else:
-                try:
-                    self.chardefs[key].append(root)
-                except KeyError:
-                    self.chardefs[key] = [root]
-
-            if key not in self.keynames:
-                self.keynames.append(key)
 
     def isInCharDef(self, key):
         return key in self.chardefs
+
 
     def getCharDef(self, key):
         """ 
@@ -43,11 +32,14 @@ class msymbols(object):
         """
         return self.chardefs[key]
 
+
     def getKeyNames(self):
         return self.keynames
 
+
     def isHaveKey(self, val):
         return True if [key for key, value in self.chardefs.items() if val in value] else False
+
 
     def getKey(self, val):
         return [key for key, value in self.chardefs.items() if val in value][0]
