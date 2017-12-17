@@ -1,12 +1,9 @@
 // 此輸入法模組的資料夾名稱
-var imeFolderName = "cheez"
+var imeFolderName = "chenm"
 
 // 此輸入法模組使用的碼表
 var selCins=[
-    "輕鬆",
-    "輕鬆小詞庫",
-    "輕鬆中詞庫",
-    "輕鬆大詞庫"
+    "拧码 Special"
 ];
 
 // 此輸入法模組使用的鍵盤類型
