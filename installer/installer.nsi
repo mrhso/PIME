@@ -36,19 +36,18 @@ SetCompressorDictSize 16 ; larger dictionary size for better compression ratio
 AllowSkipFiles off ; cannot skip a file
 
 ; icons of the generated installer and uninstaller
-!define MUI_ICON "..\python\input_methods\rime\icon.ico"
+!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\orange-uninstall.ico"
 
 !define /file PRODUCT_VERSION "..\version.txt"
 
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\PIME"
-!define HOMEPAGE_URL "https://github.com/osfans/PRIME/releases"
+!define HOMEPAGE_URL "https://github.com/mrhso/PIME/tree/mrhso-prime"
 
 Name "$(PRODUCT_NAME)"
 BrandingText "$(PRODUCT_NAME)"
 
-!define /date NOW "%Y%m%d"
-OutFile "PIME-${PRODUCT_VERSION}-setup.exe" ; The generated installer file name
+OutFile "MRHSO-PRIME-${PRODUCT_VERSION}-setup.exe" ; The generated installer file name
 
 ; We install everything to C:\Program Files (x86)
 InstallDir "$PROGRAMFILES32\PIME"
