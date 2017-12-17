@@ -1,0 +1,130 @@
+﻿;Language: 'Chinese (Hanyu pinyin)' (4100)
+;Translator: Ishisashi <liu.songquan@live.cn>
+;Revision date: 2017-12-17
+
+!insertmacro LANGFILE "HanyuPinyin" "Chinese (Hanyu pinyin)" "中文(汉语拼音)" "Zhongwen (Hanyu pinyin)"
+
+!ifdef MUI_WELCOMEPAGE
+  ${LangFileString} MUI_TEXT_WELCOME_INFO_TITLE "Huānyíng shǐyòng $(^NameDA) ānzhuāng xiàngdǎo"
+  ${LangFileString} MUI_TEXT_WELCOME_INFO_TEXT "Zhège xiàngdǎo jiāng zhǐyǐnnǐ wánchéng $(^NameDA) de ānzhuāng jìnchéng.$\r$\n$\r$\nZài kāishǐ ānzhuāng zhīqián, jiànyìxiān guānbì qítā suǒyǒu yìngyòng chéngxù. Zhèjiāng yǔnxǔ $\"ānzhuāng chéngxù$\" gēngxīn zhǐdìngde xìtǒng wénjiàn, ér bùxūyào chóngxīn qǐdòng nǐde jìsuànjī.$\r$\n$\r$\n$_CLICK"
+!endif
+
+!ifdef MUI_UNWELCOMEPAGE
+  ${LangFileString} MUI_UNTEXT_WELCOME_INFO_TITLE "Huānyíng shǐyòng $(^NameDA) jiěchú ānzhuāng xiàngdǎo"
+  ${LangFileString} MUI_UNTEXT_WELCOME_INFO_TEXT "Zhège xiàngdǎo jiāng quánchéng zhǐyǐnnǐ $(^NameDA) de jiěchú ānzhuāng jìnchéng.$\r$\n$\r$\nZài kāishǐ jiěchú ānzhuāng zhīqián, quèrèn $(^NameDA) bìngwèi yùnxíng dāngzhōng.$\r$\n$\r$\n$_CLICK"
+!endif
+
+!ifdef MUI_LICENSEPAGE
+  ${LangFileString} MUI_TEXT_LICENSE_TITLE "Xǔkězhèng xiéyì"
+  ${LangFileString} MUI_TEXT_LICENSE_SUBTITLE "Zài ānzhuāng $(^NameDA) zhīqián, qǐngjiǎnyuè shòuquán tiáokuǎn."
+  ${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM "Rúguǒ nǐjiēshòu xiéyìzhōng de tiáokuǎn, dānjī [wǒtóngyì (I)] jìxù ānzhuāng. Bìxūyào jiēshòu xiéyì cáinéng ānzhuāng $(^NameDA) ."
+  ${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM_CHECKBOX "Rúguǒ nǐjiēshòu xiéyìzhōng de tiáokuǎn, dānjī xiàfāngde gōuxuǎnkuāng. Bìxūyào jiēshòu xiéyì cáinéng ānzhuāng $(^NameDA). $_CLICK"
+  ${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM_RADIOBUTTONS "Rúguǒ nǐjiēshòu xiéyìzhōng de tiáokuǎn, xuánzé xiàfāng dìyīgè xuǎnxiàng. Bìxūyào jiēshòu xiéyì cáinéng ānzhuāng $(^NameDA). $_CLICK"
+!endif
+
+!ifdef MUI_UNLICENSEPAGE
+  ${LangFileString} MUI_UNTEXT_LICENSE_TITLE "Xǔkězhèng xiéyì"
+  ${LangFileString} MUI_UNTEXT_LICENSE_SUBTITLE "Zài jiěchú ānzhuāng $(^NameDA) zhīqián, qǐngjiǎnyuè shòuquán tiáokuǎn."
+  ${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM "Rúguǒ nǐjiēshòu xiéyìzhōng de tiáokuǎn, dānjī [wǒtóngyì (I)] jìxù jiěchú ānzhuāng. Rǔguǒ nǐxuǎndìng [qǔxiāo (C)] , ānzhuāng chéngxù jiānghuì guānbì. Bìxūyào jiēshòu xiéyì cáinéng jiěchú ānzhuāng $(^NameDA) ."
+  ${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM_CHECKBOX "Rúguǒ nǐjiēshòu xiéyìzhōng de tiáokuǎn, dānjī xiàfāngde gōuxuǎnkuāng. Bìxūyào jiēshòu xiéyì cáinéng jiěchú ānzhuāng $(^NameDA). $_CLICK"
+  ${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM_RADIOBUTTONS "Rúguǒ nǐjiēshòu xiéyìzhōng de tiáokuǎn, xuánzé xiàfāng dìyīgè xuǎnxiàng. Bìxūyào jiēshòu xiéyì cáinéng jiěchú ānzhuāng $(^NameDA). $_CLICK"
+!endif
+
+!ifdef MUI_LICENSEPAGE | MUI_UNLICENSEPAGE
+  ${LangFileString} MUI_INNERTEXT_LICENSE_TOP "Jiǎnyuè xiéyìde qíyú bùfen, àn [PgDn] wǎngxià juǎndòng yèmiàn."
+!endif
+
+!ifdef MUI_COMPONENTSPAGE
+  ${LangFileString} MUI_TEXT_COMPONENTS_TITLE "Xuǎnzé zǔjiàn"
+  ${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "Xuǎnzé nǐxiǎngyào ānzhuāng $(^NameDA) de nǎxiē gōngnéng."
+!endif
+
+!ifdef MUI_UNCOMPONENTSPAGE
+  ${LangFileString} MUI_UNTEXT_COMPONENTS_TITLE "Xuǎndìng zǔjiàn"
+  ${LangFileString} MUI_UNTEXT_COMPONENTS_SUBTITLE "Xuǎndìng $(^NameDA) dāngzhōng nǐxiǎngyào jiěchú ānzhuāng de gōngnéng."
+!endif
+
+!ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Miáoshù"
+  !ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
+    ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "Tíngxuán nǐde shǔbiāo zhǐzhēn dào zǔjiàn zhīshàng, biànkě jiàndào tāde miáoshù."
+  !else
+    ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "Xuǎnzé yīgè zǔjiàn, biànkě jiàndào tāde miáoshù."
+  !endif
+!endif
+
+!ifdef MUI_DIRECTORYPAGE
+  ${LangFileString} MUI_TEXT_DIRECTORY_TITLE "Xuǎndìng ānzhuāng wèizhì"
+  ${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "Xuǎndìng $(^NameDA) yào'ānzhuāng de wénjiànjiā."
+!endif
+
+!ifdef MUI_UNDIRECTORYPAGE
+  ${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "Xuǎndìng jiěchú ānzhuāng wèizhì"
+  ${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "Xuǎndìng $(^NameDA) yào jiěchú ānzhuāng de wénjiànjiā."
+!endif
+
+!ifdef MUI_INSTFILESPAGE
+  ${LangFileString} MUI_TEXT_INSTALLING_TITLE "Zhèngzài ānzhuāng"
+  ${LangFileString} MUI_TEXT_INSTALLING_SUBTITLE "$(^NameDA) zhèngzài ānzhuāng, qǐngděnghòu."
+  ${LangFileString} MUI_TEXT_FINISH_TITLE "Ānzhuāng wánchéng"
+  ${LangFileString} MUI_TEXT_FINISH_SUBTITLE "Ānzhuāng chéngxù yǐ chénggōngde yùnxíng wánchéng."
+  ${LangFileString} MUI_TEXT_ABORT_TITLE "Ānzhuāng yǐzhōngzhǐ"
+  ${LangFileString} MUI_TEXT_ABORT_SUBTITLE "Ānzhuāng chéngxù bìngwèi chénggōngde yùnxíng wánchéng."
+!endif
+
+!ifdef MUI_UNINSTFILESPAGE
+  ${LangFileString} MUI_UNTEXT_UNINSTALLING_TITLE "Zhèngzài jiěchú ānzhuāng"
+  ${LangFileString} MUI_UNTEXT_UNINSTALLING_SUBTITLE "$(^NameDA) zhèngzài jiěchú ānzhuāng, qǐngděnghòu."
+  ${LangFileString} MUI_UNTEXT_FINISH_TITLE "Jiěchú ānzhuāng yǐwánchéng"
+  ${LangFileString} MUI_UNTEXT_FINISH_SUBTITLE "Jiěchú ānzhuāng chéngxù yǐ chénggōngde yùnxíng wánchéng."
+  ${LangFileString} MUI_UNTEXT_ABORT_TITLE "Jiěchú ānzhuāng yǐzhōngzhǐ"
+  ${LangFileString} MUI_UNTEXT_ABORT_SUBTITLE "Jiěchú ānzhuāng chéngxù bìngwèi chénggōngde yùnxíng wánchéng."
+!endif
+
+!ifdef MUI_FINISHPAGE
+  ${LangFileString} MUI_TEXT_FINISH_INFO_TITLE "Zhèngzài wánchéng $(^NameDA) ānzhuāng xiàngdǎo"
+  ${LangFileString} MUI_TEXT_FINISH_INFO_TEXT "$(^NameDA) yǐ ānzhuāngzài nǐde xìtǒng.$\r$\nDānjī [wánchéng (F)] guānbì cǐxiàngdǎo."
+  ${LangFileString} MUI_TEXT_FINISH_INFO_REBOOT "Nǐde xìtǒng xūyào chóngxīn qǐdòng, yǐbiàn wánchéng $(^NameDA) de ānzhuāng. Xiànzàiyào chóngxīn qǐdòng ma?"
+!endif
+
+!ifdef MUI_UNFINISHPAGE
+  ${LangFileString} MUI_UNTEXT_FINISH_INFO_TITLE "Zhèngzài wánchéng $(^NameDA) jiěchú ānzhuāng xiàngdǎo"
+  ${LangFileString} MUI_UNTEXT_FINISH_INFO_TEXT "$(^NameDA) yǐcóng nǐde jìsuànjī jiěchú ānzhuāng.$\r$\n$\r$\nDānjī [wánchéng] guānbì zhège xiàngdǎo."
+  ${LangFileString} MUI_UNTEXT_FINISH_INFO_REBOOT "Jìsuànjī xūyào chóngxīn qǐdòng, yǐbiàn wánchéng $(^NameDA) de jiěchú ānzhuāng. Xiànzài xiǎngyào chóngxīn qǐdòng ma?"
+!endif
+
+!ifdef MUI_FINISHPAGE | MUI_UNFINISHPAGE
+  ${LangFileString} MUI_TEXT_FINISH_REBOOTNOW "Shì, xiànzài chóngxīn qǐdòng (&Y)"
+  ${LangFileString} MUI_TEXT_FINISH_REBOOTLATER "Fǒu, wǒ shāohòuzài zìxíng chóngxīn qǐdòng (&N)"
+  ${LangFileString} MUI_TEXT_FINISH_RUN "Yùnxíng $(^NameDA) (&R)"
+  ${LangFileString} MUI_TEXT_FINISH_SHOWREADME "Xiǎnshì $\"zìshù wénjiàn$\" (&M)"
+  ${LangFileString} MUI_BUTTONTEXT_FINISH "Wánchéng (&F)"  
+!endif
+
+!ifdef MUI_STARTMENUPAGE
+  ${LangFileString} MUI_TEXT_STARTMENU_TITLE "Xuǎnzé $\"kāishǐ càidān$\" wénjiànjiā"
+  ${LangFileString} MUI_TEXT_STARTMENU_SUBTITLE "Xuǎnzé $\"kāishǐ càidān$\" wénjiànjiā, yòngyú chéngxùde kuàijié fāngshì."
+  ${LangFileString} MUI_INNERTEXT_STARTMENU_TOP "Xuǎnzé $\"kāishǐ càidān$\" wénjiànjiā, yǐbiàn chuàngjiàn chéngxùde kuàijié fāngshì. Nǐ yěkěyǐ shūrù míngchēng, chuàngjiàn xīn wénjiànjiā."
+  ${LangFileString} MUI_INNERTEXT_STARTMENU_CHECKBOX "Bùyào chuàngjiàn kuàijié fāngshì (&N)"
+!endif
+
+!ifdef MUI_UNCONFIRMPAGE
+  ${LangFileString} MUI_UNTEXT_CONFIRM_TITLE "Jiěchú ānzhuāng $(^NameDA)"
+  ${LangFileString} MUI_UNTEXT_CONFIRM_SUBTITLE "Cóng nǐde jìsuànjī jiěchú ānzhuāng $(^NameDA) ."
+!endif
+
+!ifdef MUI_ABORTWARNING
+  ${LangFileString} MUI_TEXT_ABORTWARNING "Nǐ quèshíyào tuìchū $(^Name) ānzhuāng chéngxù ma?"
+!endif
+
+!ifdef MUI_UNABORTWARNING
+  ${LangFileString} MUI_UNTEXT_ABORTWARNING "Nǐ quèshíyào tuìchū $(^Name) jiěchú ānzhuāng chéngxù ma?"
+!endif
+
+!ifdef MULTIUSER_INSTALLMODEPAGE
+  ${LangFileString} MULTIUSER_TEXT_INSTALLMODE_TITLE "Xuǎndìng yònghù"
+  ${LangFileString} MULTIUSER_TEXT_INSTALLMODE_SUBTITLE "Xuǎndìng nǐxiǎngyào ānzhuāng $(^NameDA) gěi nǎyīgè yònghù."
+  ${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_TOP "Xuǎnzé nǐxiǎngyào ānzhuāng $(^NameDA) gěizìjǐ shǐyòng, huò cǐ jìsuànjīde suǒyǒu yònghù. $(^ClickNext)"
+  ${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_ALLUSERS "Ānzhuānggěi cǐ jìsuànjī de suǒyǒu yònghù (&A)"
+  ${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_CURRENTUSER "Ānzhuāng gěi zìjǐ (&M)"
+!endif

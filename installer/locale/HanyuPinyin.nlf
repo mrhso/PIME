@@ -1,0 +1,190 @@
+﻿# Header, don't edit
+NLF v6
+# Language ID
+4100
+# Font and size - dash (-) means default 字体名称与大小
+宋体
+9
+# Codepage - dash (-) means ANSI code page ANSI 字码页
+936
+# RTL - anything else than RTL means LTR 由右至左书写
+-
+# Translator: Ishisashi <liu.songquan@live.cn>;  Revision date: 2017-12-17
+# ^Branding
+Nullsoft Install System %s
+# ^SetupCaption
+$(^Name) Ānzhuāng
+# ^UninstallCaption
+$(^Name) Jiěchú ānzhuāng
+# ^LicenseSubCaption
+: Xǔkězhèng xiéyì
+# ^ComponentsSubCaption
+: Ānzhuāng xuǎnxiàng
+# ^DirSubCaption
+: Ānzhuāng wénjiànjiā
+# ^InstallingSubCaption
+: Zhèngzài ānzhuāng
+# ^CompletedSubCaption
+: Yǐwánchéng
+# ^UnComponentsSubCaption
+: Jiěchú ānzhuāng xuǎnxiàng
+# ^UnDirSubCaption
+: Jiěchú ānzhuāng wénjiànjiā
+# ^ConfirmSubCaption
+: Quèrèn
+# ^UninstallingSubCaption
+: Zhèngzài jiěchú ānzhuāng
+# ^UnCompletedSubCaption
+: Wánchéng
+# ^BackBtn
+< Shàngyībù (&P)
+# ^NextBtn
+Xiàyībù (&N) >
+# ^AgreeBtn
+Wǒjiēshòu (&I)
+# ^AcceptBtn
+Wǒjiēshòu \"xǔkězhèng xiéyì\" zhōngde tiáokuǎn (&A)
+# ^DontAcceptBtn
+Wǒ bùjiēshòu \"xǔkězhèng xiéyì\" zhōngde tiáokuǎn (&N)
+# ^InstallBtn
+Ānzhuāng (&I)
+# ^UninstallBtn
+Jiěchú ānzhuāng (&U)
+# ^CancelBtn
+Qǔxiāo (&C)
+# ^CloseBtn
+Guānbì (&L)
+# ^BrowseBtn
+Liúlǎn (&B)...
+# ^ShowDetailsBtn
+Xiǎnshì xìjié (&D)
+# ^ClickNext
+Dānjī [xiàyībù (N)] jìxù.
+# ^ClickInstall
+Dānjī [ānzhuāng (I)] kāishǐ ānzhuāng jìnchéng.
+# ^ClickUninstall
+Dānjī [jiěchú ānzhuāng (U)] kāishǐ jiěchú ānzhuāng jìnchéng.
+# ^Name
+Míngchēng
+# ^Completed
+Yǐwánchéng
+# ^LicenseText
+Zài'ānzhuāng $(^NameDA) zhīqián qǐngjiǎnyuè xǔkězhèng xiéyì. Rúguǒ nǐjiēshòu xiéyìzhōng suǒyǒu tiáokuǎn, dānjī [wǒtóngyì (I)] .
+# ^LicenseTextCB
+Zài'ānzhuāng $(^NameDA) zhīqián qǐngjiǎnyuè xǔkězhèng xiéyì. Rúguǒ nǐjiēshòu xiéyìzhōng suǒyǒu tiáokuǎn, dānjī xiàfāngde gōuxuǎnkuāng. $_CLICK
+# ^LicenseTextRB
+Zài'ānzhuāng $(^NameDA) zhīqián qǐngjiǎnyuè xǔkězhèng xiéyì. Rúguǒ nǐjiēshòu xiéyìzhōng suǒyǒu tiáokuǎn, xuánzé xiàfāngde dìyīgè xuǎnxiàng. $_CLICK
+# ^UnLicenseText
+Zài jiěchú ānzhuāng $(^NameDA) zhīqián qǐngjiǎnyuè xǔkězhèng xiéyì. Rúguǒ nǐjiēshòu xiéyìzhōng suǒyǒu tiáokuǎn, dānjī [wǒtóngyì (I)] .
+# ^UnLicenseTextCB
+Zài jiěchú ānzhuāng $(^NameDA) zhīqián qǐngjiǎnyuè xǔkězhèng xiéyì. Rúguǒ nǐjiēshòu xiéyìzhōng suǒyǒu tiáokuǎn, dānjī xiàfāngde gōuxuǎnkuāng. $_CLICK
+# ^UnLicenseTextRB
+Zài jiěchú ānzhuāng $(^NameDA) zhīqián qǐngjiǎnyuè xǔkězhèng xiéyì. Rúguǒ nǐjiēshòu xiéyìzhōng suǒyǒu tiáokuǎn, xuánzé xiàfāngde dìyīgè xuǎnxiàng. $_CLICK
+# ^Custom
+Zìdìngyì
+# ^ComponentsText
+Gōuxuǎn nǐ xiǎngyào ānzhuāng de zǔjiàn, bìng jiěchú gōuxuǎn nǐ bùxīwàng ānzhuāng de zǔjiàn. $_CLICK
+# ^ComponentsSubText1
+Xuǎndìng ānzhuāngde lèixíng: 
+# ^ComponentsSubText2_NoInstTypes
+Xuǎndìng ānzhuāngde zǔjiàn: 
+# ^ComponentsSubText2
+Huòzhě, zìdìngyì xuǎndìng xiǎng'ānzhuāng de zǔjiàn: 
+# ^UnComponentsText
+Gōuxuǎn nǐ xiǎngyào jiěchú ānzhuāng de zǔjiàn, bìng jiěchú gōuxuǎn nǐ bùxiǎngyào jiěchú ānzhuāng de zǔjiàn. $_CLICK
+# ^UnComponentsSubText1
+Xuǎnzé jiěchú ānzhuāng de lèixíng: 
+# ^UnComponentsSubText2_NoInstTypes
+Xuǎnzé yào jiěchú ānzhuāng de zǔjiàn: 
+# ^UnComponentsSubText2
+Huòshì, xuǎnzé xiǎngyào jiěchú ānzhuāng de kěxuǎnxiàng zǔjiàn: 
+# ^DirText
+Setup jiāng'ānzhuāng $(^NameDA) zài xiàliè wénjiànjiā. Yào ānzhuāngdào bùtóng wénjiànjiā, dānjī [liúlǎn (B)...] bìngxuǎnzé qítāde wénjiànjiā. $_CLICK
+# ^DirSubText
+Mùbiāo wénjiànjiā
+# ^DirBrowseText
+Xuǎnzé yào'ānzhuāng $(^NameDA) de wénjiànjiā wèizhì: 
+# ^UnDirText
+Setup jiāng zìxiàliè wénjiànjiā jiěchú ānzhuāng $(^NameDA) . Yào jiěchú ānzhuāng dào bùtóng wénjiànjiā, dānjī [liúlǎn (B)...] bìngxuǎnzé qítāde wénjiànjiā. $_CLICK
+# ^UnDirSubText
+""
+# ^UnDirBrowseText
+Xuǎnzé yào jiěchú ānzhuāng $(^NameDA) de wénjiànjiā: 
+# ^SpaceAvailable
+"Kěyòng kōngjiān: "
+# ^SpaceRequired
+"Suǒxū kōngjiān: "
+# ^UninstallingText
+Zhège xiàngdǎo jiāngcóng nǐde jìsuànjī jiěchú ānzhuāng $(^NameDA) . $_CLICK
+# ^UninstallingSubText
+Jiěchú ānzhuāng mùlù: 
+# ^FileError
+Bùnéng dǎkāi yàoxiěrù de wénjiàn: \r\n\t"$0"\r\nDānjī [Abort] tíngzhǐ ānzhuāng,\r\n [Retry] chóngxīn chángshì xiěrù wénjiàn, huò\r\n [Ignore] hūlüè zhège wénjiàn.
+# ^FileError_NoIgnore
+Bùnéng dǎkāi yàoxiěrù de wénjiàn: \r\n\t"$0"\r\nDānjī [Retry] chóngxīn chángshì xiěrù wénjiàn, huò\r\n [Cancel] tíngzhǐ ānzhuāng.
+# ^CantWrite
+"Wúfǎ xiěrù: "
+# ^CopyFailed
+"Fùzhì shībài "
+# ^CopyTo
+"Fùzhìdào: "
+# ^Registering
+"Zhèngzài zhùcè: "
+# ^Unregistering
+"Zhèngzài jiěchú zhùcè: "
+# ^SymbolNotFound
+"Wúfǎ zhǎodào fúhào: "
+# ^CouldNotLoad
+"Wúfǎ jiāzài: "
+# ^CreateFolder
+"Chuàngjiàn wénjiànjiā: " 
+# ^CreateShortcut
+"Chuàngjiàn kuàijié fāngshì: "
+# ^CreatedUninstaller
+"Chuàngjiàn jiěchú ānzhuāng chéngxù: "
+# ^Delete
+"Shānchú wénjiàn: "
+# ^DeleteOnReboot
+"Chóngxīn qǐdòng hòu shānchú: "
+# ^ErrorCreatingShortcut
+"Zhèngzài chuàngjiàn kuàijié fāngshì shí fāshēng cuòwù: "
+# ^ErrorCreating
+"Zhèngzài chuàngjiàn shí fāshēng cuòwù: "
+# ^ErrorDecompressing
+"Zhèngzài jiěyāsuō shùjù fāshēng cuòwù! Yǐsǔnhuài de ānzhuāng chéngxù?"
+# ^ErrorRegistering
+"Zhèngzài zhùcè DLL shí fāshēng cuòwù"
+# ^ExecShell
+"Yùnxíng qiàocéng chéngxù: "
+# ^Exec
+"Yùnxíng: "
+# ^Extract
+"Chōuqǔ: "
+# ^ErrorWriting
+"Chōuqǔ: wúfǎ xiěrù wénjiàn "
+# ^InvalidOpcode
+"Ānzhuāng sǔnhuǐ: wúxiàode cāozuò dàimǎ "
+# ^NoOLE
+"Méiyǒu OLE yòngyú: "
+# ^OutputFolder
+"Shūchū mùlù: "
+# ^RemoveFolder
+"Yíchú mùlù: "
+# ^RenameOnReboot
+"Chóngxīn qǐdòng hòu chóngmìngmíng: "
+# ^Rename
+"Chóngmìngmíng: "
+# ^Skipped
+"Yǐtiàoguò: "
+# ^CopyDetails
+"Fùzhì xìjié dào jiǎntiēbǎn "
+# ^LogInstall
+"Rìzhì ānzhuāng jìnchéng"
+# byte
+B
+# kilo
+K
+# mega
+M
+# giga
+G
