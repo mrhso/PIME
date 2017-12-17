@@ -68,7 +68,7 @@
 !insertmacro LANG_STRING emojime_DESC "安裝 emojime 輸入法模組。"
 !insertmacro LANG_STRING cheeng_DESC "安裝英數輸入法模組。"
 !insertmacro LANG_STRING braille_chewing_DESC "安裝點字酷音輸入法模組。"
-!insertmacro LANG_STRING CHENM "安裝擰碼蘇喲法模組。"
+!insertmacro LANG_STRING chenm_DESC "安裝擰碼蘇喲法模組。"
 
 !insertmacro LANG_STRING SET_CHEWING "設定新酷音輸入法"
 !insertmacro LANG_STRING SET_CHEWING_PHRASES "編輯新酷音使用者辭庫"
