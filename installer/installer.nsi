@@ -411,7 +411,7 @@ SectionEnd
 SectionGroup /e $(PYTHON_SECTION_GROUP) python_section_group
 	SectionGroup /e $(PYTHON_CHT_SECTION_GROUP) python_cht_section_group
 		Section $(CHEWING) chewing
-			SectionIn 2
+			SectionIn 1 2
 			SetOutPath "$INSTDIR\python\input_methods"
 			File /r "..\python\input_methods\chewing"
 			StrCpy $INST_PYTHON "True"
