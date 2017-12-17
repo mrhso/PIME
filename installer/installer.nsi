@@ -484,7 +484,7 @@ SectionGroup /e $(PYTHON_SECTION_GROUP) python_section_group
 		SectionEnd
 
 		Section $(CHEEZ) cheez
-			SectionIn 2
+			SectionIn 1 2
 			SetOutPath "$INSTDIR\python\input_methods"
 			File /r "..\python\input_methods\cheez"
 			StrCpy $INST_PYTHON "True"
