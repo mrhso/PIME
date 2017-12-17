@@ -43,6 +43,7 @@
 !insertmacro LANG_STRING EMOJIME "emojime"
 !insertmacro LANG_STRING CHEENG "Yīngshù"
 !insertmacro LANG_STRING BRAILLE_CHEWING "Diǎnzì kùyīn"
+!insertmacro LANG_STRING CHENM "Nǐngmǎ sūyofǎ"
 
 !insertmacro LANG_STRING SELECT_LIU_FILE "Xiāmi mókuài xūyào $\"zhèngbǎn$\" ḿxiāmi shūrùfǎde biǎogédàng (liu-uni.tab) cáinéng ānzhuāng.$\r$\nQǐngxuǎnqǔ liu-uni.tab dàng'àn suǒzài wèizhì."
 !insertmacro LANG_STRING CANNOT_INSTALL_LIU "Quēshǎo liu-uni.tab biǎogédàng, wúfǎ ānzhuāng xiāmi shūrùfǎ."
@@ -67,6 +68,7 @@
 !insertmacro LANG_STRING emojime_DESC "Ānzhuāng emojime shūrùfǎ mókuài."
 !insertmacro LANG_STRING cheeng_DESC "Ānzhuāng yīngshù shūrùfǎ mókuài."
 !insertmacro LANG_STRING braille_chewing_DESC "Ānzhuāng diǎnzì kùyīn shūrùfǎ mókuài."
+!insertmacro LANG_STRING chenm_DESC "Ānzhuāng nǐngmǎ sūyofǎ mókuài."
 
 !insertmacro LANG_STRING SET_CHEWING "Shèzhì xīnkùyīn shūrùfǎ"
 !insertmacro LANG_STRING SET_CHEWING_PHRASES "Biānjí xīnkùyīn shǐyòngzhě cíkù"
@@ -79,5 +81,6 @@
 !insertmacro LANG_STRING SET_CHEPHONETIC "Shèzhì zhùyīn shūrùfǎ"
 !insertmacro LANG_STRING SET_CHEEZ "Shèzhì qīngsōng shūrùfǎ"
 !insertmacro LANG_STRING SET_BRAILLE_CHEWING "Shèdìng diǎnzì kùyīn shūrùfǎ"
+!insertmacro LANG_STRING SET_CHENM "Shèzhì nǐngmǎ sūyofǎ"
 
 !insertmacro LANG_STRING UNINSTALL_PIME "Xièzài PIME"

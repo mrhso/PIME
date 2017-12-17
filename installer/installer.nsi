@@ -190,6 +190,7 @@ Function uninstallOldVersion
 			Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHESIMPLEX).lnk"
 			Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEPHONETIC).lnk"
 			Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEEZ).lnk"
+			Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHENM).lnk"
             ; Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_BRAILLE_CHEWING).lnk"
 			Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(UNINSTALL_PIME).lnk"
 			RMDir "$SMPROGRAMS\$(PRODUCT_NAME)"
@@ -507,6 +508,14 @@ SectionGroup /e $(PYTHON_SECTION_GROUP) python_section_group
             StrCpy $INST_PYTHON "True"
 		SectionEnd
 
+		Section $(CHENM) chenm
+			SectionIn 1 2
+			SetOutPath "$INSTDIR\python\input_methods"
+			File /r "..\python\input_methods\chenm"
+			StrCpy $INST_PYTHON "True"
+			StrCpy $INST_CINBASE "True"
+		SectionEnd
+
     SectionGroupEnd
 
 	SectionGroup /e $(PYTHON_CHS_SECTION_GROUP) python_chs_section_group
@@ -657,6 +666,10 @@ Section "" Register
 		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEEZ).lnk" "$INSTDIR\python\python3\pythonw.exe" '"$INSTDIR\python\cinbase\configtool.py" config cheez' "$INSTDIR\python\input_methods\cheez\icon.ico" 0
 	${EndIf}
 
+	${If} ${SectionIsSelected} ${chenm}
+		CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHENM).lnk" "$INSTDIR\python\python3\pythonw.exe" '"$INSTDIR\python\cinbase\configtool.py" config chenm' "$INSTDIR\python\input_methods\chenm\icon.ico" 0
+	${EndIf}
+
 	CreateShortCut "$SMPROGRAMS\$(PRODUCT_NAME)\$(UNINSTALL_PIME).lnk" "$INSTDIR\Uninstall.exe"
 SectionEnd
 
@@ -682,6 +695,7 @@ SectionEnd
 	!insertmacro MUI_DESCRIPTION_TEXT ${emojime} $(emojime_DESC)
 	!insertmacro MUI_DESCRIPTION_TEXT ${cheeng} $(cheeng_DESC)
 	!insertmacro MUI_DESCRIPTION_TEXT ${braille_chewing} $(braille_chewing_DESC)
+    !insertmacro MUI_DESCRIPTION_TEXT ${chenm} $(chenm_DESC)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ;Uninstaller Section

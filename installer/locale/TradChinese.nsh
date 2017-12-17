@@ -43,6 +43,7 @@
 !insertmacro LANG_STRING EMOJIME emojime
 !insertmacro LANG_STRING CHEENG 英數
 !insertmacro LANG_STRING BRAILLE_CHEWING "點字酷音"
+!insertmacro LANG_STRING CHENM "擰碼蘇喲法"
 
 !insertmacro LANG_STRING SELECT_LIU_FILE "蝦米模組需要「正版」嘸蝦米輸入法的表格檔 (liu-uni.tab) 才能安裝。$\r$\n請選取 liu-uni.tab 檔案所在位置。"
 !insertmacro LANG_STRING CANNOT_INSTALL_LIU "缺少 liu-uni.tab 表格檔，無法安裝蝦米輸入法。"
@@ -67,6 +68,7 @@
 !insertmacro LANG_STRING emojime_DESC "安裝 emojime 輸入法模組。"
 !insertmacro LANG_STRING cheeng_DESC "安裝英數輸入法模組。"
 !insertmacro LANG_STRING braille_chewing_DESC "安裝點字酷音輸入法模組。"
+!insertmacro LANG_STRING CHENM "安裝擰碼蘇喲法模組。"
 
 !insertmacro LANG_STRING SET_CHEWING "設定新酷音輸入法"
 !insertmacro LANG_STRING SET_CHEWING_PHRASES "編輯新酷音使用者辭庫"
@@ -80,5 +82,6 @@
 !insertmacro LANG_STRING SET_CHEPHONETIC "設定注音輸入法"
 !insertmacro LANG_STRING SET_CHEEZ "設定輕鬆輸入法"
 !insertmacro LANG_STRING SET_BRAILLE_CHEWING "設定點字酷音輸入法"
+!insertmacro LANG_STRING SET_CHENM "設定擰碼蘇喲法"
 
 !insertmacro LANG_STRING UNINSTALL_PIME "解除安裝 PIME"
