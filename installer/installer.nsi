@@ -285,7 +285,7 @@ Function .onInit
 	StrCmp $LANGUAGE "2052" 0 +3
 	File "/oname=$PLUGINSDIR\ieprotectedpage.ini" ".\resource\zh_CN\ieprotectedpage.ini"
 	Goto +3
-	StrCmp $LANGUAGE "4100" 0 +3
+	StrCmp $LANGUAGE "1" 0 +3
 	File "/oname=$PLUGINSDIR\ieprotectedpage.ini" ".\resource\zh_PY\ieprotectedpage.ini"
 	Goto +3
 	StrCmp $LANGUAGE "1033" 0 +3
