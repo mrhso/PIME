@@ -507,15 +507,6 @@ SectionGroup /e $(PYTHON_SECTION_GROUP) python_section_group
             File /r "..\python\input_methods\braille_chewing"
             StrCpy $INST_PYTHON "True"
 		SectionEnd
-
-		Section $(CHENM) chenm
-			SectionIn 1 2
-			SetOutPath "$INSTDIR\python\input_methods"
-			File /r "..\python\input_methods\chenm"
-			StrCpy $INST_PYTHON "True"
-			StrCpy $INST_CINBASE "True"
-		SectionEnd
-
     SectionGroupEnd
 
 	SectionGroup /e $(PYTHON_CHS_SECTION_GROUP) python_chs_section_group
@@ -532,6 +523,14 @@ SectionGroup /e $(PYTHON_SECTION_GROUP) python_section_group
 			SetOutPath "$INSTDIR\python\input_methods\rime\data\opencc"
 			File "..\python\opencc\*.json" "..\python\opencc\*.ocd"
 			StrCpy $INST_PYTHON "True"
+		SectionEnd
+
+		Section $(CHENM) chenm
+			SectionIn 1 2
+			SetOutPath "$INSTDIR\python\input_methods"
+			File /r "..\python\input_methods\chenm"
+			StrCpy $INST_PYTHON "True"
+			StrCpy $INST_CINBASE "True"
 		SectionEnd
 	SectionGroupEnd
 SectionGroupEnd
