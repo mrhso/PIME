@@ -57,6 +57,7 @@ class CinToJson(object):
         self.cjkExtC = {}
         self.cjkExtD = {}
         self.cjkExtE = {}
+        self.cjkExtF = {}
         self.cjkOther = {}
         self.phrases = {}
         self.privateuse = {}
@@ -73,8 +74,10 @@ class CinToJson(object):
         self.cincount['cjkExtC'] = 0
         self.cincount['cjkExtD'] = 0
         self.cincount['cjkExtE'] = 0
+        self.cincount['cjkExtF'] = 0
         self.cincount['cjkOther'] = 0
         self.cincount['phrases'] = 0
+        self.cincount['cjkCI'] = 0
         self.cincount['cjkCIS'] = 0
         self.cincount['privateuse'] = 0
         self.cincount['totalchardefs'] = 0
@@ -82,18 +85,20 @@ class CinToJson(object):
         self.charsetRange = {}
         self.charsetRange['bopomofo'] = [int('0x3100', 16), int('0x3130', 16)]
         self.charsetRange['bopomofoTone'] = [int('0x02D9', 16), int('0x02CA', 16), int('0x02C7', 16), int('0x02CB', 16)]
-        self.charsetRange['cjk'] = [int('0x4E00', 16), int('0x9FD6', 16)]
+        self.charsetRange['cjk'] = [int('0x4E00', 16), int('0x9FEB', 16)]
         self.charsetRange['big5F'] = [int('0xA440', 16), int('0xC67F', 16)]
         self.charsetRange['big5LF'] = [int('0xC940', 16), int('0xF9D6', 16)]
         self.charsetRange['big5S'] = [int('0xA140', 16), int('0xA3C0', 16)]
         self.charsetRange['cjkExtA'] = [int('0x3400', 16), int('0x4DB6', 16)]
-        self.charsetRange['cjkExtB'] = [int('0x20000', 16), int('0x2A6DF', 16)]
-        self.charsetRange['cjkExtC'] = [int('0x2A700', 16), int('0x2B73F', 16)]
-        self.charsetRange['cjkExtD'] = [int('0x2B740', 16), int('0x2B81F', 16)]
-        self.charsetRange['cjkExtE'] = [int('0x2B820', 16), int('0x2CEAF', 16)]
+        self.charsetRange['cjkExtB'] = [int('0x20000', 16), int('0x2A6D7', 16)]
+        self.charsetRange['cjkExtC'] = [int('0x2A700', 16), int('0x2B735', 16)]
+        self.charsetRange['cjkExtD'] = [int('0x2B740', 16), int('0x2B81E', 16)]
+        self.charsetRange['cjkExtE'] = [int('0x2B820', 16), int('0x2CEA2', 16)]
+        self.charsetRange['cjkExtF'] = [int('0x2CEB0', 16), int('0x2EBE1', 16)]
         self.charsetRange['pua'] = [int('0xE000', 16), int('0xF900', 16)]
         self.charsetRange['puaA'] = [int('0xF0000', 16), int('0xFFFFE', 16)]
         self.charsetRange['puaB'] = [int('0x100000', 16), int('0x10FFFE', 16)]
+        self.charsetRange['cjkCI'] = [int('0xF900', 16), int('0xFB00', 16)]
         self.charsetRange['cjkCIS'] = [int('0x2F800', 16), int('0x2FA20', 16)]
 
         self.haveHashtagInKeynames = ["ez.cin", "ezsmall.cin", "ezmid.cin", "ezbig.cin"]
@@ -116,6 +121,7 @@ class CinToJson(object):
         del self.cjkExtC
         del self.cjkExtD
         del self.cjkExtE
+        del self.cjkExtF
         del self.cjkOther
         del self.privateuse
         del self.phrases
@@ -135,6 +141,7 @@ class CinToJson(object):
         self.cjkExtC = {}
         self.cjkExtD = {}
         self.cjkExtE = {}
+        self.cjkExtF = {}
         self.cjkOther = {}
         self.privateuse = {}
         self.phrases = {}
@@ -249,7 +256,7 @@ class CinToJson(object):
         if self.sortByCharset:
             if DEBUG_MODE:
                 print("排序字元集!")
-            self.mergeDicts(self.big5F, self.big5LF, self.big5S, self.big5Other, self.bopomofo, self.cjk, self.cjkExtA, self.cjkExtB, self.cjkExtC, self.cjkExtD, self.cjkExtE, self.cjkOther, self.phrases, self.privateuse)
+            self.mergeDicts(self.big5F, self.big5LF, self.big5S, self.big5Other, self.bopomofo, self.cjk, self.cjkExtA, self.cjkExtB, self.cjkExtC, self.cjkExtD, self.cjkExtE, self.cjkExtF, self.cjkOther, self.phrases, self.privateuse)
         self.saveJsonFile(self.jsonFile)
 
 
@@ -400,6 +407,13 @@ class CinToJson(object):
                     self.cjkExtE[key] = [root]
                 self.cincount['cjkExtE'] += 1
                 return "cjkExtE"
+            elif matchint in range(self.charsetRange['cjkExtF'][0], self.charsetRange['cjkExtF'][1]): # CJK Unified Ideographs Extension F 區域
+                try:
+                    self.cjkExtF[key].append(root) # CJK 擴展 F 區
+                except KeyError:
+                    self.cjkExtF[key] = [root]
+                self.cincount['cjkExtF'] += 1
+                return "cjkExtF"
             elif (matchint in range(self.charsetRange['pua'][0], self.charsetRange['pua'][1]) or # Unicode Private Use 區域
                 matchint in range(self.charsetRange['puaA'][0], self.charsetRange['puaA'][1]) or
                 matchint in range(self.charsetRange['puaB'][0], self.charsetRange['puaB'][1])):
@@ -408,6 +422,13 @@ class CinToJson(object):
                 except KeyError:
                     self.privateuse[key] = [root]
                 self.cincount['privateuse'] += 1
+                return "pua"
+            elif matchint in range(self.charsetRange['cjkCI'][0], self.charsetRange['cjkCI'][1]): # cjk compatibility ideographs 區域
+                try:
+                    self.privateuse[key].append(root) # CJK 相容字集區
+                except KeyError:
+                    self.privateuse[key] = [root]
+                self.cincount['cjkCI'] += 1
                 return "pua"
             elif matchint in range(self.charsetRange['cjkCIS'][0], self.charsetRange['cjkCIS'][1]): # cjk compatibility ideographs supplement 區域
                 try:

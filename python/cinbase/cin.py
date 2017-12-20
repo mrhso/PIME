@@ -28,18 +28,20 @@ class Cin(object):
         self.charsetRange = {}
         self.charsetRange['bopomofo'] = [int('0x3100', 16), int('0x3130', 16)]
         self.charsetRange['bopomofoTone'] = [int('0x02D9', 16), int('0x02CA', 16), int('0x02C7', 16), int('0x02CB', 16)]
-        self.charsetRange['cjk'] = [int('0x4E00', 16), int('0x9FD6', 16)]
+        self.charsetRange['cjk'] = [int('0x4E00', 16), int('0x9FEB', 16)]
         self.charsetRange['big5F'] = [int('0xA440', 16), int('0xC67F', 16)]
         self.charsetRange['big5LF'] = [int('0xC940', 16), int('0xF9D6', 16)]
         self.charsetRange['big5S'] = [int('0xA140', 16), int('0xA3C0', 16)]
         self.charsetRange['cjkExtA'] = [int('0x3400', 16), int('0x4DB6', 16)]
-        self.charsetRange['cjkExtB'] = [int('0x20000', 16), int('0x2A6DF', 16)]
-        self.charsetRange['cjkExtC'] = [int('0x2A700', 16), int('0x2B73F', 16)]
-        self.charsetRange['cjkExtD'] = [int('0x2B740', 16), int('0x2B81F', 16)]
-        self.charsetRange['cjkExtE'] = [int('0x2B820', 16), int('0x2CEAF', 16)]
+        self.charsetRange['cjkExtB'] = [int('0x20000', 16), int('0x2A6D7', 16)]
+        self.charsetRange['cjkExtC'] = [int('0x2A700', 16), int('0x2B735', 16)]
+        self.charsetRange['cjkExtD'] = [int('0x2B740', 16), int('0x2B81E', 16)]
+        self.charsetRange['cjkExtE'] = [int('0x2B820', 16), int('0x2CEA2', 16)]
+        self.charsetRange['cjkExtF'] = [int('0x2CEB0', 16), int('0x2EBE1', 16)]
         self.charsetRange['pua'] = [int('0xE000', 16), int('0xF900', 16)]
         self.charsetRange['puaA'] = [int('0xF0000', 16), int('0xFFFFE', 16)]
         self.charsetRange['puaB'] = [int('0x100000', 16), int('0x10FFFE', 16)]
+        self.charsetRange['cjkCI'] = [int('0xF900', 16), int('0xFB00', 16)]
         self.charsetRange['cjkCIS'] = [int('0x2F800', 16), int('0x2FA20', 16)]
 
         self.__dict__.update(json.load(fs))
@@ -123,7 +125,7 @@ class Cin(object):
         matchchardefs = {}
         lowFrequencyChardefs = {}
         highFrequencyCharSetList = ["bopomofo", "bopomofoTone", "cjk", "big5F", "big5LF", "big5S"]
-        lowFrequencyCharSetList = ["cjkExtA", "cjkExtB", "cjkExtC", "cjkExtD", "cjkExtE", "pua", "cjkOther"]
+        lowFrequencyCharSetList = ["cjkExtA", "cjkExtB", "cjkExtC", "cjkExtD", "cjkExtE", "cjkExtF", "pua", "cjkOther"]
 
         highFrequencyWordCount = 0
         lowFrequencyWordCount = 0
@@ -266,9 +268,13 @@ class Cin(object):
                 return "cjkExtD"
             elif matchint in range(self.charsetRange['cjkExtE'][0], self.charsetRange['cjkExtE'][1]): # CJK Unified Ideographs Extension E 區域
                 return "cjkExtE"
+            elif matchint in range(self.charsetRange['cjkExtF'][0], self.charsetRange['cjkExtF'][1]): # CJK Unified Ideographs Extension F 區域
+                return "cjkExtF"
             elif (matchint in range(self.charsetRange['pua'][0], self.charsetRange['pua'][1]) or # Unicode Private Use 區域
                 matchint in range(self.charsetRange['puaA'][0], self.charsetRange['puaA'][1]) or
                 matchint in range(self.charsetRange['puaB'][0], self.charsetRange['puaB'][1])):
+                return "pua"
+            elif matchint in range(self.charsetRange['cjkCI'][0], self.charsetRange['cjkCI'][1]): # cjk compatibility ideographs 區域
                 return "pua"
             elif matchint in range(self.charsetRange['cjkCIS'][0], self.charsetRange['cjkCIS'][1]): # cjk compatibility ideographs supplement 區域
                 return "pua"
