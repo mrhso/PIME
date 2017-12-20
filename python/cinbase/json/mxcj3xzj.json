@@ -73040,14 +73040,16 @@
         "big5Other": 0,
         "big5S": 10,
         "bopomofo": 41,
-        "cjk": 9666,
+        "cjk": 9692,
+        "cjkCI": 15,
         "cjkCIS": 1,
         "cjkExtA": 56,
         "cjkExtB": 9,
         "cjkExtC": 0,
         "cjkExtD": 0,
         "cjkExtE": 0,
-        "cjkOther": 669,
+        "cjkExtF": 0,
+        "cjkOther": 628,
         "phrases": 0,
         "privateuse": 0,
         "totalchardefs": 25861
@@ -73090,6 +73092,51 @@
     "privateuse": {
         "anau": [
             "冕"
+        ],
+        "cgtj": [
+            "﨨"
+        ],
+        "cjkd": [
+            "﨧"
+        ],
+        "dfcq": [
+            "﨔"
+        ],
+        "dtoi": [
+            "﨓"
+        ],
+        "gccr": [
+            "﨏"
+        ],
+        "goyj": [
+            "﨣"
+        ],
+        "ivnl": [
+            "郎"
+        ],
+        "lihqm": [
+            "﨡"
+        ],
+        "mfu": [
+            "礼"
+        ],
+        "nlhau": [
+            "﨩"
+        ],
+        "tbav": [
+            "﨟"
+        ],
+        "thdu": [
+            "蘒"
+        ],
+        "uytr": [
+            "﨑"
+        ],
+        "yge": [
+            "﨎"
+        ],
+        "ynhe": [
+            "﨤"
         ]
     },
     "selkey": "1234567890"
