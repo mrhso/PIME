@@ -3306,14 +3306,15 @@ class LoadRCinTable(threading.Thread):
         self.cbTS = cbTS
         self.RCinTable = RCinTable
         self.rcinFileList = ([
-                                "checj.json", "mscj3.json", "mscj3-ext.json", "cj-ext.json", "cnscj.json", "thcj.json", "newcj3.json", "cj5.json", "newcj.json", "scj6.json", "cj-fast.json",
+                                "checj.json", "mscj3.json", "mscj3-ext.json", "cj-ext.json", "cnscj.json", "thcj.json", "newcj3.json", "cj5.json", "newcj.json", "scj6.json", "cj-fast.json", "mxcj3xzj.json", "mxcj3dzj.json", "mxcj5.json",
                                 "thphonetic.json", "CnsPhonetic.json", "bpmf.json",
                                 "tharray.json", "array30.json", "ar30-big.json", "array40.json",
                                 "thdayi.json", "dayi4.json", "dayi3.json",
                                 "ez.json", "ezsmall.json", "ezmid.json", "ezbig.json",
                                 "thpinyin.json", "pinyin.json", "roman.json",
                                 "simplecj.json", "simplex.json", "simplex5.json",
-                                "liu.json"
+                                "liu.json",
+                                "ningmaspecial.json"
                             ])
 
     def run(self):
