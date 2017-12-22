@@ -3314,7 +3314,7 @@ class LoadRCinTable(threading.Thread):
                                 "thpinyin.json", "pinyin.json", "roman.json",
                                 "simplecj.json", "simplex.json", "simplex5.json",
                                 "liu.json",
-                                "ningmaspecial.json"
+                                "ningmaspecial.json", "ningma119.json"
                             ])
 
     def run(self):
