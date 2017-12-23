@@ -35,8 +35,8 @@ class CheNMTextService(TextService):
 
         # 輸入法模組自訂區域
         self.imeDirName = "chenm"
-        self.maxCharLength = 5 # 輸入法最大編碼字元數量
-        self.cinFileList = ["ningmaspecial.json", "ningma119.json"]
+        self.maxCharLength = 18 # 輸入法最大編碼字元數量
+        self.cinFileList = ["ningmaspecial.json", "ningma119.json", "ningmacizu12w7.json"]
 
         self.cinbase = CinBase
         self.curdir = os.path.abspath(os.path.dirname(__file__))
