@@ -269,20 +269,6 @@ void TextService::updateCandidates(Ime::EditSession* session) {
 
 	candidateWindow_->setUseCursor(candUseCursor_);
 	candidateWindow_->setCandPerRow(candPerRow_);
-	candidateWindow_->setSelKeyUseCursor(selKeyUseCursor_);
-	candidateWindow_->setDesktopUse3DBorder(desktopUse3DBorder_);
-	candidateWindow_->setTextcolor(textColor_);
-	candidateWindow_->setCandidatetextcolor(candidateTextColor_);
-	candidateWindow_->setLabeltextcolor(labelTextColor_);
-	candidateWindow_->setCommenttextcolor(commentTextColor_);
-	candidateWindow_->setBackcolor(backColor_);
-	candidateWindow_->setBordercolor(borderColor_);
-	candidateWindow_->setHilitedtextcolor(hilitedTextColor_);
-	candidateWindow_->setHilitedbackcolor(hilitedBackColor_);
-	candidateWindow_->setHilitedcandidatetextcolor(hilitedCandidateTextColor_);
-	candidateWindow_->setHilitedcandidatebackcolor(hilitedCandidateBackColor_);
-	candidateWindow_->setHilitedlabeltextcolor(hilitedLabelTextColor_);
-	candidateWindow_->setHilitedcommenttextcolor(hilitedCommentTextColor_);
 
 	// the items in the candidate list should not exist the
 	// number of available keys used to select them.
@@ -295,12 +281,9 @@ void TextService::updateCandidates(Ime::EditSession* session) {
 
 	RECT textRect;
 	// get the position of composition area from TSF
-	if (candWinPos_ == 0 && compositionRect(session, &textRect)) {
-		candidateWindow_->moveWindow(textRect, layoutSpacing_);
-	} else if (candWinPos_ == 1 && selectionRect(session, &textRect)) {
-		candidateWindow_->moveWindow(textRect, layoutSpacing_);
-	}
-	else {
+	if (selectionRect(session, &textRect)) {
+		// FIXME: where should we put the candidate window?
+		candidateWindow_->move(textRect.left, textRect.bottom);
 	}
 
 	if (validCandidateListElementId_) {

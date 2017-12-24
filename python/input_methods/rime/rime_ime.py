@@ -117,18 +117,6 @@ class RimeTextService(TextService):
         )
         self.updateLangStatus()
 
-    def updateUI(self):
-        self.style = RimeStyle(APP, self.session_id)
-        self.customizeUI(candFontSize = self.style.font_point,
-            candFontName = self.style.font_face,
-            candPerRow = self.style.candidate_per_row,
-            candUseCursor = self.style.candidate_use_cursor,
-            selKeyUseCursor = self.style.sel_key_use_cursor,
-            desktopUse3DBorder = self.style.desktop_use_3d_border,
-            **self.style.colors, **self.style.layout)
-        rime.set_option(self.session_id, b'soft_cursor', self.style.soft_cursor)
-        rime.set_option(self.session_id, b'_horizontal', self.style.candidate_per_row > 1)
-
     def updateSelKeys(self, context):
         n = context.menu.page_size
         if not n: return
@@ -147,7 +135,13 @@ class RimeTextService(TextService):
     def createSession(self):
         if not (self.session_id and rime.find_session(self.session_id)):
             self.session_id = rime.create_session()
-            self.updateUI()
+            self.style = RimeStyle(APP, self.session_id)
+            self.customizeUI(candFontSize = self.style.font_point,
+                candFontName = self.style.font_face,
+                candPerRow = self.style.candidate_per_row,
+                candUseCursor = self.style.candidate_use_cursor)
+            rime.set_option(self.session_id, b'soft_cursor', self.style.soft_cursor)
+            rime.set_option(self.session_id, b'_horizontal', self.style.candidate_per_row > 1)
 
     def onDeactivate(self):
         TextService.onDeactivate(self)
@@ -247,7 +241,6 @@ class RimeTextService(TextService):
             if rime.get_status(self.session_id, status):
                 self.showMessage(status.schema_name.decode("UTF-8"), 1)
                 rime.free_status(status)
-            self.updateUI()            
             memset(byref(self.message_type), 0, 1)
         elif self.message_type.value > 1:
             self.showMessage(OPTION_NAMES[self.message_type.value - 2], 1)

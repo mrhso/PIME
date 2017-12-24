@@ -275,6 +275,10 @@ def rimeInit(datadir="data", userdir="data", fullcheck=True, appname="python", a
     if rime.start_maintenance(fullcheck):
         rime.join_maintenance_thread()
 
+def rimeGetString(config, name):
+    cstring = rime.config_get_cstring(config, name.encode("UTF-8"))
+    return cstring.decode("UTF-8") if cstring else ""
+
 def rimeSelectSchema(session_id, schema_id):
     rime.select_schema(session_id, schema_id)
     user_config = RimeConfig()
@@ -310,7 +314,6 @@ commands = {
     "get_log_dir": ID_LOG_DIR,
 }
 
-LAYOUT_POSITIONS = ["left", "right", "fixed", "bottom_left", "bottom_right", "top_left", "top_right"]
 class RimeStyle:
     font_face = "MingLiu"
     candidate_format = "{0} {1}"
@@ -321,9 +324,6 @@ class RimeStyle:
     inline_code = False
     display_tray_icon = False
     candidate_use_cursor = False
-    sel_key_use_cursor = False
-    desktop_use_3d_border = False
-    layout = {}
     soft_cursor = False
     menu = []
     options = []
@@ -331,27 +331,23 @@ class RimeStyle:
     schemas = []
     uris = []
     session_id = None
-    color_scheme = ""
-    colors = {}
 
-    def load_config(self, config):
-        c_str = bytes(CHAR_SIZE)
-        if rime.config_get_string(config, b'style/font_face', c_str, CHAR_SIZE):
-            self.font_face = c_str.rstrip(b'\0').decode("UTF-8")
-        if rime.config_get_string(config, b'style/candidate_format', c_str, CHAR_SIZE):
-            self.candidate_format = c_str.rstrip(b'\0').decode("UTF-8")
-        if rime.config_get_string(config, b'style/inline_preedit', c_str, CHAR_SIZE):
-            self.inline_preedit = c_str.rstrip(b'\0').decode("UTF-8")
-        if rime.config_get_string(config, b'style/menu_opencc_config', c_str, CHAR_SIZE):
-            self.menu_opencc_config = OpenCC(c_str.rstrip(b'\0').decode("UTF-8"))
-        if rime.config_get_string(config, b'style/color_scheme', c_str, CHAR_SIZE):
-            self.color_scheme = c_str.rstrip(b'\0').decode("UTF-8")
+    def __init__(self, appname, session_id):
+        self.session_id = session_id
+        config = RimeConfig()
+        if not rime.config_open(appname.encode("UTF-8"), config):
+            return
+        self.font_face = rimeGetString(config, 'style/font_face')
+        self.candidate_format = rimeGetString(config, 'style/candidate_format')
+        self.inline_preedit = rimeGetString(config, 'style/inline_preedit')
+        menu_opencc_config = rimeGetString(config, 'style/menu_opencc')
+        self.menu_opencc = OpenCC(menu_opencc_config) if menu_opencc_config else None
         value = c_int()
         if rime.config_get_int(config, b'style/font_point', value):
             self.font_point = value.value
         if rime.config_get_bool(config, b'style/horizontal', value):
-            self.candidate_per_row = 20 if bool(value) else 1
-        elif rime.config_get_int(config, b'style/candidate_per_row', value):
+            self.candidate_per_row = 10 if bool(value) else 1
+        if rime.config_get_int(config, b'style/candidate_per_row', value):
             self.candidate_per_row = value.value
         if rime.config_get_bool(config, b'style/display_tray_icon', value):
             self.display_tray_icon = bool(value)
@@ -359,39 +355,12 @@ class RimeStyle:
             self.candidate_use_cursor = bool(value)
         if rime.config_get_bool(config, b'style/soft_cursor', value):
             self.soft_cursor = bool(value)
-        if rime.config_get_bool(config, b'style/sel_key_use_cursor', value):
-            self.sel_key_use_cursor = bool(value)
-        if rime.config_get_bool(config, b'style/desktop_use_3d_border', value):
-            self.desktop_use_3d_border = bool(value)
-        self.layout.update(self.config_get_layout(config))
-
-    def __init__(self, appname, session_id):
-        global CAND_WIN_POSITIONS
-        self.session_id = session_id
         self.options.clear()
         self.options_states.clear()
         self.uris.clear()
-        self.colors.clear()
-        self.layout.clear()
-        
-        config = RimeConfig()
-        if rime.config_open(appname.encode("UTF-8"), config):
-            self.load_config(config)
-            self.menu = self.config_get_menu(config, b'menu')
-            rime.config_close(config)
-        current_schema = bytes(CHAR_SIZE)
-        rime.get_current_schema(self.session_id, current_schema, CHAR_SIZE)
-        if rime.schema_open(current_schema, config):
-            self.load_config(config)
-            rime.config_close(config)
-        c_str = bytes(CHAR_SIZE)
-        key = b'preset_color_schemes/' + self.color_scheme.encode("UTF-8") + b'/name'
-        if rime.schema_open(current_schema, config) and rime.config_get_string(config, key, c_str, CHAR_SIZE):
-            self.colors = self.config_get_colors(config)
-            rime.config_close(config)
-        elif rime.config_open(appname.encode("UTF-8"), config) and rime.config_get_string(config, key, c_str, CHAR_SIZE):
-            self.colors = self.config_get_colors(config)
-            rime.config_close(config)
+        self.menu = self.config_get_menu(config, b'menu')
+        #print("menu", self.menu)
+        rime.config_close(config)
 
     def get_schema(self, commandId):
         if commandId >= ID_SCHEMA:
@@ -426,56 +395,6 @@ class RimeStyle:
                 submenu.append(d)
         rime.free_schema_list(schema_list)
         return submenu          
-
-    def config_get_colors(self, config):
-        colors = {}
-        iterator = RimeConfigIterator()
-        if not rime.config_begin_map(iterator, config, b'preset_color_schemes/' + self.color_scheme.encode("UTF-8")):
-            return colors
-        value = c_int()
-        while rime.config_next(iterator):
-            if iterator.key.endswith(b'_color') and rime.config_get_int(config, iterator.path, value):
-                key = iterator.key.decode("UTF-8")
-                key = (key[0]+key.title()[1:]).replace("_","")
-                colors[key] = value.value
-        rime.config_end(iterator)
-        if "candidateTextColor" not in colors:
-            colors["candidateTextColor"]=colors["textColor"]
-        if "borderColor" not in colors:
-            colors["borderColor"]=colors["textColor"]
-        if "hilitedTextColor" not in colors:
-            colors["hilitedTextColor"]=colors["textColor"]
-        if "hilitedBackColor" not in colors:
-            colors["hilitedBackColor"]=colors["backColor"]
-        if "hilitedCandidateTextColor" not in colors:
-            colors["hilitedCandidateTextColor"]=colors["hilitedTextColor"]
-        if "hilitedCandidateBackColor" not in colors:
-            colors["hilitedCandidateBackColor"]=colors["hilitedBackColor"]
-        colors["labelTextColor"] = colors.get("labelColor", colors["candidateTextColor"])
-        if "hilitedLabelTextColor" not in colors:
-            colors["hilitedLabelTextColor"]=colors["hilitedCandidateTextColor"]
-        if "commentTextColor" not in colors:
-            colors["commentTextColor"]=colors["labelTextColor"]
-        if "hilitedCommentTextColor" not in colors:
-            colors["hilitedCommentTextColor"]=colors["hilitedLabelTextColor"]
-        return colors
-
-    def config_get_layout(self, config):
-        layout = {}
-        s = ""
-        c_str = bytes(CHAR_SIZE)
-        if rime.config_get_string(config, b'style/layout/position', c_str, CHAR_SIZE):
-            s = c_str.rstrip(b'\0').decode("UTF-8")
-        layout["layout_position"] = LAYOUT_POSITIONS.index(s) if s in LAYOUT_POSITIONS else 0
-        iterator = RimeConfigIterator()
-        if not rime.config_begin_map(iterator, config, b'style/layout'):
-            return layout
-        value = c_int()
-        while rime.config_next(iterator):
-            if rime.config_get_int(config, iterator.path, value):
-                key = iterator.key.decode("UTF-8")
-                layout["layout_" + key] = value.value
-        return layout
 
     def config_get_menu(self, config, path):
         menu = []
