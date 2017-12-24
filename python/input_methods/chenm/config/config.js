@@ -5,7 +5,8 @@ var imeFolderName = "chenm"
 var selCins=[
     "拧码 Special",
     "拧码 11.9",
-    "拧码词组 1.2w7"
+    "拧码词组 1.2w7",
+    "拧码高手 3.7"
 ];
 
 // 此輸入法模組使用的鍵盤類型
