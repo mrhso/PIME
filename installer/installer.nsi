@@ -36,8 +36,8 @@ SetCompressorDictSize 16 ; larger dictionary size for better compression ratio
 AllowSkipFiles off ; cannot skip a file
 
 ; icons of the generated installer and uninstaller
-!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
-!define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\orange-uninstall.ico"
+!define MUI_ICON "..\python\input_methods\rime\icon.ico"
+!define MUI_UNICON "..\python\input_methods\rime\icon.ico"
 
 !define /file PRODUCT_VERSION "..\version.txt"
 
