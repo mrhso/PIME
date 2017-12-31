@@ -1,7 +1,8 @@
 # Open Chinese Convert 開放中文轉換
 
 [ ![Download](https://api.bintray.com/packages/byvoid/opencc/OpenCC/images/download.svg) ](https://bintray.com/byvoid/opencc/OpenCC/_latestVersion)
-[![Build Status](https://travis-ci.org/BYVoid/OpenCC.svg?branch=master)](https://travis-ci.org/BYVoid/OpenCC)
+[![Travis](https://img.shields.io/travis/BYVoid/OpenCC.svg)](https://travis-ci.org/BYVoid/OpenCC)
+[![AppVeyor](https://img.shields.io/appveyor/ci/Carbo/OpenCC.svg)](https://ci.appveyor.com/project/Carbo/OpenCC)
 
 ## Introduction 介紹
 
@@ -31,7 +32,7 @@ Open Chinese Convert (OpenCC, 開放中文轉換) is an opensource project for c
 * [Ubuntu](https://launchpad.net/ubuntu/+source/opencc)
 * [Fedora](https://admin.fedoraproject.org/pkgdb/package/opencc/)
 * [Arch Linux](https://www.archlinux.org/packages/community/x86_64/opencc/)
-* [Mac OS](https://github.com/mxcl/homebrew/blob/master/Library/Formula/opencc.rb)
+* [Mac OS](https://github.com/Homebrew/homebrew-core/blob/master/Formula/opencc.rb)
 * [Node.js](https://npmjs.org/package/opencc)
 
 ## Download 下載
@@ -99,14 +100,16 @@ cmake --build build --config Release --target install
 
 See https://github.com/gelosie/OpenCC/tree/master/iOS
 
+Or [SwiftyOpenCC](https://github.com/XQS6LB3A/SwiftyOpenCC)
+
 ### Android
 
 See [android-opencc](https://github.com/qichuan/android-opencc)
 
 ## Projects using Opencc 使用OpenCC的項目
 
-* [ibus-pinyin](http://code.google.com/p/ibus/)
-* [fcitx](http://code.google.com/p/fcitx/)
+* [ibus-pinyin](https://github.com/ibus/ibus-pinyin)
+* [fcitx](https://github.com/fcitx/fcitx)
 * [rimeime](http://code.google.com/p/rimeime/)
 * [libgooglepinyin](http://code.google.com/p/libgooglepinyin/)
 * [ibus-libpinyin](https://github.com/libpinyin/ibus-libpinyin)
@@ -166,5 +169,10 @@ https://github.com/BYVoid/OpenCC/blob/master/NEWS.md
 * [Flandre Scarlet](https://github.com/XadillaX)
 * [宋辰文](https://github.com/songchenwen)
 * [iwater](https://github.com/iwater)
+* [Xpol Wan](https://github.com/xpol)
+* [Weihang Lo](https://github.com/weihanglo)
+* [Cychih](https://github.com/pi314)
+* [kyleskimo](https://github.com/kyleskimo)
+* [Ryuan Choi](https://github.com/bunhere)
 
 Please update this list you have contributed OpenCC.
