@@ -35,7 +35,7 @@ class CheNMTextService(TextService):
 
         # 輸入法模組自訂區域
         self.imeDirName = "chenm"
-        self.maxCharLength = 18 # 輸入法最大編碼字元數量
+        self.maxCharLength = 7 # 輸入法最大編碼字元數量
         self.cinFileList = ["ningmaspecial.json", "ningma119.json", "ningmacizu12w7.json", "ningmagaoshou37.json"]
 
         self.cinbase = CinBase
@@ -92,7 +92,6 @@ class CheNMTextService(TextService):
 
 
     def onKeyDown(self, keyEvent):
-        self.autoShowCandWhenMaxChar = True
         KeyState = self.cinbase.onKeyDown(self, keyEvent, CinTable, RCinTable, HCinTable)
         return KeyState
 
