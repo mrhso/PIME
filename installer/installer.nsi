@@ -42,7 +42,7 @@ AllowSkipFiles off ; cannot skip a file
 !define /file PRODUCT_VERSION "..\version.txt"
 
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\PIME"
-!define HOMEPAGE_URL "https://github.com/mrhso/PIME/tree/mrhso-prime"
+!define HOMEPAGE_URL "https://github.com/mrhso/PIME/tree/mrhso-prime-RimeTW"
 
 Name "$(PRODUCT_NAME)"
 BrandingText "$(PRODUCT_NAME)"
