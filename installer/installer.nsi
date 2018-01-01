@@ -47,7 +47,7 @@ AllowSkipFiles off ; cannot skip a file
 Name "$(PRODUCT_NAME)"
 BrandingText "$(PRODUCT_NAME)"
 
-OutFile "MRHSO-PRIME-DIY-${PRODUCT_VERSION}-setup.exe" ; The generated installer file name
+OutFile "MRHSO-PRIME-DIY-COLOURREVERT-${PRODUCT_VERSION}-setup.exe" ; The generated installer file name
 
 ; We install everything to C:\Program Files (x86)
 InstallDir "$PROGRAMFILES32\PIME"
