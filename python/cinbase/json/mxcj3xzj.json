@@ -3231,6 +3231,9 @@
         "bilr": [
             "膅"
         ],
+        "bim": [
+            "⺼"
+        ],
         "bimbc": [
             "頱"
         ],
@@ -6741,6 +6744,9 @@
         "cjru": [
             "鋴"
         ],
+        "cjsi": [
+            "䥉"
+        ],
         "cjstv": [
             "冁"
         ],
@@ -7930,6 +7936,9 @@
         ],
         "ctm": [
             "鉗"
+        ],
+        "ctma": [
+            "鐠"
         ],
         "ctmc": [
             "錤",
@@ -15718,6 +15727,9 @@
         "etm": [
             "泔"
         ],
+        "etma": [
+            "潽"
+        ],
         "etmb": [
             "满"
         ],
@@ -19305,6 +19317,9 @@
         ],
         "gcok": [
             "赦"
+        ],
+        "gcor": [
+            "﨏"
         ],
         "gcru": [
             "㙂"
@@ -65404,6 +65419,9 @@
         "rnmk": [
             "㗋"
         ],
+        "rnmp": [
+            "喼"
+        ],
         "rno": [
             "吹"
         ],
@@ -90803,6 +90821,9 @@
         "yrtm": [
             "詌"
         ],
+        "yrtma": [
+            "譜"
+        ],
         "yrtmc": [
             "諆"
         ],
@@ -93469,24 +93490,24 @@
         ]
     },
     "cincount": {
-        "big5F": 6241,
-        "big5LF": 9157,
+        "big5F": 6242,
+        "big5LF": 9159,
         "big5Other": 0,
         "big5S": 10,
         "bopomofo": 41,
-        "cjk": 9688,
-        "cjkCI": 15,
+        "cjk": 9689,
+        "cjkCI": 16,
         "cjkCIS": 1,
-        "cjkExtA": 7549,
+        "cjkExtA": 7550,
         "cjkExtB": 8,
         "cjkExtC": 0,
         "cjkExtD": 0,
         "cjkExtE": 0,
         "cjkExtF": 0,
-        "cjkOther": 628,
+        "cjkOther": 629,
         "phrases": 0,
         "privateuse": 0,
-        "totalchardefs": 33337
+        "totalchardefs": 33344
     },
     "cname": "迷信倉頡3_小字集",
     "dupchardefs": {
