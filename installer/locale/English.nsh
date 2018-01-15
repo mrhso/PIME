@@ -80,7 +80,7 @@
 !insertmacro LANG_STRING SET_CHEPINYIN "Setup Pinyin input method"
 !insertmacro LANG_STRING SET_CHESIMPLEX "Setup Quick input method"
 !insertmacro LANG_STRING SET_CHEPHONETIC "Setup Phonetic input method"
-!insertmacro LANG_STRING SET_CHEEZ "Setup EZ Input input method"
+!insertmacro LANG_STRING SET_CHEEZ "Setup EZ Input method"
 !insertmacro LANG_STRING SET_BRAILLE_CHEWING "Setup Braille Chewing input method"
 !insertmacro LANG_STRING SET_CHENM "Setup Ningma Suyofa"
 
