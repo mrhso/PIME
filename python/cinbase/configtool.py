@@ -138,7 +138,7 @@ class ConfigHandler(BaseHandler):
     def load_cindata(self):
         cfg.load()
         CinDict ={}
-        CinDict["checj"] = ["checj.json", "mscj3.json", "mscj3-ext.json", "cj-ext.json", "cnscj.json", "thcj.json", "newcj3.json", "cj5.json", "newcj.json", "scj6.json", "cj-fast.json", "mxcj3xzj.json", "mxcj3dzj.json", "mxcj5nor.json", "mxcj5sup.json", "mxcj5simp.json"]
+        CinDict["checj"] = ["checj.json", "mscj3.json", "mscj3-ext.json", "cj-ext.json", "cnscj.json", "thcj.json", "newcj3.json", "cj5.json", "newcj.json", "scj6.json", "cj-fast.json", "mxcj3xzj.json", "mxcj3dzj.json", "mxcj5nor.json", "mxcj5sup.json", "mxcj5simpnor.json", "mxcj5simpsup.json", "mxcj5tradnor.json", "mxcj5tradsup.json"]
         CinDict["chephonetic"] = ["thphonetic.json", "CnsPhonetic.json", "bpmf.json"]
         CinDict["chearray"] = ["tharray.json", "array30.json", "ar30-big.json", "array40.json"]
         CinDict["chedayi"] = ["thdayi.json", "dayi4.json", "dayi3.json"]
