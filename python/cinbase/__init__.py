@@ -3306,7 +3306,7 @@ class LoadRCinTable(threading.Thread):
         self.cbTS = cbTS
         self.RCinTable = RCinTable
         self.rcinFileList = ([
-                                "checj.json", "mscj3.json", "mscj3-ext.json", "cj-ext.json", "cnscj.json", "thcj.json", "newcj3.json", "cj5.json", "newcj.json", "scj6.json", "cj-fast.json", "mxcj3xzj.json", "mxcj3dzj.json", "mxcj5nor.json", "mxcj5sup.json", "mxcj5simp.json",
+                                "checj.json", "mscj3.json", "mscj3-ext.json", "cj-ext.json", "cnscj.json", "thcj.json", "newcj3.json", "cj5.json", "newcj.json", "scj6.json", "cj-fast.json", "mxcj3xzj.json", "mxcj3dzj.json", "mxcj5nor.json", "mxcj5sup.json", "mxcj5simpnor.json", "mxcj5simpsup.json", "mxcj5tradnor.json", "mxcj5tradsup.json",
                                 "thphonetic.json", "CnsPhonetic.json", "bpmf.json",
                                 "tharray.json", "array30.json", "ar30-big.json", "array40.json",
                                 "thdayi.json", "dayi4.json", "dayi3.json",
