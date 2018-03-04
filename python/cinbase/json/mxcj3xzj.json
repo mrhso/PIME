@@ -13457,9 +13457,6 @@
         "ehk": [
             "沃"
         ],
-        "ehkj": [
-            "汧"
-        ],
         "ehkl": [
             "㳢"
         ],
@@ -72413,6 +72410,9 @@
         "tlj": [
             "革"
         ],
+        "tlld": [
+            "䕈"
+        ],
         "tlll": [
             "萧",
             "䔥"
@@ -72453,6 +72453,9 @@
         ],
         "tlmy": [
             "菲"
+        ],
+        "tlnd": [
+            "䕈"
         ],
         "tlpa": [
             "㬫"
@@ -79115,6 +79118,9 @@
         ],
         "vkok": [
             "嫉"
+        ],
+        "vkomn": [
+            "㡮"
         ],
         "vkoo": [
             "㛍"
@@ -87321,6 +87327,9 @@
         "xyrpa": [
             "詣"
         ],
+        "xyrrv": [
+            "誤"
+        ],
         "xyrtg": [
             "讛"
         ],
@@ -90724,7 +90733,8 @@
             "襄"
         ],
         "yrrvc": [
-            "譔"
+            "譔",
+            "誤"
         ],
         "yrrvk": [
             "誤"
@@ -93549,15 +93559,15 @@
         ]
     },
     "cincount": {
-        "big5F": 6241,
-        "big5LF": 9167,
+        "big5F": 6243,
+        "big5LF": 9166,
         "big5Other": 0,
         "big5S": 10,
         "bopomofo": 41,
         "cjk": 9702,
         "cjkCI": 16,
         "cjkCIS": 1,
-        "cjkExtA": 7551,
+        "cjkExtA": 7554,
         "cjkExtB": 8,
         "cjkExtC": 0,
         "cjkExtD": 0,
@@ -93566,7 +93576,7 @@
         "cjkOther": 629,
         "phrases": 0,
         "privateuse": 0,
-        "totalchardefs": 33365
+        "totalchardefs": 33369
     },
     "cname": "迷信倉頡3_小字集",
     "dupchardefs": {

@@ -29866,7 +29866,6 @@
             "𣷹"
         ],
         "ehkj": [
-            "汧",
             "𣸖"
         ],
         "ehkl": [
@@ -170368,6 +170367,9 @@
         "tlky": [
             "𦰈"
         ],
+        "tlld": [
+            "䕈"
+        ],
         "tllh": [
             "𦿄"
         ],
@@ -170433,6 +170435,7 @@
             "𧹘"
         ],
         "tlnd": [
+            "䕈",
             "𦺯"
         ],
         "tlnl": [
@@ -185817,6 +185820,9 @@
         "vkok": [
             "嫉"
         ],
+        "vkomn": [
+            "㡮"
+        ],
         "vkoo": [
             "㛍"
         ],
@@ -198185,6 +198191,9 @@
         "xyrpa": [
             "詣"
         ],
+        "xyrrv": [
+            "誤"
+        ],
         "xyrtg": [
             "讛"
         ],
@@ -206604,7 +206613,8 @@
             "𧩑"
         ],
         "yrrvc": [
-            "譔"
+            "譔",
+            "誤"
         ],
         "yrrvk": [
             "誤"
@@ -212293,15 +212303,15 @@
         ]
     },
     "cincount": {
-        "big5F": 6241,
-        "big5LF": 9167,
+        "big5F": 6243,
+        "big5LF": 9166,
         "big5Other": 0,
         "big5S": 10,
         "bopomofo": 41,
         "cjk": 9702,
         "cjkCI": 16,
         "cjkCIS": 1,
-        "cjkExtA": 7551,
+        "cjkExtA": 7554,
         "cjkExtB": 42719,
         "cjkExtC": 4149,
         "cjkExtD": 222,
@@ -212310,7 +212320,7 @@
         "cjkOther": 629,
         "phrases": 0,
         "privateuse": 0,
-        "totalchardefs": 80441
+        "totalchardefs": 80445
     },
     "cname": "迷信倉頡3_大字集",
     "dupchardefs": {
