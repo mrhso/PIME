@@ -347,7 +347,6 @@ aghaf	𮭇
 aghd	𥣷
 agi	㫢
 agi	𢧄
-agir	𣈻
 agirm	𭨎
 agis	𬁃
 agji	𣊎
@@ -632,6 +631,7 @@ ajiav	𭧄
 ajii	暷
 ajii	𭧧
 ajip	𪱇
+ajir	𣈻
 ajjb	𣊿
 ajjb	𣋂
 ajje	𢻣
@@ -6969,10 +6969,7 @@ cggg	𨩒
 cggi	𨩥
 cggu	鐃
 cgi	鉣
-cgig	𨭱
 cgii	𨧶
-cgim	𨯒
-cgim	𨰕
 cgis	𨦲
 cgis	𨪠
 cgit	鎑
@@ -7430,9 +7427,12 @@ cji	𢧐
 cjig	鐵
 cjig	䥫
 cjig	𨬿
+cjig	𨭱
 cjig	𮢨
 cjii	鏄
 cjii	𫓆
+cjim	𨯒
+cjim	𨰕
 cjim	𮢾
 cjip	鏸
 cjir	𨭓
@@ -17570,7 +17570,6 @@ fgi	𪸘
 fgihf	𪇲
 fgii	𡮊
 fgil	𭴦
-fgim	𤍬
 fgit	熆
 fgji	𤎒
 fgjk	𤎒
@@ -17886,6 +17885,7 @@ fjds	𤊹
 fjhp	烢
 fjhq	𤉍
 fji	戦
+fjic	𤍬
 fjii	𤍿
 fjip	𬋅
 fjjb	𭵿
@@ -20060,7 +20060,6 @@ gilib	𠬖
 gill	𪣏
 gilmi	蟄
 gilmi	𧐨
-gilmi	𧓤
 giln	刦
 gilo	𡌻
 gilr	塘
@@ -20150,7 +20149,6 @@ giv	𡠗
 giv	𡠦
 give	𫭨
 givif	縶
-givif	𦀂
 givif	𦂌
 giwg	㙻
 giwg	𡏂
@@ -25704,6 +25702,7 @@ hjim	籖
 hjin	𥶸
 hjip	𫂠
 hjir	𥯒
+hjir	𫂰
 hjjb	𥶡
 hjjd	𥶭
 hjji	䉖
@@ -35984,12 +35983,13 @@ jhyu	𭔀
 ji	𢦏
 jiad	𡩕
 jiav	㝗
-jibd	𪭒
 jibi	博
+jibnd	𪭒
 jibu	𥅰
 jibuc	𮚂
 jibuu	𧡃
 jiche	𢧇
+jicni	𢧇
 jid	栽
 jid	𪧌
 jidi	專
@@ -36030,12 +36030,12 @@ jild	𡪼
 jile	㝩
 jilir	𢨣
 jilmi	蛓
+jilmi	𧓤
 jilmy	𮧇
 jiln	剸
 jiln	𫦂
 jilsm	韯
 jily	𮧇
-jilyv	𢨆
 jimbc	𩓘
 jimcw	酨
 jimcw	𧟭
@@ -36047,12 +36047,13 @@ jind	𪭋
 jinl	鄟
 jino	㝎
 jinyo	𤴝
-jioav	𬲏
 jiob	𡭇
 jiobo	胾
 jiog	截
 jiohe	𩳇
+jioiv	𬲏
 jiok	𭤈
+jiomv	𬲏
 jip	惠
 jipf	𪧝
 jips	㢤
@@ -36063,6 +36064,7 @@ jir	哉
 jirau	𨚵
 jire	𭮻
 jirg	𢧑
+jirhg	𢧜
 jirmg	𢧜
 jirxu	𬹢
 jisk	𡫣
@@ -36072,7 +36074,9 @@ jit	𫸜
 jiti	𡨜
 jiu	𡸸
 jiuuu	𢨎
+jivif	𦀂
 jivle	𫩄
+jivly	𢨆
 jiw	𤱱
 jiwc	𫴩
 jiwgf	䵧
@@ -38448,7 +38452,6 @@ kggp	㥣
 kghaf	鵟
 kghe	𤹥
 kgi	㾀
-kgig	𤻛
 kgil	㾡
 kgit	𤸱
 kgje	𤺴
@@ -39590,6 +39593,7 @@ kjfe	𤸃
 kjhaf	𬷂
 kjhhh	㣏
 kjhp	𤵾
+kjig	𤻛
 kjii	𤹵
 kjjh	𤺋
 kjjj	𤹖
@@ -42247,7 +42251,7 @@ lijim	䘂
 lijim	𧓥
 lijip	蟪
 lijiv	𧒶
-lijiv	𧔒
+lijiy	𧔒
 lijj	褲
 lijjl	螹
 lijka	蝫
@@ -60857,6 +60861,7 @@ osje	𠉧
 osjff	𮩏
 osjg	𫤃
 osjie	𮩋
+osjig	𩟙
 osjj	㒤
 osjl	倻
 osjm	𠐅
@@ -64361,7 +64366,6 @@ qghv	𭡉
 qgi	抾
 qgii	𫽅
 qgii	𫾓
-qgij	𢶪
 qgik	𫽅
 qgil	𢭙
 qgil	𭡊
@@ -64990,6 +64994,7 @@ qji	𠫢
 qjig	擮
 qjig	𢶋
 qjii	摶
+qjij	𢶪
 qjim	㩥
 qjip	𢴥
 qjiv	𭢚
@@ -76394,7 +76399,6 @@ tgif	爇
 tgif	𤑔
 tgif	𬋖
 tgif	𭶢
-tgig	𦼺
 tgig	𦿳
 tgig	𫉷
 tgii	藝
@@ -77320,6 +77324,7 @@ tjibi	𩌏
 tjice	𩊻
 tjid	𮐅
 tjig	䕙
+tjig	𦼺
 tjii	蓴
 tjii	𩋋
 tjii	𮑀
@@ -89290,7 +89295,6 @@ xcfbd	𮢚
 xcfbu	𨬥
 xcg	𡉀
 xcgg	𫒕
-xcgim	𨰕
 xcgis	𨪠
 xcgni	𨮾
 xcha	㒶
@@ -89362,6 +89366,7 @@ xcjck	𮢰
 xcjcv	𮣨
 xcjig	䥫
 xcjii	𫓆
+xcjim	𮢾
 xcjir	𮢜
 xcjjm	𨯪
 xcjkr	𨮩
@@ -91360,7 +91365,7 @@ xgish	𠠐
 xgisq	驇
 xgit	𡊯
 xgiv	𡠗
-xgivi	𦀂
+xgivi	𦂌
 xgiwg	𡏂
 xgiyh	𧛜
 xgjav	𮎙
@@ -92074,6 +92079,7 @@ xhjha	鷱
 xhjhr	𥰋
 xhjhx	𦥛
 xhjii	簙
+xhjir	𫂰
 xhjji	𥰳
 xhjjl	𮅼
 xhjjn	𫂄
@@ -93301,6 +93307,7 @@ xjig	㦳
 xjiha	䳒
 xjihs	㦲
 xjik	𫳉
+xjilm	𧓤
 xjiln	𫦂
 xjimc	𧟭
 xjiyh	𧛦
@@ -98075,7 +98082,6 @@ xtbug	𬞝
 xtbuk	𦴁
 xtbup	𮐊
 xtbuu	𦺊
-xtbuw	𦽖
 xtbvf	𦷲
 xtbvp	𧄅
 xtbye	𣀺
@@ -98223,7 +98229,7 @@ xtghd	𦏁
 xtghm	𣂼
 xtghu	𠒌
 xtgif	𤑔
-xtgig	𦿳
+xtgig	𫉷
 xtgii	𮒛
 xtgiv	𧃳
 xtgjf	𧅹
@@ -98384,6 +98390,7 @@ xtjhk	𧄳
 xtjhm	𣃕
 xtjhn	𣪲
 xtjhq	𪺶
+xtjig	𦼺
 xtjii	𩋋
 xtjir	𬞛
 xtjjb	𮒜
@@ -102603,7 +102610,7 @@ xxxwt	𣫬
 xxxww	𤳏
 xxxxa	𭞘
 xxxxb	𦙔
-xxxxc	𮢀
+xxxxc	𨭱
 xxxxd	𣠵
 xxxxe	𤄃
 xxxxf	𪁺
