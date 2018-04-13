@@ -1,6 +1,6 @@
 # PIME
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ju8c225nt9qgxeee?svg=true)](https://ci.appveyor.com/project/EasyIME/PIME)
+[![Build status](https://ci.appveyor.com/api/projects/status/8yial6976640khi1?svg=true)](https://ci.appveyor.com/project/mrhso/pime-avu3n)
 [![GitHub release](https://img.shields.io/github/release/EasyIME/PIME.svg)](https://github.com/EasyIME/PIME/releases)
 
 Implement input methods easily for Windows via Text Services Framework:
