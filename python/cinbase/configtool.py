@@ -145,7 +145,7 @@ class ConfigHandler(BaseHandler):
         CinDict["cheez"] = ["ez.json", "ezsmall.json", "ezmid.json", "ezbig.json"]
         CinDict["chepinyin"] = ["thpinyin.json", "pinyin.json", "roman.json"]
         CinDict["chesimplex"] = ["simplecj.json", "simplex.json", "simplex5.json"]
-        CinDict["cheliu"] = ["liu.json"]
+        CinDict["cheliu"] = ["liu.json", "liu2.json", "liu3.json", "liu4.json"]
         CinDict["chenm"] = ["huisuwubi12pc.json", "huisuwubi12baidu.json", "ningma119.json", "ningmacizu12w7.json", "ningmagaoshou37.json", "huisuwubi11xp.json", "huisuwubi11win7.json", "huisuwubi11baiduo.json", "huisuwubi11pc.json", "huisuwubi11baidun.json"]
         jsonFile = CinDict[cfg.imeDirName][cfg.selCinType]
 

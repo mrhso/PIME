@@ -35,8 +35,9 @@ class CheLiuTextService(TextService):
 
         # 輸入法模組自訂區域
         self.imeDirName = "cheliu"
-        self.maxCharLength = 4 # 輸入法最大編碼字元數量
-        self.cinFileList = ["liu.json"]
+        self.maxCharLength = 5 # 輸入法最大編碼字元數量
+        # 熊版是有 VRSFWLCBKJ 的，所以就設定為 5 這個
+        self.cinFileList = ["liu.json", "liu2.json", "liu3.json", "liu4.json"]
 
         self.cinbase = CinBase
         self.curdir = os.path.abspath(os.path.dirname(__file__))

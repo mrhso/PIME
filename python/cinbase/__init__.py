@@ -3313,7 +3313,7 @@ class LoadRCinTable(threading.Thread):
                                 "ez.json", "ezsmall.json", "ezmid.json", "ezbig.json",
                                 "thpinyin.json", "pinyin.json", "roman.json",
                                 "simplecj.json", "simplex.json", "simplex5.json",
-                                "liu.json",
+                                "liu.json", "liu2.json", "liu3.json", "liu4.json"
                                 "huisuwubi12pc.json", "huisuwubi12baidu.json", "ningma119.json", "ningmacizu12w7.json", "ningmagaoshou37.json", "huisuwubi11xp.json", "huisuwubi11win7.json", "huisuwubi11baiduo.json", "huisuwubi11pc.json", "huisuwubi11baidun.json"
                             ])
 
