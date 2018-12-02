@@ -1877,6 +1877,7 @@ cmrr	鎶
 cmrt	鋀
 cmrw	鍢
 cms	鈩
+cmso	㒸
 cmsu	鈪
 cmt	鈃
 cmtn	鉶
@@ -8316,6 +8317,7 @@ inli	廕
 inlo	衤
 inno	辶
 ino	之
+ino	辶
 inoe	廢
 inol	衤
 inop	廃
@@ -10021,6 +10023,7 @@ kubbb	尳
 kuhaf	鵪
 kuhhc	尲
 kuhjg	尰
+kukvu	兓
 kulit	尴
 kulmc	尵
 kuln	剦
@@ -18292,7 +18295,6 @@ shc	刅
 shcnh	鬀
 shcwa	鬙
 shd	髤
-shdbn	鬎
 shdci	鬆
 shdhe	髲
 shdln	鬎
@@ -18393,6 +18395,7 @@ sibt	監
 sibuu	覧
 sic	鍳
 sif	熨
+sihaf	鵵
 sihhh	髟
 sihk	镺
 sihml	斸
@@ -20117,6 +20120,7 @@ twli	蔑
 twli	薎
 twli	薥
 twlii	蠤
+twlm	蔑
 twln	夢
 twln	萝
 twln	甍
@@ -24143,6 +24147,7 @@ xije	庋
 xik	义
 xikp	慦
 xim	亠
+xino	辶
 xiod	楽
 xiogr	噟
 xip	庀
@@ -36197,7 +36202,6 @@ bsypp	𦟭
 bt	𠕁
 bt	𢌳
 bt	𦉰
-bt	𠃢
 bta	𣆩
 bta	𣌧
 btaj	𦞻
@@ -39385,7 +39389,6 @@ dtch	𣔄
 dtck	𣝢
 dtcp	𣚜
 dtcr	𣚞
-dtcv	𣝡
 dtcv	𣞼
 dtcy	𣗠
 dtdd	𣟒
@@ -39469,7 +39472,6 @@ dton	𣔁
 dtoo	𣞔
 dtoo	𣠇
 dtov	𣝡
-dtov	𣞼
 dtp	𢣡
 dtp	𣔀
 dtpd	𣚭
@@ -40179,7 +40181,6 @@ ehsk	𣺱
 ehsl	𣷲
 ehsqf	𩣟
 ehss	𣷔
-ehst	𣴁
 ehsu	𣲣
 ehte	𤄑
 ehua	𤂩
@@ -40908,6 +40909,7 @@ etcp	𣽫
 etct	𤀾
 etcu	𣿑
 etd	𣷞
+eteb	𣼛
 etge	𣻌
 etge	𤀡
 etgf	𤅼
@@ -44449,7 +44451,6 @@ hbmnp	𣩺
 hbmp	𥭿
 hbmr	𥗑
 hbmrb	𩱬
-hbmx	𦥺
 hbn	𦦎
 hbnhe	𢃺
 hbniu	𦦩
@@ -44522,6 +44523,7 @@ hbwgf	𪒵
 hbwi	𥷮
 hbwlb	𦦻
 hbwp	𥵖
+hbxk	𦥺
 hby	𥫼
 hbyaj	𦠰
 hbye	𢿸
@@ -47356,11 +47358,12 @@ horn	𥳕
 horp	𢛃
 horr	𤔑
 horu	𨑔
+horui	𢔨
 horv	𨑔
+horvi	𢔨
 horvj	𢕃
 horyo	𨄦
 hosb	𥮃
-hosci	𢔨
 hoshe	𢖓
 hoshm	𢕬
 hosim	𢕬
@@ -47381,7 +47384,6 @@ hosse	𤓷
 hostq	𢔦
 hostt	𢔧
 hosu	𢒿
-hosui	𢔨
 hosv	𥱭
 hosyj	𢕌
 hosyj	𢔧
@@ -48127,7 +48129,6 @@ hssj	𦔰
 hssj	𢩇
 hssp	𥲅
 hssqf	𩢉
-hssx	𦥺
 hst	𢨬
 hst	𣆼
 hstc	𢩉
@@ -49326,7 +49327,6 @@ ibmbc	𩒺
 ibmgn	𢐭
 ibmn	𠅘
 ibmr	𢈉
-ibmt	𠂂
 ibmvn	𤮇
 ibmwl	𩈨
 ibog	𨿌
@@ -49339,6 +49339,7 @@ ibrr	𦝕
 ibsmr	𢩚
 ibug	𢌄
 ibuu	𢈥
+ibxt	𠂂
 ibyaj	𦠰
 ibye	𢼹
 ibye	𢿀
@@ -50785,6 +50786,7 @@ isjd	𢋶
 isje	𢈾
 iske	𢊘
 islh	𢧟
+islm	𢧟
 ism	𢦘
 ismb	𦚑
 ismbc	𢩛
@@ -50816,7 +50818,6 @@ isru	𢨪
 issj	𢩇
 issmm	𦑆
 issqf	𩢉
-isst	𠂂
 ist	𢨬
 istc	𢩉
 istc	𢨼
@@ -56816,6 +56817,7 @@ mbvmd	𩃕
 mbvno	𩄖
 mbvr	𩂰
 mbwii	𩅏
+mbwio	𩅏
 mbwk	𩂥
 mbwk	𩃙
 mbwl	𩂘
@@ -57994,8 +57996,8 @@ mhs	𢨥
 mhsb	𠪂
 mhsd	𠩞
 mhsm	𠩎
-mhulm	𤘍
 mhumt	𤘑
+mhuxm	𤘍
 mhv	𠨸
 mhvp	𠨿
 mhwcm	𤘉
@@ -62174,7 +62176,6 @@ nrppk	𣬐
 nrppk	𤟭
 nrppk	𣬒
 nrppr	𣬕
-nrrm	𪚺
 nrrn	𢐆
 nrtcv	𡅖
 nrtov	𡅖
@@ -62307,6 +62308,7 @@ nuog	𨾼
 nuoin	𪚬
 nuoiv	𩚴
 nuok	𢼮
+nuom	𪚺
 nupi	𪚭
 nupr	𪚶
 nuq	𢪸
@@ -67254,11 +67256,11 @@ rasj	𦖫
 rasm	𠹥
 ratk	𠾝
 ratr	𡄗
-rau	𨙨
 rauf	𨚋
 raum	𡃢
 raur	𡅜
 raut	𡄊
+rauz	𨙨
 ravf	𡀾
 ravo	𠿒
 rawe	𠼦
@@ -68447,7 +68449,6 @@ rmrr	𠹭
 rmrr	𡂳
 rmrt	𠶡
 rmru	𧿆
-rmru	𦉭
 rmruj	𨃿
 rmrut	𨃿
 rmrvs	𨁳
@@ -69278,7 +69279,6 @@ rugk	𠼌
 ruhe	𡂅
 ruhi	𠿯
 ruhjj	𢁅
-ruhpu	𨞰
 ruhpu	𨞸
 ruhr	𠸉
 ruje	𢻌
@@ -69311,13 +69311,11 @@ ruom	𠳥
 rup	𢙸
 rup	𠲹
 rupr	𪓞
-rurau	𨛜
 rurhg	𪓪
 rurk	𡆑
 rurmg	𪓪
 rut	𢌴
 rutcu	𨞔
-rutcu	𨞠
 ruto	𠾨
 rutt	𠚎
 ruu	𡵒
@@ -69400,8 +69398,10 @@ rws	𠰸
 rwvf	𠼱
 rwyv	𠼊
 rxk	𦥼
+rxl	𠃢
 rxm	𠁁
 rxu	𪚴
+rxu	𦉭
 ryac	𡅙
 ryav	𠺙
 rybc	𡄶
@@ -69547,6 +69547,9 @@ ryyb	𡂓
 ryye	𢼖
 ryypn	𧈐
 ryypu	𧈐
+rzhpu	𨞰
+rzrau	𨛜
+rztcu	𨞠
 sa	𡰶
 sabuu	𧢇
 sahaf	𪄶
@@ -71317,7 +71320,6 @@ sshe	𡕪
 sshne	𣪐
 sshql	𢀥
 sshsl	𢀦
-sshu	𦉭
 sshus	𠥫
 ssiib	𢀬
 ssiil	𢀨
@@ -75151,15 +75153,11 @@ ulbr	𠻭
 ulk	𡶈
 ulll	𡵅
 ulll	𡵫
-ullm	𦥒
-ullm	𠚒
 ulln	𡵫
 ulln	𡶒
 ulmbc	𩓻
 ulmi	𧈪
 ulmi	𡺃
-ulmm	𦥒
-ulmm	𠚒
 ulq	𡷏
 ulr	𠺤
 ulvk	𡾄
@@ -75254,7 +75252,6 @@ umrr	𡾏
 umrt	𧯛
 umsc	𠥄
 umsh	𡽐
-umsh	𡺳
 umsmm	𦐉
 umtc	𡾣
 umtn	𡶭
@@ -75719,6 +75716,8 @@ uwwf	𡿜
 uwww	𡾊
 uwww	𡾋
 uwyi	𡴋
+uxm	𦥒
+uxmm	𠚒
 uxmvn	𤮯
 uybg	𡿎
 uybj	𡽅
@@ -78701,6 +78700,7 @@ ycsv	𧘠
 yct	𢌸
 yctc	𣦄
 yctm	𣦄
+ycumm	𣦋
 ycvif	𥾻
 ycye	𢿡
 ycyhn	𧇠
@@ -79405,7 +79405,6 @@ yllw	𨔂
 ylm	𠅁
 ylmi	𨒷
 ylmp	𨓖
-ylmu	𣥫
 ylmu	𣦋
 ylmu	𨓢
 ylmv	𣥏
@@ -79605,6 +79604,7 @@ ymu	𣥃
 ymukb	𥜾
 ymuow	𪘭
 ymurr	𣥼
+ymuxm	𣥫
 ymvg	𨓷
 ymvi	𨑼
 ymvi	𨕯
@@ -80069,6 +80069,7 @@ yrbmm	𧨋
 yrbnj	𦝠
 yrbnk	𩼊
 yrbnk	𦝠
+yrbnk	𣎆
 yrbnk	𦟀
 yrbnn	𩼊
 yrbnq	𦟀
@@ -86557,7 +86558,6 @@ bccms	𬥕
 bccsh	𬥏
 bcf	𬋑
 bcfq	𬥓
-bcgah	𫯆
 bchgr	𬥘
 bchqr	𬥘
 bcice	𫿪
@@ -87023,7 +87023,6 @@ djir	𬃋
 djjp	𬄉
 djmg	𬃏
 djmwl	𬰠
-djra	𬃬
 djrm	𬃱
 djrm	𬄮
 djrp	𬅂
@@ -87063,10 +87062,10 @@ dmwg	𬃗
 dnig	𬄐
 dnkn	𬄴
 dnkq	𬂹
+dnkt	𬃇
 dnmp	𬃡
 dnq	𬂤
 dnsp	𬃡
-dnst	𬃇
 dnwc	𬄽
 docl	𬄂
 doha	𬂺
@@ -87114,7 +87113,6 @@ dtcr	𬄯
 dtei	𬂵
 dtge	𬄿
 dthf	𬅑
-dthv	𬡗
 dtis	𬃾
 dtkf	𬄠
 dtkl	𬅈
@@ -87151,6 +87149,7 @@ dycv	𬄓
 dyjl	𬅀
 dykb	𬄭
 dymm	𬄢
+dyra	𬃬
 dysi	𬄶
 dytr	𬃪
 dyvf	𬃎
@@ -87292,6 +87291,7 @@ erjc	𬉌
 erji	𬉢
 ermcw	𬪵
 ermd	𬇢
+erpc	𬉌
 esfv	𬉆
 eshd	𬇲
 eshl	𬇳
@@ -87414,7 +87414,6 @@ fdnqr	𬖨
 fdnqr	𬖿
 fdnsm	𬖖
 fdo	𬖌
-fdoii	𬖜
 fdop	𬖒
 fdpkk	𬖕
 fdqo	𬖐
@@ -87424,13 +87423,13 @@ fdsjj	𬗂
 fdsmb	𬖥
 fdstt	𬖪
 fdsyj	𬖪
+fdthg	𬖱
 fdtpd	𬖶
 fdtqg	𬖱
 fdumi	𬖲
 fdve	𬖗
 fdwjr	𬖢
 fdwl	𬋆
-fdyhg	𬖱
 fdylc	𬖛
 fdyra	𬖷
 fdyrb	𬖰
@@ -87881,7 +87880,6 @@ hinl	𬪂
 hino	𬔱
 hip	𬴽
 hir	𫪋
-his	𫼉
 hish	𬇉
 hisj	𬴿
 hive	𬔹
@@ -87892,7 +87890,6 @@ hjmbo	𬱪
 hjmo	𬕖
 hjpou	𬯈
 hjpym	𬸢
-hjqs	𬱵
 hjrn	𬕲
 hk	𫯛
 hkd	𬃥
@@ -87953,6 +87950,7 @@ hnnl	𬩼
 hnono	𬱽
 hnphp	𬲀
 hnpym	𬸎
+hnqs	𬱵
 hnymr	𬣀
 hoayk	𫹗
 hobgr	𬋬
@@ -88093,6 +88091,7 @@ hshgs	𫦿
 hshne	𬆢
 hshss	𫦿
 hshvp	𬇋
+hsi	𫼉
 hsjka	𫼏
 hsjp	𬕻
 hsjs	𬕴
@@ -88146,8 +88145,8 @@ huyhm	𫤢
 huykm	𫤢
 huym	𬴾
 huyta	𬇂
-hvbcc	𬲈
 hvfm	𬕡
+hvioc	𬲈
 hvjcr	𬲄
 hvnom	𬹭
 hvomn	𬲂
@@ -88176,8 +88175,6 @@ hxbyu	𬜄
 hxemw	𬜂
 hxg	𫮩
 hxkr	𫬁
-hxlml	𬛿
-hxlmn	𬛿
 hxm	𬛸
 hxnd	𫲯
 hxnsh	𬛹
@@ -88185,6 +88182,8 @@ hxog	𬯶
 hxr	𬛺
 hxt	𫸟
 hxv	𫱴
+hxvml	𬛿
+hxvmn	𬛿
 hxymr	𬣏
 hycrn	𬜕
 hyeyh	𬜚
@@ -88221,6 +88220,7 @@ ibpym	𬸜
 ibrjp	𬴖
 ibthu	𬳗
 icbac	𫸏
+icgah	𫯆
 icgah	𫸌
 icohs	𫸋
 icqmb	𫸎
@@ -88442,6 +88442,7 @@ irjs	𫷶
 irlq	𬚫
 irmp	𬆗
 irop	𫢼
+irpp	𫨩
 irsm	𫩞
 irsml	𫿺
 irtq	𬙸
@@ -88641,6 +88642,7 @@ jhse	𫳪
 jhul	𫳨
 jhvfu	𬔕
 jhxp	𫴔
+jibxu	𬹢
 jidmq	𬰫
 jifg	𫴖
 jifj	𫳠
@@ -89043,7 +89045,6 @@ lhnm	𬡦
 lhuo	𬡷
 libm	𬌒
 libtu	𬠐
-libxu	𬹢
 lidam	𬠜
 lidbm	𬠜
 lidj	𬟼
@@ -89163,7 +89164,6 @@ lpnoo	𬲊
 lpvif	𬗋
 lpym	𬡍
 lqj	𬡈
-lrrv	𬡫
 lsefh	𬮪
 lseyv	𬮧
 lsf	𬮟
@@ -89286,7 +89286,6 @@ mcf	𬊪
 mchaf	𬷢
 mci	𫶫
 mcln	𫥼
-mcmca	𫨤
 mcnhe	𬥠
 mcnii	𬱒
 mcor	𫨊
@@ -89514,6 +89513,7 @@ mmjbj	𫡵
 mmjbm	𬆄
 mmjm	𫡸
 mmma	𫡷
+mmmwg	𬪿
 mmmy	𫡲
 mmnou	𬅧
 mmofb	𬆈
@@ -89523,7 +89523,6 @@ mmsl	𫧽
 mmtwb	𬒪
 mmup	𫹵
 mmvn	𬎥
-mmwg	𬪿
 mmydl	𬩓
 mmyk	𫿮
 mna	𬁦
@@ -89612,7 +89611,6 @@ mrok	𬑿
 mromi	𬒊
 mrowy	𬒐
 mroyr	𬒘
-mrpp	𫨩
 mrptb	𬒛
 mrpym	𬸂
 mrpym	𬸠
@@ -89881,6 +89879,7 @@ nlom	𬮾
 nloyr	𬯑
 nlpvm	𬮻
 nlqka	𬯌
+nlskt	𬯅
 nltbf	𬯡
 nltkn	𬯐
 nltmv	𬯋
@@ -89903,8 +89902,8 @@ nmajv	𬶩
 nmayf	𬶱
 nmb	𬶈
 nmbbe	𬶙
-nmbmr	𬳶
 nmbof	𬶭
+nmbr	𬳶
 nmbse	𬶚
 nmcnh	𬶕
 nmcwj	𬶛
@@ -89997,15 +89996,16 @@ nnhbv	𫯒
 nnho	𫡓
 nnjbv	𫯚
 nnmn	𫯍
-nnmrb	𬴸
+nnmrb	𬴼
 nnmrb	𬴹
 nnmrb	𬴺
 nnmrb	𬴻
-nnmrb	𬴼
+nnmrb	𬴸
 nnnnn	𫦗
 nnsh	𫦘
 nnyhc	𫯙
 nnytk	𫯖
+nnz	𫸪
 nob	𬂏
 nof	𬊹
 nog	𫮻
@@ -90040,13 +90040,11 @@ nrwu	𬺞
 nrxu	𬹝
 nsamo	𫡝
 nsk	𫸩
-nskt	𬯅
 nsl	𫡄
 nsnn	𫡐
 nsp	𫹭
 nspym	𬸅
 nsql	𫸶
-nssv	𫸪
 nsyco	𬩄
 nsyto	𬩄
 nt	𫸦
@@ -90267,6 +90265,7 @@ omdu	𬹡
 omfm	𫣀
 omgb	𫤍
 omhaf	𬷏
+omhaf	𬷗
 omhf	𬷉
 omhk	𫤌
 omis	𫢙
@@ -90346,8 +90345,8 @@ ophua	𬭿
 ophxc	𬮀
 opid	𬬸
 opihf	𬭭
-opiiks	𬬶
 opikh	𬭝
+opiks	𬬶
 opiok	𬭐
 opip	𬬩
 opir	𬭀
@@ -90800,7 +90799,6 @@ qxpym	𬸥
 qyc	𫼚
 qyce	𫽕
 qyg	𫼠
-qyhn	𫩽
 qyhs	𫽾
 qykkk	𫿟
 qykq	𫽁
@@ -90865,13 +90863,13 @@ rgfo	𫫬
 rhfk	𫬚
 rhgu	𫩱
 rhha	𫫝
+rhhb	𫬧
 rhhd	𫬀
 rhhn	𫩓
 rhjo	𫪪
 rhlmi	𬠉
 rhlo	𫩜
 rhmr	𫩲
-rhrb	𫬧
 rhrk	𫫤
 rhvf	𫪈
 ri	𫩕
@@ -91039,6 +91037,7 @@ rqtc	𫪵
 rqtk	𫬒
 rqvd	𫬈
 rqvv	𫬶
+rqyn	𫩽
 rqyr	𫫓
 rqyx	𫬬
 rrau	𫶷
@@ -91099,9 +91098,9 @@ rusu	𫩯
 rvfu	𫫴
 rvif	𫩹
 rvwy	𫪰
-rwky	𫫼
 rwlp	𫬘
 rwlr	𫪞
+rwlu	𫫼
 rwlv	𫫼
 rycv	𫬄
 rydi	𫪀
@@ -91221,7 +91220,6 @@ sla	𬁤
 slg	𫭹
 slhjr	𬛥
 slmso	𬥃
-slnd	𬛧
 slnq	𬛣
 slok	𫾱
 slp	𫺕
@@ -91269,6 +91267,7 @@ srysy	𫵦
 sscwa	𬛫
 ssf	𬋀
 ssjk	𫧛
+ssnd	𬛧
 sthbn	𫵨
 stlc	𫧖
 stmc	𫧖
@@ -91395,7 +91394,6 @@ tgfp	𫺵
 tgif	𬋖
 tgiku	𬞓
 tgkf	𬋖
-tgnl	𬝰
 tgoq	𫮱
 tgt	𬙬
 tgwyi	𬙰
@@ -91433,6 +91431,7 @@ tjmf	𬋎
 tjmg	𬝄
 tjmn	𬞊
 tjmob	𬰥
+tjnl	𬞮
 tjoc	𬝯
 tjrhu	𬞁
 tjt	𬜦
@@ -91452,6 +91451,7 @@ tknp	𬜫
 tkptd	𬙾
 tkpu	𬙴
 tkpym	𬸮
+tkyoj	𬙼
 tlbo	𬟃
 tleo	𬜾
 tlks	𬞔
@@ -91541,7 +91541,6 @@ tqmkj	𬙲
 tqqs	𬙭
 tqrhp	𬙳
 tqtct	𬙻
-tqyoj	𬙼
 trbhx	𬚁
 trjb	𬞑
 trma	𬟅
@@ -91558,6 +91557,7 @@ trrb	𬙿
 trxu	𬟏
 tryk	𬜰
 tsfh	𬝃
+tsgl	𬝰
 tshe	𬟂
 tshe	𬟦
 tshk	𬟂
@@ -91617,7 +91617,7 @@ tvpym	𬸭
 tvys	𬜹
 twbr	𬞒
 twib	𬝟
-twli	𬞱
+twlu	𬞱
 twmg	𬜿
 twmm	𬞏
 twok	𫿁
@@ -91739,6 +91739,7 @@ vcpm	𫱳
 vcuh	𫱧
 vdhml	𫿾
 vdm	𫰬
+vdoii	𬖜
 vdoml	𬖜
 ve	𫰖
 veite	𫱩
@@ -91794,9 +91795,9 @@ vfmrl	𬗩
 vfmrt	𬗖
 vfmwg	𬘉
 vfmwr	𬗟
-vfnbq	𬗝
 vfndu	𬗆
 vfnhs	𬗅
+vfnib	𬗝
 vfnnc	𬘂
 vfnwu	𬘇
 vfoge	𬗿
@@ -91876,11 +91877,13 @@ vlhpe	𫩃
 vlhye	𫩃
 vlit	𫱕
 vlpb	𫱉
+vltmc	𬌋
 vlvl	𫡅
 vlx	𫱷
 vmaa	𫱯
 vmag	𬌂
 vmam	𬘜
+vmbbu	𬘮
 vmbhu	𬘖
 vmbhx	𬘺
 vmbjb	𬌈
@@ -91888,7 +91891,6 @@ vmbje	𬌉
 vmbk	𫱭
 vmbkf	𬙇
 vmbm	𫰟
-vmbmu	𬘮
 vmbr	𫲚
 vmdd	𬘭
 vmdj	𬘚
@@ -91931,10 +91933,10 @@ vmlll	𬘓
 vmlm	𫰫
 vmlsx	𬙁
 vmmbk	𬘰
-vmmbv	𬘱
 vmmcw	𬘟
 vmmls	𬘔
 vmmrt	𬌑
+vmmwv	𬘱
 vmnib	𬌍
 vmnkg	𬘩
 vmnn	𫰞
@@ -91988,7 +91990,6 @@ vnndc	𫤵
 vno	𫰑
 vnom	𫰛
 vnrs	𫱦
-vntmc	𬌋
 vnue	𫱂
 vnyk	𫰨
 vobt	𬐗
@@ -92005,8 +92006,8 @@ vpav	𫻂
 vpbc	𫱇
 vpko	𫲆
 vplb	𫷏
+vpoir	𫻈
 vpou	𫱀
-vpr	𫻈
 vqou	𫱟
 vqs	𫰍
 vqv	𫲌
@@ -92082,9 +92083,9 @@ wffqm	𬹘
 wfhbv	𬹖
 wftwi	𬹛
 wfybo	𬹕
+wfymi	𬹚
 wgnng	𬫀
 wgtkr	𫭔
-wgymi	𬹚
 whfd	𬏃
 whlb	𫭎
 whxo	𫭌
@@ -92181,7 +92182,6 @@ ybkjt	𫬩
 yblb	𬨪
 yblbd	𬃨
 ybmm	𬨶
-ybnhe	𬩔
 yboiv	𬛠
 ybond	𬂕
 yboyv	𬛠
@@ -92219,6 +92219,7 @@ yev	𫰥
 yevw	𬩆
 yfbw	𬩖
 yfdi	𬨿
+yfdv	𬡗
 yfhaf	𬷦
 yfnl	𬪣
 yfok	𫿀
@@ -92276,7 +92277,6 @@ yjkf	𬩪
 yjlln	𬨙
 yjmy	𬍏
 yjn	𬨖
-yjnl	𬞮
 yjnq	𬔧
 yjol	𫧦
 yjph	𬨘
@@ -92439,6 +92439,7 @@ yrp	𬢛
 yrpbc	𬢻
 yrqki	𬢪
 yrrr	𬩨
+yrrv	𬡫
 yrshr	𫫌
 yrsmg	𬣑
 yrtaa	𬣒
@@ -92471,6 +92472,7 @@ ysoeh	𬀔
 ysoex	𬀝
 ysofa	𬀙
 ysofx	𬀢
+ysogm	𬀘
 ysohc	𬀣
 ysohk	𬀐
 ysohk	𬀡
@@ -92495,7 +92497,6 @@ ysonf	𬀤
 ysorj	𬀚
 ysoro	𬀟
 ysosf	𬀏
-ysotm	𬀘
 ysovk	𬀕
 ysovl	𬀀
 ysowj	𬀆
@@ -92533,7 +92534,6 @@ yturu	𬔝
 ytvs	𬔖
 ytwb	𬔤
 ytwn	𬩝
-yubcc	𫥮
 yubu	𬩗
 yubwi	𬺖
 yuddf	𬺔
@@ -92545,6 +92545,7 @@ yuhjr	𬺄
 yui	𫻺
 yuibi	𬺏
 yuihr	𬺍
+yuioc	𫥮
 yujbm	𬺌
 yujig	𬺕
 yujmd	𬹷
@@ -92593,6 +92594,7 @@ yvwlk	𫲓
 yvwln	𫲓
 yvybg	𬂙
 ywaa	𬸶
+ywbe	𬩔
 ywbu	𫡼
 ywbuu	𬸳
 ywg	𫭬
@@ -93037,6 +93039,8 @@ bwli	爵
 by	丹
 c	金
 cdwf	鍊
+cgtj	﨨
+cjkd	﨧
 cmct	益
 cmjn	鉶
 cmkn	鉶
@@ -93045,6 +93049,7 @@ cvne	錄
 danw	欄
 dbln	刺
 dd	林
+dfcq	﨔
 dhhl	柳
 dijk	杖
 dlwv	樓
@@ -93054,6 +93059,7 @@ dnwa	櫓
 doo	來
 dowy	梅
 dqthb	韛
+dtoi	﨓
 ebbb	滑
 ebmr	洞
 ebmu	滛
@@ -93099,10 +93105,12 @@ fkmbc	類
 fypt	爐
 gbmo	塚
 gbmo	塚
+gcor	﨏
 gdhne	穀
 gfle	隸
 gfle	隷
 gjtc	墳
+goyj	﨣
 goyjj	𧻓
 grhne	嗀
 gsyj	塀
@@ -93202,6 +93210,7 @@ ks	力
 kwle	瘝
 kwu	奄
 lapv	褐
+lihqm	﨡
 livvv	蠟
 liwot	蝹
 liwvf	螺
@@ -93280,6 +93289,7 @@ nffdq	鱗
 nlfdq	隣
 nlgce	陵
 nlgcg	陸
+nlhau	﨩
 nlhem	隆
 nlheq	降
 nljka	陼
@@ -93373,6 +93383,7 @@ stkr	匿
 suf	𤋮
 tang	藺
 tanw	蘭
+tbav	﨟
 tcbt	益
 tehr	落
 tgce	菱
@@ -93401,6 +93412,7 @@ ul	屮
 umrt	豈
 uolc	嶺
 uomb	崙
+uytr	﨑
 v	女
 vep	怒
 veq	拏
@@ -93436,6 +93448,7 @@ ybhg	望
 ybog	離
 ybysp	龍
 yc	六
+yge	﨎
 yhmbc	頻
 yhmbc	頻
 yihu	充
@@ -93444,6 +93457,7 @@ yioj	率
 yjwj	連
 ykcf	遼
 ykr	吝
+ynhe	﨤
 ynui	逸
 ynui	逸
 ypg	壟

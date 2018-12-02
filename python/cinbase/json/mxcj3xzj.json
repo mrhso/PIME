@@ -7181,6 +7181,9 @@
         "cms": [
             "鈩"
         ],
+        "cmso": [
+            "㒸"
+        ],
         "cmst": [
             "㿽"
         ],
@@ -30788,6 +30791,7 @@
         ],
         "ino": [
             "之",
+            "辶",
             "㡱"
         ],
         "inoe": [
@@ -37482,6 +37486,9 @@
         ],
         "kukmr": [
             "㞆"
+        ],
+        "kukvu": [
+            "兓"
         ],
         "kulit": [
             "尴"
@@ -68321,9 +68328,6 @@
         "shd": [
             "髤"
         ],
-        "shdbn": [
-            "鬎"
-        ],
         "shdci": [
             "鬆"
         ],
@@ -68776,6 +68780,9 @@
         ],
         "sigsk": [
             "䦋"
+        ],
+        "sihaf": [
+            "鵵"
         ],
         "sihhh": [
             "髟"
@@ -75027,6 +75034,9 @@
         ],
         "twlj": [
             "䕉"
+        ],
+        "twlm": [
+            "蔑"
         ],
         "twln": [
             "夢",
@@ -84323,6 +84333,9 @@
         ],
         "xim": [
             "亠"
+        ],
+        "xino": [
+            "辶"
         ],
         "xiod": [
             "楽"
@@ -94189,15 +94202,15 @@
         ]
     },
     "cincount": {
-        "big5F": 6306,
+        "big5F": 6307,
         "big5LF": 9250,
         "big5Other": 0,
         "big5S": 10,
         "bopomofo": 41,
-        "cjk": 9774,
+        "cjk": 9777,
         "cjkCI": 13,
         "cjkCIS": 0,
-        "cjkExtA": 7577,
+        "cjkExtA": 7578,
         "cjkExtB": 1,
         "cjkExtC": 0,
         "cjkExtD": 0,
@@ -94206,7 +94219,7 @@
         "cjkOther": 621,
         "phrases": 0,
         "privateuse": 0,
-        "totalchardefs": 33593
+        "totalchardefs": 33598
     },
     "cname": "迷信倉頡3_小字集",
     "dupchardefs": {},
