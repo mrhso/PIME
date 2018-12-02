@@ -170,8 +170,6 @@ Function uninstallOldVersion
 
 			Delete /REBOOTOK "$INSTDIR\PIMELauncher.exe"
 
-            Delete /REBOOTOK "$INSTDIR\PIMEDebugConsole.exe"
-
             Delete "$INSTDIR\backends.json"
 			RMDir /REBOOTOK /r "$INSTDIR\python"
 			RMDir /REBOOTOK /r "$INSTDIR\node"
@@ -404,9 +402,6 @@ Section $(SECTION_MAIN) SecMain
 
 	; Install the launcher responsible to launch the backends
 	File "..\build\PIMELauncher\Release\PIMELauncher.exe"
-    
-    ; Install developer tool used to inspect debug messages
-    File "..\build\PIMELauncher\Release\PIMEDebugConsole.exe"
 SectionEnd
 
 SectionGroup /e $(PYTHON_SECTION_GROUP) python_section_group
@@ -717,15 +712,10 @@ Section "Uninstall"
 	ExecWait '"$INSTDIR\PIMELauncher.exe" /quit'
 	Delete /REBOOTOK "$INSTDIR\PIMELauncher.exe"
 
-    Delete /REBOOTOK "$INSTDIR\PIMEDebugConsole.exe"
-
 	RMDir /REBOOTOK /r "$INSTDIR\x86"
 	RMDir /REBOOTOK /r "$INSTDIR\python"
 	RMDir /REBOOTOK /r "$INSTDIR\node"
     Delete "$INSTDIR\backends.json"
-
-	; Only exist in earlier versions, but need to delete it.
-	RMDir /REBOOTOK /r "$INSTDIR\server"
 
 	; Delete shortcuts
 	Delete "$SMPROGRAMS\$(PRODUCT_NAME)\$(SET_CHEWING).lnk"
