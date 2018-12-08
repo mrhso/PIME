@@ -19,7 +19,3 @@ build_script:
 after_build:
   - appveyor.after_build.bat
   - ps: .\appveyor.artifacts.ps1
-
-branches:
-  only:
-  - mrhso-prime-diy-ColourRevert
